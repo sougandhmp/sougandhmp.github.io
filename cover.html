@@ -8,11 +8,13 @@
 <style>
 /* Colours follow the site theme (Graphite). The page sends the current theme with postMessage; see js/theme.js.
    Android green stays the same in both themes; --green-text is the readable version for text on light backgrounds.
-   The code card is a dark editor window in both themes. */
+   The Greeting.kt code card switches between a dark and a light editor style with the theme. */
 :root{--bg:#111214;--dots:rgba(61,220,132,.14);--fg:#eceef0;--muted:#c3c7cc;--line:#2a2d31;--chip:#dfe2e5;--tile:#17181b;--ring:#1c1e21;--soft:#1b2a22;
-  --screen:#151618;--dim:#3a3d42;--dim2:#26292d;--green-text:#3DDC84;--kmp:#C9B8FF;--shadow:rgba(0,0,0,.35);--avatar-shadow:rgba(0,0,0,.45);--shine:rgba(236,238,240,.18)}
+  --screen:#151618;--dim:#3a3d42;--dim2:#26292d;--green-text:#3DDC84;--kmp:#C9B8FF;--shadow:rgba(0,0,0,.35);--avatar-shadow:rgba(0,0,0,.45);--shine:rgba(236,238,240,.18);
+  --code-bg:#17181b;--code-border:#2a2d31;--code-divider:#26292d;--code-muted:#8b9097;--code-fg:#eceef0;--code-annot:#3DDC84;--code-kw:#8FB8FF;--code-str:#F5C97A;--code-shadow:none}
 [data-theme="light"]{--bg:#f6f7f8;--dots:rgba(14,122,67,.13);--fg:#111214;--muted:#41464c;--line:#dcdfe3;--chip:#2a2d31;--tile:#ffffff;--ring:#eef0f2;--soft:#dcf3e6;
-  --screen:#ffffff;--dim:#c9cdd2;--dim2:#e6e8eb;--green-text:#0e7a43;--kmp:#6b3fd4;--shadow:rgba(17,18,20,.10);--avatar-shadow:rgba(17,18,20,.18);--shine:rgba(17,18,20,.07)}
+  --screen:#ffffff;--dim:#c9cdd2;--dim2:#e6e8eb;--green-text:#0e7a43;--kmp:#6b3fd4;--shadow:rgba(17,18,20,.10);--avatar-shadow:rgba(17,18,20,.18);--shine:rgba(17,18,20,.07);
+  --code-bg:#ffffff;--code-border:#dcdfe3;--code-divider:#e6e8eb;--code-muted:#60666d;--code-fg:#111214;--code-annot:#0e7a43;--code-kw:#0b57d0;--code-str:#9a5b00;--code-shadow:0 12px 28px rgba(17,18,20,.10)}
 body{margin:0;background:transparent;font-family:'Sora',Georgia,serif;color:var(--fg)}
 /* Embedded in the page, the cover is see-through so the page's own background (colour, dots, glow) shows behind it with no seam.
    Opened on its own (e.g. when rendering cover.png), it paints the same background itself. */
@@ -123,18 +125,18 @@ html,body{overflow:hidden}
 </div>
 
 <!-- code card -->
-<div class="float mono" style="position: absolute; left: 1160px; top: 78px; width: 300px; box-sizing: border-box; border: 1px solid #2a2d31; border-radius: 14px; background: #17181b; font-size: 14px; line-height: 1.7; overflow: hidden">
-<div style="display: flex; gap: 6px; align-items: center; padding: 10px 14px; border-bottom: 1px solid #26292d">
+<div class="float mono" style="position: absolute; left: 1160px; top: 78px; width: 300px; box-sizing: border-box; border: 1px solid var(--code-border); border-radius: 14px; background: var(--code-bg); box-shadow: var(--code-shadow); font-size: 14px; line-height: 1.7; overflow: hidden">
+<div style="display: flex; gap: 6px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--code-divider)">
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #E0735F"></span>
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #E8B85C"></span>
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #3DDC84"></span>
-<span style="margin-left: 8px; font-size: 12px; color: #8b9097">Greeting.kt</span>
+<span style="margin-left: 8px; font-size: 12px; color: var(--code-muted)">Greeting.kt</span>
 </div>
-<div style="padding: 12px 16px 14px; color: #eceef0">
-<span class="line" style="color: #3DDC84">@Composable</span>
-<span class="line l2"><span style="color: #8FB8FF">fun</span> Greeting() {</span>
-<span class="line l3" style="padding-left: 4ch">Text(<span style="color: #F5C97A">"Hello, Android!"</span>)</span>
-<span class="line l4">}<span class="caret" style="color: #3DDC84">▍</span></span>
+<div style="padding: 12px 16px 14px; color: var(--code-fg)">
+<span class="line" style="color: var(--code-annot)">@Composable</span>
+<span class="line l2"><span style="color: var(--code-kw)">fun</span> Greeting() {</span>
+<span class="line l3" style="padding-left: 4ch">Text(<span style="color: var(--code-str)">"Hello, Android!"</span>)</span>
+<span class="line l4">}<span class="caret" style="color: var(--code-annot)">▍</span></span>
 </div>
 </div>
 

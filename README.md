@@ -93,7 +93,7 @@ In page order:
    - **Keyboard:** a "Skip to content" link appears when a keyboard user presses Tab on arrival.
 2. **Cover**: `cover.html` in an iframe. It's scaled to fit the window by a `ResizeObserver` in `main.js`.
 3. **Hero**: eyebrow tag, headline, intro paragraph, location line, call-to-action buttons and three highlight tiles.
-4. **Experience** (`#experience`): one `.job` block per role.
+4. **Experience** (`#experience`): a vertical timeline, with one `.job` block per role inside `.timeline`, newest first. On desktop, dates sit on the left, a line with a dot per role runs down the middle, and details are on the right. On phones, the line runs down the left edge. The most recent role gets a filled, glowing dot. The line and dots are pure CSS (`.timeline::before`, `.job::before`), so adding a role is just another `.job` block.
 5. **Skills** (`#skills`): one `.skillrow` per category.
 6. **Projects** (`#projects`): project cards with Android, Jetpack Compose and Flutter filters. Clicking anywhere on a card opens that project's own page, `project.html?id=…` (see **Add or edit project details** under [Common edits](#common-edits)).
 7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word.
@@ -103,10 +103,10 @@ In page order:
 
 ### Common edits
 
-**Add a job.** Copy an existing `<div class="job">` block in `#experience`. Bullets marked `class="more"` stay hidden until the visitor clicks "Show more".
+**Add a job.** Copy an existing `<div class="job" role="listitem">` block inside `.timeline` in `#experience`, and put it first if it's your newest role. Bullets marked `class="more"` stay hidden until the visitor clicks "Show more".
 
 ```html
-<div class="job">
+<div class="job" role="listitem">
   <div class="when">Jan 2027 – Present</div>
   <div>
     <h3>Job title</h3>
@@ -301,7 +301,8 @@ A self-contained 1500×500 banner: name, skill chips, caricature, a code card th
 - **Colours:** its colours are CSS variables at the top of `cover.html`, with a `[data-theme="light"]` set, matching the Graphite values in `css/styles.css`. If you change the site theme, change these too.
 - **Name position:** the cover also reports where its name is and hides it on request, for the name fly-in (see [JavaScript](#javascript)).
 - **Syncing:** on load, the cover reads the saved theme. When the switch is flipped, `js/theme.js` sends the new theme to every `<iframe data-theme-sync>` with `postMessage`. That also works when previewing from the file system.
-- **Fixed in both themes:** Android green, the Kotlin/Flutter logos and the code card, which stays a dark editor window.
+- **Fixed in both themes:** Android green and the Kotlin/Flutter logos.
+- **Greeting.kt code card:** it switches too, from a dark editor window to a light one, with its own `--code-*` colours at the top of `cover.html`. The light-theme syntax colours pass AA contrast on white.
 
 ### Regenerating `cover.png` and `og-image.png` (in `assets/images/`)
 
