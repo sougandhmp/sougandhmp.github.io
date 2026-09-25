@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Source for the browser-tab / home-screen icons (favicon-32.png, favicon-192.png, apple-touch-icon.png).
+     Render steps are in README.md. ?s=<size> sets the size; &bleed=1 fills the whole square (iOS rounds it itself). -->
+<title>Site icon</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@800&display=swap" rel="stylesheet">
+<style>
+html, body { margin: 0; background: transparent; }
+.tile { box-sizing: border-box; display: grid; place-items: center; background: #111214; color: #7ff0ae;
+  font-family: 'JetBrains Mono', ui-monospace, monospace; font-weight: 800; letter-spacing: -.04em; }
+</style></head>
+<body>
+<div class="tile">SMP</div>
+<script>
+const q = new URLSearchParams(location.search);
+const s = +(q.get('s') || 192), bleed = q.get('bleed') === '1';
+const t = document.querySelector('.tile');
+Object.assign(t.style, {
+  width: s + 'px', height: s + 'px',
+  borderRadius: bleed ? '0' : Math.round(s * 0.24) + 'px',
+  border: `${Math.max(1.5, s * 0.045)}px solid #3ddc84`,
+  fontSize: Math.round(s * (s <= 32 ? 0.36 : 0.32)) + 'px',
+});
+if (bleed) Object.assign(t.style, { border: 'none', boxShadow: `inset 0 0 0 ${s * 0.05}px #3ddc84` });
+</script>
+</body></html>

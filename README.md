@@ -36,28 +36,49 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 
 ## Project structure
 
-| Path | What it is |
-|---|---|
-| `project.html` | One page for every project, e.g. `project.html?id=flagmaster`. It's filled in by `js/project-page.js` |
-| `index.html` | All page content: hero, experience, skills, projects, recommendations, about/contact, résumé viewer |
-| `css/styles.css` | All styles. Theme colours and fonts are at the top |
-| `js/main.js` | Page behaviour (see [JavaScript](#javascript)) |
-| `js/floaters.js` | The floating tech-logo tiles in the page margins, as a data list |
-| `js/theme.js` | Light/dark theme switch, shared by both pages. It's loaded in `<head>` so a saved theme applies before the page appears, and it passes theme changes to the cover |
-| `js/projects.js` | Content for the project pages: one entry per project |
-| `js/contact.js` | The "Send me a message" form in About & contact (see [Contact form](#contact-form)) |
-| `js/project-page.js` | Builds `project.html` from `js/projects.js`, including the Previous/Next project links and a "not found" message for unknown IDs |
-| `images/flagmaster/` | FlagMaster app screenshots shown on its project page (resized to 480px wide) |
-| `cover.html` | Animated cover banner (1500×500), embedded in the hero through an `<iframe>` |
-| `tools/og-card.html` | Source for the link-preview image `og-image.png` |
-| `cover.png` | Static 3000×1000 render of `cover.html` |
-| `og-image.png` | 1200×630 link-preview card for LinkedIn, X, Slack and similar sites |
-| `avatar.png` | Caricature used on the cover |
-| `profile.png` | Photo in the About section (droidcon Berlin 2021) |
-| `Sougandh_MP_Resume_Sydney.pdf` | Résumé, for viewing and downloading |
-| `resume-1.png`, `resume-2.png` | Résumé pages as images, shown on phones and browsers without a PDF viewer |
-| `favicon-32.png`, `favicon-192.png`, `apple-touch-icon.png` | Browser and home-screen icons |
-| `CNAME` | Custom domain for GitHub Pages |
+```
+.
+├── index.html                 Home page: hero, experience, skills, projects, recommendations, about/contact
+├── project.html               One page for every project (project.html?id=flagmaster), filled in by js/project-page.js
+├── cover.html                 Animated cover banner, embedded in the home page through an <iframe>
+├── CNAME                      Custom domain for GitHub Pages (sougandh.dev). Don't delete
+├── README.md
+├── css/
+│   └── styles.css             All styles. Theme colours and fonts are at the top
+├── js/
+│   ├── theme.js               Light/dark theme (loaded in <head> on both pages)
+│   ├── main.js                Home-page behaviour (see JavaScript)
+│   ├── floaters.js            Floating tech-logo tiles, as a data list
+│   ├── name-morph.js          Scroll animation: "Sougandh" flies from the cover into the nav
+│   ├── contact.js             "Send me a message" form (see Contact form)
+│   ├── projects.js            Content for the project pages: one entry per project
+│   └── project-page.js        Builds project.html from js/projects.js
+├── assets/
+│   ├── icons/                 favicon-32.png, favicon-192.png, apple-touch-icon.png (SMP monogram)
+│   ├── images/
+│   │   ├── avatar-caricature.png              Caricature used on the cover
+│   │   ├── profile-droidcon-berlin-2021.png   Photo in About & contact
+│   │   ├── cover.png                          Static 3000×1000 render of cover.html
+│   │   ├── og-image.png                       1200×630 link-preview card (LinkedIn, X, Slack…)
+│   │   └── projects/
+│   │       └── flagmaster/                    App screenshots for the FlagMaster page (480px wide)
+│   └── resume/
+│       ├── sougandh-manikkoth-paremmal-resume.pdf   Résumé for viewing and downloading
+│       └── resume-page-1.png, resume-page-2.png     The pages as images, for phones without a PDF viewer
+└── tools/                     Sources for generated images, not linked from the site
+    ├── og-card.html           Builds assets/images/og-image.png
+    └── icon.html              Builds the icons in assets/icons/
+```
+
+### Naming conventions
+
+- **File and folder names:** lowercase kebab-case (`name-morph.js`, `profile-droidcon-berlin-2021.png`). No spaces, capitals or underscores. GitHub Pages URLs are case-sensitive, and this keeps links predictable.
+- **Describe the content, not the order:** e.g. `results-screen.png`, not `screenshot-2.png`.
+- **Where files go:**
+  - **Pages:** at the root (`index.html`, `project.html`, `cover.html`).
+  - **Code:** in `css/` and `js/`.
+  - **Everything else:** in `assets/`. That's `icons/` for icons, `images/` for images (per-project screenshots in `images/projects/<project-id>/`, using the same ID as `js/projects.js`), and `resume/` for the résumé.
+- **Résumé download name:** the download link sets a readable file name, `Sougandh-Manikkoth-Paremmal-Resume.pdf`, through its `download` attribute, independent of the stored name.
 
 ---
 
@@ -66,7 +87,7 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 In page order:
 
 1. **Nav**: the SMP monogram, section links (Experience, Skills, Projects, Recommendations, About), a Résumé button and the sun/moon theme switch.
-   - **Name:** the full name next to the monogram appears only after the cover scrolls out of view. It's hidden between 961px and 1080px, where there isn't room for it.
+   - **Name:** as you scroll down from the top, "Sougandh" flies from the cover up into the nav and shrinks to fit, then "Manikkoth Paremmal" fades in beside it. Scrolling back up reverses it (`js/name-morph.js`). With reduced motion, the name simply fades in once the cover scrolls away. It's hidden between 961px and 1080px, where there isn't room for it.
    - **701px to 960px (tablets):** the links collapse behind a menu button. The theme switch stays in the bar.
    - **700px and below (phones):** a bottom navigation bar (`.tabbar`, Material 3 style) replaces the top menu, with Work, Skills, Projects, Reviews and About one thumb-tap away. The top bar keeps just the monogram and the theme switch.
    - **Keyboard:** a "Skip to content" link appears when a keyboard user presses Tab on arrival.
@@ -132,7 +153,7 @@ In page order:
   summary: 'One or two sentences on what it is.',
   meta: [['Role', '…'], ['When', '…']],              // label/value pairs shown in a row
   impact: [['33%', 'faster auto-fill']],             // big-number tiles
-  screenshots: [['images/my-app/home.png', 'Describe what the screenshot shows']],
+  screenshots: [['assets/images/projects/my-app/home-screen.png', 'Describe what the screenshot shows']],
   sections: [['What I did', ['First point.', 'Second point.']]],
   stack: ['Kotlin', 'Jetpack Compose'],
   links: [['View on GitHub', 'https://github.com/…']],
@@ -153,8 +174,8 @@ Every field except `title` is optional. The Previous and Next links at the botto
 **Change the headline.** Edit the `<h1>` in the hero. Wrap the words you want highlighted in amber in `<span class="name">…</span>`.
 
 **Update the résumé.**
-1. Replace `Sougandh_MP_Resume_Sydney.pdf`. If you rename it, update the five references in `index.html`.
-2. Re-export `resume-1.png` and `resume-2.png` from the new PDF, one image per page (the current ones are 1224×1584).
+1. Replace `assets/resume/sougandh-manikkoth-paremmal-resume.pdf`, keeping the same name. If you rename it, update the five references in `index.html`.
+2. Re-export `assets/resume/resume-page-1.png` and `resume-page-2.png` from the new PDF, one image per page (the current ones are 1224×1584).
 
 **Update page titles and link previews.** The `<title>`, `description`, `og:*` and `twitter:*` tags are at the top of `index.html`.
 
@@ -200,6 +221,7 @@ Change a colour in these two blocks and it updates across the whole site.
 | `--secondary` | Amber: company names, stack labels, headline highlight, award badge |
 | `--card`, `--surface` | Card and tile backgrounds |
 | `--danger` | Form error text and invalid field borders |
+| `--dots` | The dotted grid across the page background, matching the cover |
 | `--highlight` | 1px top sheen on cards, tiles and the About panel, for depth |
 | `--glow-a`, `--glow-b` | Very soft green and amber ambient light fixed behind the page (`body::before`) |
 
@@ -233,14 +255,15 @@ If you change a font, update both the Google Fonts `<link>` and the token. `cove
 | Feature | How it works |
 |---|---|
 | Cover scaling | A `ResizeObserver` scales the 1500×500 cover iframe to fill the banner without cropping |
-| Nav name | An `IntersectionObserver` on the cover toggles `nav.hide-brand`. The name shows once less than 35% of the cover is visible |
+| Nav name | An `IntersectionObserver` on the cover toggles `nav.hide-brand`. The name fades in once less than 35% of the cover is visible. This is the fallback when the fly-in animation is off |
+| Name fly-in | In `js/name-morph.js`. The cover is an iframe, so its text can't leave it. Instead, the cover reports the name's position and size (`postMessage`), and the page lays an identical copy (`.name-flyer`) exactly over it. While scrolling, the cover hides its own name, and the copy moves and scales from there to the nav's `.bn-first`. When it lands, `nav.name-landed` shows the real nav name. It's driven directly by scroll position, not a timer |
 | Theme | In `js/theme.js`, shared with `project.html`. Until a visitor uses the switch, the site follows their device's light/dark setting, including live changes. The switch saves their choice in `localStorage`. It also sets the mobile browser toolbar colour (`theme-color`), keeps the cover in sync, and cross-fades the page with the View Transitions API where supported (not with reduced motion) |
 | Mobile menu | `setMenu()` opens and closes the menu at 960px and below, and keeps `aria-expanded` and the button label in sync. It closes on a link tap, Escape (focus returns to the button), a tap outside the nav, or when the window widens past the breakpoint |
 | Job "Show more" | Toggles `.expanded` on a `.job` to reveal its `li.more` bullets |
 | Project filters | Hides cards whose `data-category` tags don't include the selected filter, and marks the selected button with `aria-pressed` |
 | Active nav link | Highlights the section in view in both the top menu and the phone bottom bar, and sets `aria-current`. Scrolling back to the hero clears it |
 | Scroll reveal | Fades in elements with `data-reveal` as they enter the screen |
-| Résumé viewer | Opens a dialog with the browser's PDF viewer, or with `resume-1/2.png` on phones and browsers without one |
+| Résumé viewer | Opens a dialog with the browser's PDF viewer, or with `assets/resume/resume-page-1/2.png` on phones and browsers without one |
 | Footer year | Fills in the current year |
 
 ### `js/floaters.js`
@@ -276,10 +299,11 @@ A self-contained 1500×500 banner: name, skill chips, caricature, a code card th
 
 **Theme:** the cover follows the site's light/dark theme.
 - **Colours:** its colours are CSS variables at the top of `cover.html`, with a `[data-theme="light"]` set, matching the Graphite values in `css/styles.css`. If you change the site theme, change these too.
+- **Name position:** the cover also reports where its name is and hides it on request, for the name fly-in (see [JavaScript](#javascript)).
 - **Syncing:** on load, the cover reads the saved theme. When the switch is flipped, `js/theme.js` sends the new theme to every `<iframe data-theme-sync>` with `postMessage`. That also works when previewing from the file system.
 - **Fixed in both themes:** Android green, the Kotlin/Flutter logos and the code card, which stays a dark editor window.
 
-### Regenerating `cover.png` and `og-image.png`
+### Regenerating `cover.png` and `og-image.png` (in `assets/images/`)
 
 These two are static pictures of the cover in its default dark theme. Regenerate them whenever `cover.html` changes: link previews use `og-image.png`, and it's built from `cover.png`.
 
@@ -288,15 +312,15 @@ From the repo root on macOS, with Google Chrome installed:
 ```sh
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
-# 1. cover.png: 3000×1000 (2× scale), after the typing animation finishes
+# 1. assets/images/cover.png: 3000×1000 (2× scale), after the typing animation finishes
 "$CHROME" --headless=new --hide-scrollbars --force-device-scale-factor=2 \
   --window-size=1500,500 --virtual-time-budget=8000 \
-  --screenshot="$PWD/cover.png" "file://$PWD/cover.html"
+  --screenshot="$PWD/assets/images/cover.png" "file://$PWD/cover.html"
 
-# 2. og-image.png: 1200×630 card built from cover.png (tools/og-card.html)
+# 2. assets/images/og-image.png: 1200×630 card built from cover.png (tools/og-card.html)
 "$CHROME" --headless=new --hide-scrollbars --force-device-scale-factor=1 \
   --window-size=1200,630 --virtual-time-budget=6000 \
-  --screenshot="$PWD/og-image.png" "file://$PWD/tools/og-card.html"
+  --screenshot="$PWD/assets/images/og-image.png" "file://$PWD/tools/og-card.html"
 ```
 
 Always run step 1 before step 2. The tagline, domain and keywords at the bottom of the card are in `tools/og-card.html`.
@@ -304,6 +328,21 @@ Always run step 1 before step 2. The tagline, domain and keywords at the bottom 
 After pushing a new card, paste https://sougandh.dev into [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/). This refreshes LinkedIn's cached preview.
 
 ---
+
+### Regenerating the icons
+
+The tab and home-screen icons are the SMP monogram, drawn by `tools/icon.html` at any size. The `?s=` parameter sets the size in pixels. `&bleed=1` makes a full square for iOS, which rounds the corners itself.
+
+```sh
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+render() { "$CHROME" --headless=new --hide-scrollbars --force-device-scale-factor=1 --default-background-color=00000000 \
+  --window-size=$1,$1 --virtual-time-budget=5000 --screenshot="$PWD/$2" "file://$PWD/tools/icon.html?s=$1$3"; }
+render 32 assets/icons/favicon-32.png
+render 192 assets/icons/favicon-192.png
+render 180 assets/icons/apple-touch-icon.png '&bleed=1'
+```
+
+Browsers cache icons hard. After changing them, bump the `?v=` number on the three icon links in both `index.html` and `project.html`.
 
 ## Accessibility notes
 

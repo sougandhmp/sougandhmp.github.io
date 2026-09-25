@@ -13,7 +13,11 @@
   --screen:#151618;--dim:#3a3d42;--dim2:#26292d;--green-text:#3DDC84;--kmp:#C9B8FF;--shadow:rgba(0,0,0,.35);--avatar-shadow:rgba(0,0,0,.45);--shine:rgba(236,238,240,.18)}
 [data-theme="light"]{--bg:#f6f7f8;--dots:rgba(14,122,67,.13);--fg:#111214;--muted:#41464c;--line:#dcdfe3;--chip:#2a2d31;--tile:#ffffff;--ring:#eef0f2;--soft:#dcf3e6;
   --screen:#ffffff;--dim:#c9cdd2;--dim2:#e6e8eb;--green-text:#0e7a43;--kmp:#6b3fd4;--shadow:rgba(17,18,20,.10);--avatar-shadow:rgba(17,18,20,.18);--shine:rgba(17,18,20,.07)}
-body{margin:0;background:var(--bg) radial-gradient(var(--dots) 1.2px,transparent 1.4px) 0 0/22px 22px;font-family:'Sora',Georgia,serif;color:var(--fg)}
+body{margin:0;background:transparent;font-family:'Sora',Georgia,serif;color:var(--fg)}
+/* Embedded in the page, the cover is see-through so the page's own background (colour, dots, glow) shows behind it with no seam.
+   Opened on its own (e.g. when rendering cover.png), it paints the same background itself. */
+html.standalone body{background:var(--bg) radial-gradient(var(--dots) 1.2px,transparent 1.4px) 0 0/22px 22px}
+:root{color-scheme:dark}[data-theme="light"]{color-scheme:light} /* must match the page's, or browsers paint the iframe opaque */
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes floatY2{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(10px) rotate(-4deg)}}
@@ -101,7 +105,7 @@ html,body{overflow:hidden}
 </div>
 
 <!-- avatar (GitHub profile picture, background removed) -->
-<img src="avatar.png" alt="Sougandh's avatar" width="440" height="440" style="position: absolute; left: 740px; top: 60px; width: 440px; height: 440px; filter: drop-shadow(0 18px 36px var(--avatar-shadow))">
+<img src="assets/images/avatar-caricature.png" alt="Sougandh's avatar" width="440" height="440" style="position: absolute; left: 740px; top: 60px; width: 440px; height: 440px; filter: drop-shadow(0 18px 36px var(--avatar-shadow))">
 
 <!-- floating tech icons -->
 <div class="tech" title="Kotlin" style="left: 596px; top: 96px; --r: -8deg; --d: 7s; --delay: 0s">
@@ -167,11 +171,28 @@ BUILD SUCCESSFUL
 
 </div>
 <script>
+if (window.parent === window) document.documentElement.classList.add('standalone');
 // until the page sends the theme: the saved choice, otherwise the device setting (same rule as js/theme.js)
 let t = null;
 try { t = localStorage.getItem('theme'); } catch (e) {}
 document.documentElement.dataset.theme = t || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-addEventListener('message', (e) => { if (e.data && e.data.theme) document.documentElement.dataset.theme = e.data.theme; });
+addEventListener('message', (e) => {
+  if (!e.data) return;
+  if (e.data.theme) document.documentElement.dataset.theme = e.data.theme;
+  // the page hides the name while its own copy flies it into the nav (js/name-morph.js)
+  if ('hideName' in e.data) document.querySelector('h1').style.visibility = e.data.hideName ? 'hidden' : '';
+});
+// tell the page where the name's text sits (its glyph box, not the h1's line box) and at what size
+const reportName = () => {
+  const h1 = document.querySelector('h1');
+  const range = document.createRange();
+  range.selectNodeContents(h1);
+  const r = range.getBoundingClientRect();
+  parent.postMessage({ coverName: { x: r.left, y: r.top, fontSize: parseFloat(getComputedStyle(h1).fontSize) } }, '*');
+};
+document.fonts.ready.then(reportName);
+addEventListener('resize', reportName);
+addEventListener('message', (e) => { if (e.data && e.data.requestName) reportName(); });
 </script>
 </body>
 </html>

@@ -61,7 +61,7 @@ const PROJECTS = {
   },
 
   'banking-payments': {
-    title: 'Banking payments platform',
+    title: 'NextGen Retail Banking App',
     kicker: 'Professional work · Synechron',
     award: 'Top Engineer of the Month · Feb 2026',
     summary: 'A next-generation retail banking Android app for a leading UAE retail bank. I was a core contributor, owning major functionality in the Payments module.',
@@ -128,10 +128,10 @@ const PROJECTS = {
       ['Platform', 'Android 7.0 and later'],
     ],
     screenshots: [
-      ['images/flagmaster/time_schedule.png', 'Start screen with difficulty and question-count choices, and buttons to start now or schedule the challenge'],
-      ['images/flagmaster/count_down.png', 'Results screen showing a final score of 4 out of 10 and the answer given for each flag'],
-      ['images/flagmaster/challenge_screen_1.png', 'A question showing the flag of Spain with four country options'],
-      ['images/flagmaster/game_over_score.png', 'Game over screen with a grade ring and a Play again button'],
+      ['assets/images/projects/flagmaster/start-screen.png', 'Start screen with difficulty and question-count choices, and buttons to start now or schedule the challenge'],
+      ['assets/images/projects/flagmaster/results-screen.png', 'Results screen showing a final score of 4 out of 10 and the answer given for each flag'],
+      ['assets/images/projects/flagmaster/question-screen.png', 'A question showing the flag of Spain with four country options'],
+      ['assets/images/projects/flagmaster/game-over-screen.png', 'Game over screen with a grade ring and a Play again button'],
     ],
     sections: [
       ['Features', [
