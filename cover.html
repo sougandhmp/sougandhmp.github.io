@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#0D1411;font-family:'Bricolage Grotesque',Georgia,serif;color:#F2EEE3}
+body{margin:0;background:#0D1411 radial-gradient(rgba(61,220,132,.16) 1.2px,transparent 1.4px) 0 0/22px 22px;font-family:'Bricolage Grotesque',Georgia,serif;color:#F2EEE3}
 a{color:#3DDC84}a:hover{color:#8BF0B8}
 .dots{background-image:radial-gradient(rgba(61,220,132,.16) 1.2px,transparent 1.4px);background-size:22px 22px}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
@@ -40,6 +40,9 @@ a{color:#3DDC84}a:hover{color:#8BF0B8}
 .tip{animation:glow 1.6s ease-in-out infinite}
 .chip{animation:pop 5.5s ease-out 1 forwards}
 .shine{animation:shimmer 2.4s ease-in-out infinite}
+.tech{position:absolute;width:58px;height:58px;display:grid;place-items:center;box-sizing:border-box;border-radius:16px;background:#121E18;border:1px solid #2E4A3B;box-shadow:0 12px 28px rgba(0,0,0,.35);transform:rotate(var(--r));animation:drift var(--d) ease-in-out var(--delay) infinite}
+.tech svg{width:30px;height:30px;display:block}
+@keyframes drift{0%,100%{transform:translate(0,0) rotate(var(--r))}33%{transform:translate(7px,-12px) rotate(calc(var(--r) * -.4))}66%{transform:translate(-5px,-5px) rotate(calc(var(--r) * 1.4))}}
 .still *{animation:none !important}
 html,body{overflow:hidden}
 .still .line{max-width:40ch}
@@ -47,7 +50,7 @@ html,body{overflow:hidden}
 </style>
 </head>
 <body>
-<div class="dots" style="width: 1500px; height: 500px; position: relative; overflow: hidden; background-color: #0D1411; box-sizing: border-box">
+<div style="width: 1500px; height: 500px; margin: 0 auto; position: relative; overflow: hidden; box-sizing: border-box">
 
 <!-- stars -->
 <div class="star" style="position: absolute; left: 700px; top: 40px; width: 8px; height: 8px; border-radius: 50%; background: #3DDC84"></div>
@@ -67,15 +70,11 @@ html,body{overflow:hidden}
 </svg>
 
 <!-- left text block -->
-<div style="position: absolute; left: 90px; top: 92px; width: 600px; display: flex; flex-direction: column; gap: 14px">
+<div style="position: absolute; left: 90px; top: 118px; width: 600px; display: flex; flex-direction: column; gap: 14px">
 <div class="mono" style="font-size: 15px; letter-spacing: 0.12em; color: #3DDC84">&lt;hello_world /&gt; I'M</div>
 <div style="display: flex; flex-direction: column; gap: 2px">
 <h1 style="margin: 0; font-size: 104px; line-height: 0.95; font-weight: 800; letter-spacing: -0.03em; color: #F2EEE3">Sougandh</h1>
 <div style="font-size: 38px; font-weight: 500; letter-spacing: -0.01em; color: #C9D3CC">Manikkoth Paremmal</div>
-</div>
-<div style="display: flex; align-items: center; gap: 14px; margin-top: 8px">
-<div style="width: 44px; height: 4px; border-radius: 2px; background: #3DDC84"></div>
-<div style="font-size: 28px; font-weight: 800; color: #3DDC84">Android Developer</div>
 </div>
 <div class="mono" style="display: flex; gap: 10px; margin-top: 10px; font-size: 14px">
 <span style="padding: 7px 14px; border: 1px solid #2E4A3B; border-radius: 999px; color: #DDE6E0">Kotlin</span>
@@ -96,75 +95,26 @@ html,body{overflow:hidden}
 <div style="height: 8px; width: 70%; border-radius: 4px; background: #3A5446"></div>
 </div>
 
-<!-- caricature -->
-<svg width="420" height="500" viewBox="0 0 400 480" style="position: absolute; left: 750px; top: 4px" role="img" aria-label="Cartoon caricature of Sougandh smiling in a black hoodie">
-<!-- hoodie -->
-<path d="M40 480 C52 400 100 356 160 346 L240 346 C300 356 348 400 360 480 Z" fill="#1C1F22"></path>
-<path d="M146 350 L254 350 L270 480 L130 480 Z" fill="#E6E9EE"></path>
-<path d="M146 350 C120 380 118 440 124 480" fill="none" stroke="#2C3136" stroke-width="10"></path>
-<path d="M254 350 C280 380 282 440 276 480" fill="none" stroke="#2C3136" stroke-width="10"></path>
-<!-- neck -->
-<path d="M172 292 L228 292 L232 352 C214 366 186 366 168 352 Z" fill="#7F5133"></path>
-<path d="M168 352 C186 366 214 366 232 352 L236 356 C214 374 186 374 164 356 Z" fill="#D4D8DE"></path>
-<!-- lanyard + badge -->
-<path d="M170 356 L196 440 L206 440 L182 356 Z" fill="#2F3FC0"></path>
-<path d="M230 356 L204 440 L194 440 L218 356 Z" fill="#2F3FC0"></path>
-<rect x="172" y="436" width="56" height="44" rx="4" fill="#F7F7F9"></rect>
-<rect x="172" y="436" width="56" height="10" rx="2" fill="#3DDC84"></rect>
-<text x="200" y="468" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#1C1F22">&lt;/&gt;</text>
-<!-- head group -->
-<g class="head">
-<ellipse cx="86" cy="196" rx="24" ry="34" fill="#8A5838"></ellipse>
-<ellipse cx="90" cy="198" rx="12" ry="20" fill="#6E4329"></ellipse>
-<ellipse cx="314" cy="196" rx="24" ry="34" fill="#8A5838"></ellipse>
-<ellipse cx="310" cy="198" rx="12" ry="20" fill="#6E4329"></ellipse>
-<path d="M200 58 C272 58 310 110 310 186 C310 256 268 316 200 320 C132 316 90 256 90 186 C90 110 128 58 200 58 Z" fill="#9A6441"></path>
-<path d="M112 250 C130 296 162 316 200 320 C168 306 136 284 112 250 Z" fill="#7F5133"></path>
-<!-- hair -->
-<path d="M88 176 C80 92 132 40 204 40 C276 40 324 88 312 178 C304 146 290 122 266 112 C232 100 170 100 136 112 C112 122 96 146 88 176 Z" fill="#17120F"></path>
-<circle cx="140" cy="62" r="18" fill="#17120F"></circle>
-<circle cx="176" cy="44" r="20" fill="#17120F"></circle>
-<circle cx="216" cy="40" r="20" fill="#17120F"></circle>
-<circle cx="256" cy="52" r="20" fill="#17120F"></circle>
-<circle cx="286" cy="76" r="16" fill="#17120F"></circle>
-<!-- brows -->
-<path d="M132 146 C146 134 168 134 182 144" fill="none" stroke="#1E1612" stroke-width="9" stroke-linecap="round"></path>
-<path d="M218 144 C232 134 254 134 268 146" fill="none" stroke="#1E1612" stroke-width="9" stroke-linecap="round"></path>
-<!-- eyes -->
-<g class="eye">
-<ellipse cx="158" cy="172" rx="18" ry="11" fill="#FBF7EF"></ellipse>
-<circle cx="160" cy="171" r="8" fill="#2A1A12"></circle>
-<circle cx="163" cy="168" r="2.5" fill="#FFFFFF"></circle>
-</g>
-<g class="eye">
-<ellipse cx="242" cy="172" rx="18" ry="11" fill="#FBF7EF"></ellipse>
-<circle cx="240" cy="171" r="8" fill="#2A1A12"></circle>
-<circle cx="243" cy="168" r="2.5" fill="#FFFFFF"></circle>
-</g>
-<path d="M136 178 Q158 171 180 178 L180 188 L136 188 Z" fill="#9A6441"></path>
-<path d="M220 178 Q242 171 264 178 L264 188 L220 188 Z" fill="#9A6441"></path>
-<path d="M140 180 Q158 174 176 180" fill="none" stroke="#6E4329" stroke-width="2.5" stroke-linecap="round"></path>
-<path d="M224 180 Q242 174 260 180" fill="none" stroke="#6E4329" stroke-width="2.5" stroke-linecap="round"></path>
-<!-- nose -->
-<path d="M195 178 C193 204 176 220 182 232 C188 242 212 242 218 232 C224 220 207 204 205 178 Z" fill="#8A5838"></path>
-<ellipse cx="190" cy="232" rx="5" ry="3" fill="#4A2A1A"></ellipse>
-<ellipse cx="210" cy="232" rx="5" ry="3" fill="#4A2A1A"></ellipse>
-<!-- cheeks -->
-<path d="M126 232 C134 250 146 258 152 262" fill="none" stroke="#7F5133" stroke-width="3" stroke-linecap="round"></path>
-<path d="M274 232 C266 250 254 258 248 262" fill="none" stroke="#7F5133" stroke-width="3" stroke-linecap="round"></path>
-<!-- mouth -->
-<path d="M146 258 C160 312 240 312 254 258 C232 268 168 268 146 258 Z" fill="#5A1F1A"></path>
-<path d="M152 261 C176 270 224 270 248 261 C244 280 156 280 152 261 Z" fill="#FFFDF8"></path>
-<path d="M172 294 C190 302 210 302 228 294 C214 292 186 292 172 294 Z" fill="#C55A55"></path>
-<!-- moustache -->
-<path d="M154 254 C170 240 190 242 200 248 C210 242 230 240 246 254 C230 250 212 252 200 255 C188 252 170 250 154 254 Z" fill="#17120F"></path>
-<!-- chin -->
-<path d="M186 314 Q200 320 214 314" fill="none" stroke="#7F5133" stroke-width="2.5" stroke-linecap="round"></path>
-</g>
-</svg>
+<!-- avatar (GitHub profile picture, background removed) -->
+<img src="avatar.png" alt="Sougandh's avatar" width="440" height="440" style="position: absolute; left: 740px; top: 60px; width: 440px; height: 440px; filter: drop-shadow(0 18px 36px rgba(0,0,0,.45))">
+
+<!-- floating tech icons -->
+<div class="tech" title="Kotlin" style="left: 596px; top: 96px; --r: -8deg; --d: 7s; --delay: 0s">
+<svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="kt" x1="24" y1="0" x2="0" y2="24" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7F52FF"></stop><stop offset=".55" stop-color="#C711E1"></stop><stop offset="1" stop-color="#E54857"></stop></linearGradient></defs><path d="M24 24H0V0h24L12 12Z" fill="url(#kt)"></path></svg>
+</div>
+<div class="tech" title="Android" style="left: 330px; top: 420px; --r: 6deg; --d: 8.5s; --delay: -2s">
+<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="9" x2="5" y2="5.5" stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round"></line><line x1="17" y1="9" x2="19" y2="5.5" stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round"></line><path d="M2.5 19a9.5 9.5 0 0 1 19 0Z" fill="#3DDC84"></path><circle cx="8.3" cy="14.6" r="1.2" fill="#121E18"></circle><circle cx="15.7" cy="14.6" r="1.2" fill="#121E18"></circle></svg>
+</div>
+<div class="tech" title="Flutter" style="left: 1180px; top: 336px; --r: 8deg; --d: 6.5s; --delay: -4s">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.3 0 2.3 12 6 15.7 21.7 0Z" fill="#54C5F8"></path><path d="M14.3 11.1 7.9 17.5l6.4 6.5h7.4l-6.5-6.5 6.5-6.4Z" fill="#01579B"></path><path d="M11.1 20.7 14.3 24h7.4l-6.5-6.5Z" fill="#29B6F6" opacity=".6"></path></svg>
+</div>
+<div class="tech" title="Kotlin Multiplatform" style="left: 548px; top: 428px; --r: -5deg; --d: 9s; --delay: -6s; gap: 2px; align-content: center">
+<svg viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><defs><linearGradient id="kmp" x1="24" y1="0" x2="0" y2="24" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7F52FF"></stop><stop offset=".55" stop-color="#C711E1"></stop><stop offset="1" stop-color="#E54857"></stop></linearGradient></defs><path d="M24 24H0V0h24L12 12Z" fill="url(#kmp)"></path></svg>
+<span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: .06em; color: #C9B8FF">KMP</span>
+</div>
 
 <!-- code card -->
-<div class="float mono" style="position: absolute; left: 1160px; top: 58px; width: 300px; box-sizing: border-box; border: 1px solid #2E4A3B; border-radius: 14px; background: #121E18; font-size: 14px; line-height: 1.7; overflow: hidden">
+<div class="float mono" style="position: absolute; left: 1160px; top: 78px; width: 300px; box-sizing: border-box; border: 1px solid #2E4A3B; border-radius: 14px; background: #121E18; font-size: 14px; line-height: 1.7; overflow: hidden">
 <div style="display: flex; gap: 6px; align-items: center; padding: 10px 14px; border-bottom: 1px solid #22362B">
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #E0735F"></span>
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #E8B85C"></span>
