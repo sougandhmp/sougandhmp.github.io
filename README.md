@@ -171,7 +171,10 @@ The **Send me a message** form (`#message` in `index.html`, logic in `js/contact
 **Is the key safe to publish?** Yes. The access key only lets people send messages *to* you, so it's meant to live in public HTML. Anyone who sends you a message through the form has their name, email and message passed through Web3Forms on the way to you.
 
 **How the form behaves:**
-- **Invalid entries:** name, email and a message of at least 10 characters are required. Invalid fields get a red border and the browser's own message.
+- **Fields:** Name, Email and Message are required (marked *). Phone is optional, but if it's filled in it must look like a phone number (digits, spaces, `+ ( ) - .`, 6–30 characters).
+- **Send button:** it stays disabled until the name and message aren't blank, the email is valid (it must include a dot in the domain, so `a@b` isn't accepted) and any phone number is valid. A hint under the button says what's required. Email and phone errors appear once the visitor leaves the field.
+- **Phone in your email:** when a visitor gives a phone number, it's included in the message you receive.
+- **How it sends:** the form posts to Web3Forms as `FormData` with no custom headers. JSON would make the browser send a CORS preflight request first, and Web3Forms rejects those, so the form would fail.
 - **Success:** the form clears and thanks the visitor by name.
 - **Failure:** the typed message stays in the form, and a direct email link is offered instead.
 - **Spam:** a hidden `botcheck` field catches simple spam bots. Web3Forms also filters spam on its side.
