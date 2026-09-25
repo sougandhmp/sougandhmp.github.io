@@ -8,6 +8,59 @@ The site is plain HTML, CSS and JavaScript. There is no framework, no package ma
 
 ---
 
+## Quick settings
+
+Your job-search status and location live in one file, **`js/site-config.js`**. Change a value there, save, then [deploy](#deploy). You don't need to touch any HTML.
+
+```js
+const SITE = {
+  openToRoles: true,
+  roles: 'Android roles',
+  jobLocations: 'Sydney or remote',
+  homeLocation: 'Sydney, Australia',
+  homeCity: 'Sydney',
+  timeZone: 'Australia/Sydney',
+};
+```
+
+| Setting | What it changes | Example values |
+|---|---|---|
+| `openToRoles` | `true` shows "Open to …" in the hero and the About card, with a pulsing green dot. `false` hides it, and the hero dot turns grey and stops pulsing. | `true`, `false` |
+| `roles` | The kind of role, after "Open to" | `'Android roles'`, `'Android & mobile roles'`, `'Android Tech Lead roles'` |
+| `jobLocations` | Where you're job searching, shown after the role | `'Sydney or remote'`, `'Sydney, Melbourne or remote'`, `'Australia-wide or remote'` |
+| `homeLocation` | Where you live, shown in the hero next to the dot | `'Sydney, Australia'`, `'Melbourne, Australia'` |
+| `homeCity` | The city in the About card clock ("9:46 pm in Sydney") | `'Sydney'`, `'Melbourne'` |
+| `timeZone` | The time zone for that clock ([IANA name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)) | `'Australia/Sydney'`, `'Australia/Melbourne'`, `'Europe/Berlin'` |
+
+Keep the quotes around text values, and the comma at the end of each line.
+
+**Where each setting appears on the page:**
+
+- **Hero:** `● Sydney, Australia · Open to Android roles, Sydney or remote` (`homeLocation`, `roles`, `jobLocations`)
+- **About card:** `● Open to Android roles · Sydney or remote   9:46 pm in Sydney` (`roles`, `jobLocations`, `homeCity`, `timeZone`)
+
+### Recipes
+
+**You've found a job, so stop showing that you're looking:** set `openToRoles: false`.
+
+**You're looking again:** set `openToRoles: true`, and check that `roles` and `jobLocations` are still right.
+
+**You're looking in different places:** change `jobLocations` only, e.g. `'Sydney, Melbourne or remote'`.
+
+**You've moved city:** change `homeLocation`, `homeCity` and `timeZone` in `js/site-config.js`. Then update the fixed text that the config can't reach. Link-preview scrapers (LinkedIn, Slack, X) don't run JavaScript, so this text has to be written into the files:
+
+1. `index.html`, in the `<head>`: the city in the `description`, `og:description` and `twitter:description` meta tags ("… in Sydney …", "Based in Sydney.").
+2. `tools/og-card.html`: the "Kotlin · Compose · Sydney" line. Then regenerate `assets/images/og-image.png` (see [Regenerating `cover.png` and `og-image.png`](#regenerating-coverpng-and-og-imagepng-in-assetsimages)).
+3. The résumé, if its address changed (see **Update the résumé** under [Common edits](#common-edits)).
+
+To find every mention of the old city:
+
+```sh
+grep -rn "Sydney" --include="*.html" --include="*.js" .
+```
+
+---
+
 ## Preview locally
 
 Open `index.html` in a browser:
@@ -47,6 +100,7 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 │   └── styles.css             All styles. Theme colours and fonts are at the top
 ├── js/
 │   ├── theme.js               Light/dark theme (loaded in <head> on both pages)
+│   ├── site-config.js         Job-search switch (openToRoles), roles, job locations, home city and time zone
 │   ├── main.js                Home-page behaviour (see JavaScript)
 │   ├── floaters.js            Floating tech-logo tiles, as a data list
 │   ├── name-morph.js          Scroll animation: "Sougandh" flies from the cover into the nav
@@ -97,11 +151,13 @@ In page order:
 5. **Skills** (`#skills`): three rows, deliberately short so the Android signal isn't diluted: **Core** (`.skillrow.core`, highlighted green), **Engineering** and **Additional**. Add a skill only if you'd want a recruiter to ask about it.
 6. **Projects** (`#projects`): project cards with Android, Jetpack Compose and Flutter filters. Clicking anywhere on a card opens that project's own page, `project.html?id=…` (see **Add or edit project details** under [Common edits](#common-edits)).
 7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word. Main-page cards show a green arrow and a compact excerpt; selecting a card opens the full recommendation in a dialog with inline previous/next navigation arrows. The full-screen dialog also links to all recommendations on LinkedIn.
-8. **About & contact** (`#contact`): photo, a status line with the live time in Sydney, short bio, education, languages and contact buttons (the email button has a **Copy** button beside it), followed by the **Send me a message** form (`#message`). The form has optional topic chips that change the message prompt and go into the email subject, and a character counter. Both cards share one two-column grid (`--contact-col`), so the bio and the form line up. The logic is in `js/contact.js`. The hero's **Get in touch** button links to the form.
+8. **About & contact** (`#contact`): photo, a status line (open-to-roles status and the live local time, both from `js/site-config.js`), short bio, education, languages and contact buttons (the email button has a **Copy** button beside it), followed by the **Send me a message** form (`#message`). The form has optional topic chips that change the message prompt and go into the email subject, and a character counter. Both cards share one two-column grid (`--contact-col`), so the bio and the form line up. The logic is in `js/contact.js`. The hero's **Get in touch** button links to the form.
 9. **Résumé dialog**: opened by any link with `data-resume`.
 10. **Footer**: the year is filled in by JavaScript.
 
 ### Common edits
+
+**Job search status, roles or location.** See [Quick settings](#quick-settings) at the top.
 
 **Add a job.** Copy an existing `<div class="job" role="listitem">` block inside `.timeline` in `#experience`, and put it first if it's your newest role. Bullets marked `class="more"` stay hidden until the visitor clicks "Show more".
 

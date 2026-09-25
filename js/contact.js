@@ -2,7 +2,7 @@
 // Name, a valid email and a message are required, and Send stays disabled until all three are filled in. Phone is optional.
 // If the access_key field is ever set back to a YOUR_… placeholder, the form falls back to the visitor's email app.
 
-// About card: copy-email button and the live local time in Sydney
+// About card: copy-email button and the live local time (city and time zone from js/site-config.js)
 (() => {
   document.querySelectorAll('.copy-email').forEach((button) => {
     const label = button.querySelector('.copy-label');
@@ -23,8 +23,9 @@
 
   const clock = document.querySelector('.local-time');
   if (!clock) return;
-  const format = new Intl.DateTimeFormat('en-AU', { timeZone: 'Australia/Sydney', hour: 'numeric', minute: '2-digit' });
-  const tick = () => { clock.textContent = `${format.format(new Date())} in Sydney`; };
+  const { timeZone = 'Australia/Sydney', homeCity = 'Sydney' } = typeof SITE !== 'undefined' ? SITE : {};
+  const format = new Intl.DateTimeFormat('en-AU', { timeZone, hour: 'numeric', minute: '2-digit' });
+  const tick = () => { clock.textContent = `${format.format(new Date())} in ${homeCity}`; };
   tick();
   clock.hidden = false;
   setInterval(tick, 30000);

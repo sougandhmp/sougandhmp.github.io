@@ -181,6 +181,9 @@ h1 .name { color: var(--secondary); }
 .hero-stack { display: flex; flex-wrap: wrap; gap: 4px 0; margin: 0; padding: 0; list-style: none; font-family: var(--mono); font-size: .86rem; font-weight: 600; color: var(--accent-strong); }
 .hero-stack li:not(:last-child)::after { content: "·"; margin: 0 10px; color: var(--faint); font-weight: 400; }
 .availability { display: flex; align-items: center; gap: 10px; margin: 14px 0 0; font-size: .95rem; color: var(--muted); }
+.open-roles::before { content: "·"; margin-right: 10px; color: var(--faint); }
+.availability { flex-wrap: wrap; column-gap: 10px; }
+.status-dot.off { background: var(--faint); box-shadow: none; animation: none; }
 .status-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent); animation: status-pulse 2.4s ease-in-out infinite; }
 @keyframes status-pulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 0%, transparent); } }
 .lead.intro { margin-top: 30px; font-size: 1.05rem; }

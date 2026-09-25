@@ -8,6 +8,13 @@ if (cover) new ResizeObserver(([e]) => {
 }).observe(cover);
 document.getElementById('y').textContent = new Date().getFullYear();
 
+// Job search and location, from js/site-config.js
+if (typeof SITE !== 'undefined') {
+  document.querySelectorAll('[data-site]').forEach((el) => { el.textContent = SITE[el.dataset.site] ?? el.textContent; });
+  document.querySelectorAll('[data-open-roles]').forEach((el) => { el.hidden = !SITE.openToRoles; });
+  document.querySelector('.availability .status-dot')?.classList.toggle('off', !SITE.openToRoles);
+}
+
 const nav = document.querySelector('nav');
 // the cover already shows the name; only put it in the nav once the cover scrolls away
 if (cover) new IntersectionObserver(([e]) => nav.classList.toggle('hide-brand', e.intersectionRatio > 0.35),
