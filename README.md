@@ -87,7 +87,7 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 In page order:
 
 1. **Nav**: the SMP monogram, section links (Experience, Skills, Projects, Recommendations, About), a Résumé button and the sun/moon theme switch.
-   - **Name:** as you scroll down from the top, "Sougandh" flies from the cover up into the nav and shrinks to fit, then "Manikkoth Paremmal" fades in beside it. Scrolling back up reverses it (`js/name-morph.js`). With reduced motion, the name simply fades in once the cover scrolls away. It's hidden between 961px and 1080px, where there isn't room for it.
+   - **Name:** as you scroll down from the top, the whole name on the cover ("Sougandh" and "Manikkoth Paremmal") flies up into the nav and shrinks to fit, landing side by side. Scrolling back up reverses it (`js/name-morph.js`). With reduced motion, the name simply fades in once the cover scrolls away. It's hidden between 961px and 1080px, where there isn't room for it.
    - **701px to 960px (tablets):** the links collapse behind a menu button. The theme switch stays in the bar.
    - **700px and below (phones):** a bottom navigation bar (`.tabbar`, Material 3 style) replaces the top menu, with Work, Skills, Projects, Reviews and About one thumb-tap away. The top bar keeps just the monogram and the theme switch.
    - **Keyboard:** a "Skip to content" link appears when a keyboard user presses Tab on arrival.
@@ -193,7 +193,7 @@ The **Send me a message** form (`#message` in `index.html`, logic in `js/contact
 
 **How the form behaves:**
 - **Fields:** Name, Email and Message are required (marked *). Phone is optional, but if it's filled in it must look like a phone number (digits, spaces, `+ ( ) - .`, 6–30 characters).
-- **Send button:** it stays disabled until the name and message aren't blank, the email is valid (it must include a dot in the domain, so `a@b` isn't accepted) and any phone number is valid. A hint under the button says what's required. Email and phone errors appear once the visitor leaves the field.
+- **Send button:** it stays disabled until the name and message aren't blank, the email is valid (it must include a dot in the domain, so `a@b` isn't accepted) and any phone number is valid. The hint under the button lists exactly what's still missing (e.g. "Still needed: a valid email address and a message.") and disappears once the form is ready. Email and phone errors appear once the visitor leaves the field.
 - **Phone in your email:** when a visitor gives a phone number, it's included in the message you receive.
 - **How it sends:** the form posts to Web3Forms as `FormData` with no custom headers. JSON would make the browser send a CORS preflight request first, and Web3Forms rejects those, so the form would fail.
 - **Success:** the form clears and thanks the visitor by name.
@@ -256,7 +256,7 @@ If you change a font, update both the Google Fonts `<link>` and the token. `cove
 |---|---|
 | Cover scaling | A `ResizeObserver` scales the 1500×500 cover iframe to fill the banner without cropping |
 | Nav name | An `IntersectionObserver` on the cover toggles `nav.hide-brand`. The name fades in once less than 35% of the cover is visible. This is the fallback when the fly-in animation is off |
-| Name fly-in | In `js/name-morph.js`. The cover is an iframe, so its text can't leave it. Instead, the cover reports the name's position and size (`postMessage`), and the page lays an identical copy (`.name-flyer`) exactly over it. While scrolling, the cover hides its own name, and the copy moves and scales from there to the nav's `.bn-first`. When it lands, `nav.name-landed` shows the real nav name. It's driven directly by scroll position, not a timer |
+| Name fly-in | In `js/name-morph.js`. The cover is an iframe, so its text can't leave it. Instead, the cover reports the position and style of both name parts (`postMessage`), and the page lays identical copies (`.name-flyer`) exactly over them. While scrolling, the cover hides its originals, and the copies move and scale to the nav's `.bn-first` and `.bn-rest`. The surname's weight (500 to 800) and colour (grey to full) blend on the way, because Sora is loaded as a variable font. It's also nudged right as the two lines converge, so they never overlap. When they land, `nav.name-landed` shows the real nav name. It's driven directly by scroll position, not a timer |
 | Theme | In `js/theme.js`, shared with `project.html`. Until a visitor uses the switch, the site follows their device's light/dark setting, including live changes. The switch saves their choice in `localStorage`. It also sets the mobile browser toolbar colour (`theme-color`), keeps the cover in sync, and cross-fades the page with the View Transitions API where supported (not with reduced motion) |
 | Mobile menu | `setMenu()` opens and closes the menu at 960px and below, and keeps `aria-expanded` and the button label in sync. It closes on a link tap, Escape (focus returns to the button), a tap outside the nav, or when the window widens past the breakpoint |
 | Job "Show more" | Toggles `.expanded` on a `.job` to reveal its `li.more` bullets |

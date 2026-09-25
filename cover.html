@@ -84,8 +84,8 @@ html,body{overflow:hidden}
 <div style="position: absolute; left: 90px; top: 118px; width: 600px; display: flex; flex-direction: column; gap: 14px">
 <div class="mono" style="font-size: 15px; letter-spacing: 0.12em; color: var(--green-text)">&lt;hello_world /&gt; I'M</div>
 <div style="display: flex; flex-direction: column; gap: 2px">
-<h1 style="margin: 0; font-size: 92px; line-height: 0.95; font-weight: 800; letter-spacing: -0.035em; color: var(--fg)">Sougandh</h1>
-<div style="font-size: 34px; font-weight: 500; letter-spacing: -0.015em; color: var(--muted)">Manikkoth Paremmal</div>
+<h1 data-name="first" style="margin: 0; font-size: 92px; line-height: 0.95; font-weight: 800; letter-spacing: -0.035em; color: var(--fg)">Sougandh</h1>
+<div data-name="rest" style="font-size: 34px; font-weight: 500; letter-spacing: -0.015em; color: var(--muted)">Manikkoth Paremmal</div>
 </div>
 <div class="mono" style="display: flex; gap: 10px; margin-top: 10px; font-size: 14px">
 <span style="padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip)">Kotlin</span>
@@ -181,16 +181,21 @@ document.documentElement.dataset.theme = t || (matchMedia('(prefers-color-scheme
 addEventListener('message', (e) => {
   if (!e.data) return;
   if (e.data.theme) document.documentElement.dataset.theme = e.data.theme;
-  // the page hides the name while its own copy flies it into the nav (js/name-morph.js)
-  if ('hideName' in e.data) document.querySelector('h1').style.visibility = e.data.hideName ? 'hidden' : '';
+  // the page hides the name while its own copies fly it into the nav (js/name-morph.js)
+  if ('hideName' in e.data) document.querySelectorAll('[data-name]').forEach((el) => { el.style.visibility = e.data.hideName ? 'hidden' : ''; });
 });
-// tell the page where the name's text sits (its glyph box, not the h1's line box) and at what size
+// tell the page where each part of the name sits (its glyph box, not the element's line box) and how it's styled
 const reportName = () => {
-  const h1 = document.querySelector('h1');
-  const range = document.createRange();
-  range.selectNodeContents(h1);
-  const r = range.getBoundingClientRect();
-  parent.postMessage({ coverName: { x: r.left, y: r.top, fontSize: parseFloat(getComputedStyle(h1).fontSize) } }, '*');
+  const parts = {};
+  document.querySelectorAll('[data-name]').forEach((el) => {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const r = range.getBoundingClientRect();
+    const cs = getComputedStyle(el);
+    parts[el.dataset.name] = { x: r.left, y: r.top, fontSize: parseFloat(cs.fontSize), weight: parseFloat(cs.fontWeight),
+      letterSpacing: parseFloat(cs.letterSpacing) / parseFloat(cs.fontSize) };
+  });
+  parent.postMessage({ coverName: parts }, '*');
 };
 document.fonts.ready.then(reportName);
 addEventListener('resize', reportName);

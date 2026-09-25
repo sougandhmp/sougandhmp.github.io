@@ -19,10 +19,25 @@
   const phoneValid = () => !phone.value.trim() || PHONE_PATTERN.test(phone.value.trim());
   const ready = () => name.value.trim() !== '' && emailValid() && message.value.trim() !== '' && phoneValid();
 
+  // the hint under Send says exactly what's still missing, e.g. "Still needed: a valid email address."
+  const joinList = (items) => (items.length < 2 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`);
+  const hintText = () => {
+    const empty = !name.value.trim() && !email.value.trim() && !message.value.trim();
+    if (empty) return 'Add your name, email and a message to send.';
+    const missing = [];
+    if (!name.value.trim()) missing.push('your name');
+    if (!email.value.trim()) missing.push('your email');
+    else if (!emailValid()) missing.push('a valid email address');
+    if (!message.value.trim()) missing.push('a message');
+    if (!phoneValid()) missing.push('a valid phone number (or leave it blank)');
+    return `Still needed: ${joinList(missing)}.`;
+  };
+
   let sending = false;
   const refresh = () => {
     button.disabled = sending || !ready();
     hint.hidden = ready();
+    if (!ready()) hint.textContent = hintText();
     // only complain about a field once the visitor has typed something and moved on
     const showEmail = email.dataset.touched && email.value.trim() && !emailValid();
     const showPhone = phone.dataset.touched && !phoneValid();
