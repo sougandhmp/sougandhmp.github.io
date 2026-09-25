@@ -1,5 +1,6 @@
 // Content for the project detail view (opened from each project card).
 // The keys match data-project on the cards in index.html. Every field except title is optional.
+// List the most important technologies first in each stack: the project cards on the home page show the first three.
 // Facts come from the résumé and, for FlagMaster, the GitHub README; keep them accurate.
 const PROJECTS = {
   'mega-android': {
@@ -24,7 +25,7 @@ const PROJECTS = {
         'Worked with cross-functional engineering teams to integrate features and optimise app performance.',
       ]],
     ],
-    stack: ['Java', 'Kotlin', 'Jetpack Compose', 'XML', 'Clean Architecture', 'MVVM', 'Hilt', 'JUnit', 'Coroutines & Flow', 'ViewModel', 'WorkManager', 'Room', 'DataStore', 'GitLab', 'Crashlytics'],
+    stack: ['Kotlin', 'Jetpack Compose', 'Clean Architecture', 'Java', 'XML', 'MVVM', 'Hilt', 'JUnit', 'Coroutines & Flow', 'ViewModel', 'WorkManager', 'Room', 'DataStore', 'GitLab', 'Crashlytics'],
     links: [
       ['About MEGA', 'https://mega.io/mobile'],
       ['Google Play', 'https://play.google.com/store/apps/details?id=mega.privacy.android.app'],

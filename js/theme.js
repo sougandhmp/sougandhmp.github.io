@@ -1,21 +1,43 @@
-// Theme: loaded in <head> on every page so a saved light/dark choice applies before the first paint.
+// Theme: loaded in <head> on every page so the right theme applies before the first paint.
+// Until the visitor picks a theme with the switch, the site follows their device's light/dark setting.
 (() => {
   const root = document.documentElement;
-  try {
-    const saved = localStorage.getItem('theme');
-    if (saved) root.dataset.theme = saved;
-  } catch (e) { /* storage blocked: fall back to the default dark theme */ }
+  const prefersLight = matchMedia('(prefers-color-scheme: light)');
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const BAR_COLOURS = { dark: '#111214', light: '#f6f7f8' }; // mobile browser toolbar, matches --bg
 
-  // the sun/moon icon and knob swap in CSS; only the button label needs updating here
+  let saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (e) { /* storage blocked: follow the device */ }
+  const current = () => saved || (prefersLight.matches ? 'light' : 'dark');
+
+  // embedded pages that follow the theme (the cover) get it by postMessage,
+  // which also works when previewing from the file system, where the iframe can't read this page
+  const syncFrames = () => document.querySelectorAll('iframe[data-theme-sync]').forEach((frame) =>
+    frame.contentWindow?.postMessage({ theme: root.dataset.theme }, '*'));
+
+  const apply = (theme) => {
+    root.dataset.theme = theme;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', BAR_COLOURS[theme]);
+    const toggle = document.querySelector('.theme-toggle');
+    toggle?.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+    syncFrames();
+  };
+  apply(current());
+
+  // the device setting changed while the page is open: follow it, unless the visitor has chosen a theme
+  prefersLight.addEventListener('change', () => { if (!saved) apply(current()); });
+
   document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('iframe[data-theme-sync]').forEach((frame) => frame.addEventListener('load', syncFrames));
+    apply(current()); // again now that the switch and the cover exist
     const toggle = document.querySelector('.theme-toggle');
     if (!toggle) return;
-    const updateLabel = () => toggle.setAttribute('aria-label', root.dataset.theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
-    updateLabel();
     toggle.addEventListener('click', () => {
-      root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
-      try { localStorage.setItem('theme', root.dataset.theme); } catch (e) { /* ignore */ }
-      updateLabel();
+      saved = current() === 'light' ? 'dark' : 'light';
+      try { localStorage.setItem('theme', saved); } catch (e) { /* ignore */ }
+      // cross-fade the whole page in one step instead of each element changing at its own speed
+      if (document.startViewTransition && !reduceMotion.matches) document.startViewTransition(() => apply(saved));
+      else apply(saved);
     });
   });
 })();

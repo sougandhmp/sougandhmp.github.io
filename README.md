@@ -43,8 +43,9 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 | `css/styles.css` | All styles. Theme colours and fonts are at the top |
 | `js/main.js` | Page behaviour (see [JavaScript](#javascript)) |
 | `js/floaters.js` | The floating tech-logo tiles in the page margins, as a data list |
-| `js/theme.js` | Light/dark theme switch, shared by both pages. It's loaded in `<head>` so a saved theme applies before the page appears |
+| `js/theme.js` | Light/dark theme switch, shared by both pages. It's loaded in `<head>` so a saved theme applies before the page appears, and it passes theme changes to the cover |
 | `js/projects.js` | Content for the project pages: one entry per project |
+| `js/contact.js` | The "Send me a message" form in About & contact (see [Contact form](#contact-form)) |
 | `js/project-page.js` | Builds `project.html` from `js/projects.js`, including the Previous/Next project links and a "not found" message for unknown IDs |
 | `images/flagmaster/` | FlagMaster app screenshots shown on its project page (resized to 480px wide) |
 | `cover.html` | Animated cover banner (1500×500), embedded in the hero through an `<iframe>` |
@@ -75,7 +76,7 @@ In page order:
 5. **Skills** (`#skills`): one `.skillrow` per category.
 6. **Projects** (`#projects`): project cards with Android, Jetpack Compose and Flutter filters. Clicking anywhere on a card opens that project's own page, `project.html?id=…` (see **Add or edit project details** under [Common edits](#common-edits)).
 7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word.
-8. **About & contact** (`#contact`): photo, short bio, education, languages and contact buttons.
+8. **About & contact** (`#contact`): photo, short bio, education, languages and contact buttons, followed by the **Send me a message** form (`#message`). The hero's **Get in touch** button links to the form.
 9. **Résumé dialog**: opened by any link with `data-resume`.
 10. **Footer**: the year is filled in by JavaScript.
 
@@ -110,7 +111,8 @@ In page order:
 ```
 
 - **Whole card is a link:** the title link (`.card-link`) is stretched over the card, so clicking anywhere on it opens the project page. Other links inside the card, like GitHub, still open their own destinations.
-- **Tech stack:** each `<li>` in `.stack` shows as one amber chip.
+- **Tech stack:** each `<li>` in `.stack` shows as one amber chip. Cards show only the **first three** technologies from the project's `stack` in `js/projects.js`, plus a dashed `<li class="more">+N</li>` chip for the rest. The full list is on the project page. When you change a stack, update the card's three chips and the count.
+- **GitHub and Google Play links:** use round icon buttons (`<a class="icon-link" … aria-label="My App on GitHub" title="GitHub">` with the logo SVG). Copy an existing one from `index.html`. On project pages, links to github.com and play.google.com become icon buttons automatically. Other links stay as text buttons.
 - **Featured project:** add `featured` to the card's class (`class="card featured"`) to make it span two columns on screens 700px and wider, as MEGA Android does. The desktop grid has three columns.
 
 - **Several links:** wrap them in `<div class="links">…</div>`, as on the MEGA Android card.
@@ -158,11 +160,28 @@ Every field except `title` is optional. The Previous and Next links at the botto
 
 ---
 
+## Contact form
+
+The **Send me a message** form (`#message` in `index.html`, logic in `js/contact.js`) delivers messages to your inbox through [Web3Forms](https://web3forms.com). A static GitHub Pages site can't send email by itself.
+
+**Setup:** done. The form's hidden `access_key` input in `index.html` holds the Web3Forms key for `sougandhmp@gmail.com`.
+- **Replacing the key:** to change the key, or to send messages to another address, create a new key at https://web3forms.com and replace that value.
+- **Placeholder fallback:** if the value is ever set back to a `YOUR_…` placeholder, the form falls back to opening the visitor's email app.
+
+**Is the key safe to publish?** Yes. The access key only lets people send messages *to* you, so it's meant to live in public HTML. Anyone who sends you a message through the form has their name, email and message passed through Web3Forms on the way to you.
+
+**How the form behaves:**
+- **Invalid entries:** name, email and a message of at least 10 characters are required. Invalid fields get a red border and the browser's own message.
+- **Success:** the form clears and thanks the visitor by name.
+- **Failure:** the typed message stays in the form, and a direct email link is offered instead.
+- **Spam:** a hidden `botcheck` field catches simple spam bots. Web3Forms also filters spam on its side.
+- **Subject line:** messages arrive as "New message from <name> via sougandh.dev", and replying goes straight to the visitor's email.
+
 ## Styling (`css/styles.css`)
 
 ### Theme colours
 
-Both themes are defined as CSS custom properties at the top of the file:
+Both themes are defined as CSS custom properties at the top of the file. Visitors get the one matching their device until they choose with the switch:
 
 - **Dark (default):** `:root`
 - **Light:** `[data-theme="light"]`
@@ -177,6 +196,9 @@ Change a colour in these two blocks and it updates across the whole site.
 | `--accent`, `--accent-strong`, `--accent-soft` | Android green: links, buttons, tags, monogram |
 | `--secondary` | Amber: company names, stack labels, headline highlight, award badge |
 | `--card`, `--surface` | Card and tile backgrounds |
+| `--danger` | Form error text and invalid field borders |
+| `--highlight` | 1px top sheen on cards, tiles and the About panel, for depth |
+| `--glow-a`, `--glow-b` | Very soft green and amber ambient light fixed behind the page (`body::before`) |
 
 The primary button (`.btn.primary`) always uses Android green `#3ddc84`, in both themes.
 
@@ -209,7 +231,7 @@ If you change a font, update both the Google Fonts `<link>` and the token. `cove
 |---|---|
 | Cover scaling | A `ResizeObserver` scales the 1500×500 cover iframe to fill the banner without cropping |
 | Nav name | An `IntersectionObserver` on the cover toggles `nav.hide-brand`. The name shows once less than 35% of the cover is visible |
-| Theme switch | In `js/theme.js`, shared with `project.html`. It switches `data-theme` on `<html>` and remembers the choice in `localStorage`. The green knob under the active sun or moon icon moves in CSS |
+| Theme | In `js/theme.js`, shared with `project.html`. Until a visitor uses the switch, the site follows their device's light/dark setting, including live changes. The switch saves their choice in `localStorage`. It also sets the mobile browser toolbar colour (`theme-color`), keeps the cover in sync, and cross-fades the page with the View Transitions API where supported (not with reduced motion) |
 | Mobile menu | `setMenu()` opens and closes the menu at 960px and below, and keeps `aria-expanded` and the button label in sync. It closes on a link tap, Escape (focus returns to the button), a tap outside the nav, or when the window widens past the breakpoint |
 | Job "Show more" | Toggles `.expanded` on a `.job` to reveal its `li.more` bullets |
 | Project filters | Hides cards whose `data-category` tags don't include the selected filter, and marks the selected button with `aria-pressed` |
@@ -247,11 +269,16 @@ Logo paths come from [Simple Icons](https://simpleicons.org). Open an icon's SVG
 
 ### `cover.html`
 
-A self-contained 1500×500 banner: name, skill chips, caricature, a code card that types itself out, a "BUILD SUCCESSFUL" chip, a robot and drifting tech tiles. It has its own inline CSS and needs no JavaScript.
+A self-contained 1500×500 banner: name, skill chips, caricature, a code card that types itself out, a "BUILD SUCCESSFUL" chip, a robot and drifting tech tiles. It has its own inline CSS.
+
+**Theme:** the cover follows the site's light/dark theme.
+- **Colours:** its colours are CSS variables at the top of `cover.html`, with a `[data-theme="light"]` set, matching the Graphite values in `css/styles.css`. If you change the site theme, change these too.
+- **Syncing:** on load, the cover reads the saved theme. When the switch is flipped, `js/theme.js` sends the new theme to every `<iframe data-theme-sync>` with `postMessage`. That also works when previewing from the file system.
+- **Fixed in both themes:** Android green, the Kotlin/Flutter logos and the code card, which stays a dark editor window.
 
 ### Regenerating `cover.png` and `og-image.png`
 
-These two are static pictures of the cover. Regenerate them whenever `cover.html` changes: link previews use `og-image.png`, and it's built from `cover.png`.
+These two are static pictures of the cover in its default dark theme. Regenerate them whenever `cover.html` changes: link previews use `og-image.png`, and it's built from `cover.png`.
 
 From the repo root on macOS, with Google Chrome installed:
 
