@@ -17,12 +17,18 @@
   --chip-text: #dde6e0;
   --card-bg: #111b16;
   --card-muted: #3a5446;
+  --code-bg: #2b2b2b;
+  --code-header: #3c3f41;
+  --code-fg: #a9b7c6;
+  --code-keyword: #cc7832;
+  --code-string: #6a8759;
+  --code-annotation: #bbb529;
   --accent: #3ddc84;
 }
 html[data-theme="light"] {
   --bg: #f2f3f1;
-  --bg-elevated: #edf2ee;
-  --bg-panel: #f8faf8;
+  --bg-elevated: #ffffff;
+  --bg-panel: #ffffff;
   --fg: #111214;
   --muted: #404b52;
   --line: #d9dedd;
@@ -30,6 +36,12 @@ html[data-theme="light"] {
   --chip-text: #2d373e;
   --card-bg: #f7faf7;
   --card-muted: #4a6158;
+  --code-bg: #ffffff;
+  --code-header: #f3f3f3;
+  --code-fg: #000000;
+  --code-keyword: #0033b3;
+  --code-string: #067d17;
+  --code-annotation: #9e880d;
   --accent: #1aaa73;
 }
 body{margin:0;background:var(--bg) radial-gradient(var(--soft) 1.2px,transparent 1.4px) 0 0/22px 22px;font-family:'Sora',Georgia,serif;color:var(--fg)}
@@ -66,7 +78,7 @@ a{color:var(--accent)}a:hover{color:#8BF0B8}
 .tip{animation:glow 1.6s ease-in-out infinite}
 .chip{animation:pop 5.5s ease-out 1 forwards}
 .shine{animation:shimmer 2.4s ease-in-out infinite}
-.tech{position:absolute;width:58px;height:58px;display:grid;place-items:center;box-sizing:border-box;border-radius:16px;background:var(--bg-elevated);border:1px solid var(--line);box-shadow:0 12px 28px rgba(0,0,0,.35);transform:rotate(var(--r));animation:drift var(--d) ease-in-out var(--delay) infinite}
+.tech{position:absolute;width:58px;height:58px;display:grid;place-items:center;box-sizing:border-box;border-radius:16px;background:var(--card-bg);border:1px solid var(--line);box-shadow:0 12px 28px rgba(0,0,0,.35);transform:rotate(var(--r));animation:drift var(--d) ease-in-out var(--delay) infinite}
 .tech svg{width:30px;height:30px;display:block}
 @keyframes drift{0%,100%{transform:translate(0,0) rotate(var(--r))}33%{transform:translate(7px,-12px) rotate(calc(var(--r) * -.4))}66%{transform:translate(-5px,-5px) rotate(calc(var(--r) * 1.4))}}
 .still *{animation:none !important}
@@ -79,20 +91,20 @@ html,body{overflow:hidden}
 <div style="width: 1500px; height: 500px; margin: 0 auto; position: relative; overflow: hidden; box-sizing: border-box">
 
 <!-- stars -->
-<div class="star" style="position: absolute; left: 700px; top: 40px; width: 8px; height: 8px; border-radius: 50%; background: #3DDC84"></div>
-<div class="star s2" style="position: absolute; left: 1100px; top: 250px; width: 6px; height: 6px; border-radius: 50%; background: #F2EEE3"></div>
-<div class="star s3" style="position: absolute; left: 600px; top: 440px; width: 7px; height: 7px; border-radius: 50%; background: #3DDC84"></div>
-<div class="star s4" style="position: absolute; left: 1440px; top: 30px; width: 6px; height: 6px; border-radius: 50%; background: #F2EEE3"></div>
-<div class="star s2" style="position: absolute; left: 60px; top: 460px; width: 6px; height: 6px; border-radius: 50%; background: #3DDC84"></div>
+<div class="star" style="position: absolute; left: 700px; top: 40px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent)"></div>
+<div class="star s2" style="position: absolute; left: 1100px; top: 250px; width: 6px; height: 6px; border-radius: 50%; background: var(--fg)"></div>
+<div class="star s3" style="position: absolute; left: 600px; top: 440px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent)"></div>
+<div class="star s4" style="position: absolute; left: 1440px; top: 30px; width: 6px; height: 6px; border-radius: 50%; background: var(--fg)"></div>
+<div class="star s2" style="position: absolute; left: 60px; top: 460px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent)"></div>
 
 <!-- rings behind caricature -->
 <svg class="ring" width="420" height="420" viewBox="0 0 420 420" style="position: absolute; left: 750px; top: 20px" aria-hidden="true">
-<circle cx="210" cy="210" r="200" fill="none" stroke="#3DDC84" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 14"></circle>
-<circle cx="210" cy="10" r="7" fill="#3DDC84"></circle>
+<circle cx="210" cy="210" r="200" fill="none" stroke="var(--accent)" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 14"></circle>
+<circle cx="210" cy="10" r="7" fill="var(--accent)"></circle>
 </svg>
 <svg class="ring-rev" width="340" height="340" viewBox="0 0 340 340" style="position: absolute; left: 790px; top: 60px" aria-hidden="true">
-<circle cx="170" cy="170" r="160" fill="#16231C" stroke="#3DDC84" stroke-opacity=".5" stroke-width="1.5"></circle>
-<circle cx="330" cy="170" r="5" fill="#F2EEE3"></circle>
+<circle cx="170" cy="170" r="160" fill="var(--card-bg)" stroke="var(--accent)" stroke-opacity=".5" stroke-width="1.5"></circle>
+<circle cx="330" cy="170" r="5" fill="var(--fg)"></circle>
 </svg>
 
 <!-- left text block -->
@@ -114,15 +126,15 @@ html,body{overflow:hidden}
 </div>
 
 <!-- floating phone -->
-<div class="phone" style="position: absolute; left: 668px; top: 250px; width: 78px; height: 150px; box-sizing: border-box; border: 3px solid #F2EEE3; border-radius: 16px; padding: 14px 8px 10px; display: flex; flex-direction: column; gap: 7px; background: #111B16; overflow: hidden">
-<div style="position: absolute; left: 30px; top: 5px; width: 12px; height: 4px; border-radius: 2px; background: #F2EEE3"></div>
-<div style="height: 22px; border-radius: 6px; background: #3DDC84"></div>
-<div style="height: 8px; width: 80%; border-radius: 4px; background: #3A5446"></div>
-<div style="height: 8px; width: 60%; border-radius: 4px; background: #3A5446"></div>
-<div style="height: 30px; border-radius: 6px; background: #22362B; position: relative; overflow: hidden">
+<div class="phone" style="position: absolute; left: 668px; top: 250px; width: 78px; height: 150px; box-sizing: border-box; border: 3px solid var(--fg); border-radius: 16px; padding: 14px 8px 10px; display: flex; flex-direction: column; gap: 7px; background: var(--card-bg); overflow: hidden">
+<div style="position: absolute; left: 30px; top: 5px; width: 12px; height: 4px; border-radius: 2px; background: var(--fg)"></div>
+<div style="height: 22px; border-radius: 6px; background: var(--accent)"></div>
+<div style="height: 8px; width: 80%; border-radius: 4px; background: var(--card-muted)"></div>
+<div style="height: 8px; width: 60%; border-radius: 4px; background: var(--card-muted)"></div>
+<div style="height: 30px; border-radius: 6px; background: var(--bg-elevated); position: relative; overflow: hidden">
 <div class="shine" style="position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: rgba(242,238,227,.18)"></div>
 </div>
-<div style="height: 8px; width: 70%; border-radius: 4px; background: #3A5446"></div>
+<div style="height: 8px; width: 70%; border-radius: 4px; background: var(--card-muted)"></div>
 </div>
 
 <!-- avatar (caricature image) -->
@@ -133,7 +145,7 @@ html,body{overflow:hidden}
 <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="kt" x1="24" y1="0" x2="0" y2="24" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7F52FF"></stop><stop offset=".55" stop-color="#C711E1"></stop><stop offset="1" stop-color="#E54857"></stop></linearGradient></defs><path d="M24 24H0V0h24L12 12Z" fill="url(#kt)"></path></svg>
 </div>
 <div class="tech" title="Android" style="left: 330px; top: 420px; --r: 6deg; --d: 8.5s; --delay: -2s">
-<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="9" x2="5" y2="5.5" stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round"></line><line x1="17" y1="9" x2="19" y2="5.5" stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round"></line><path d="M2.5 19a9.5 9.5 0 0 1 19 0Z" fill="#3DDC84"></path><circle cx="8.3" cy="14.6" r="1.2" fill="#121E18"></circle><circle cx="15.7" cy="14.6" r="1.2" fill="#121E18"></circle></svg>
+<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="9" x2="5" y2="5.5" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"></line><line x1="17" y1="9" x2="19" y2="5.5" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"></line><path d="M2.5 19a9.5 9.5 0 0 1 19 0Z" fill="var(--accent)"></path><circle cx="8.3" cy="14.6" r="1.2" fill="var(--bg)"></circle><circle cx="15.7" cy="14.6" r="1.2" fill="var(--bg)"></circle></svg>
 </div>
 <div class="tech" title="Flutter" style="left: 1180px; top: 336px; --r: 8deg; --d: 6.5s; --delay: -4s">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.3 0 2.3 12 6 15.7 21.7 0Z" fill="#54C5F8"></path><path d="M14.3 11.1 7.9 17.5l6.4 6.5h7.4l-6.5-6.5 6.5-6.4Z" fill="#01579B"></path><path d="M11.1 20.7 14.3 24h7.4l-6.5-6.5Z" fill="#29B6F6" opacity=".6"></path></svg>
@@ -144,74 +156,82 @@ html,body{overflow:hidden}
 </div>
 
 <!-- code card -->
-<div class="float mono" style="position: absolute; left: 1160px; top: 78px; width: 300px; box-sizing: border-box; border: 1px solid #2E4A3B; border-radius: 14px; background: #121E18; font-size: 14px; line-height: 1.7; overflow: hidden">
-<div style="display: flex; gap: 6px; align-items: center; padding: 10px 14px; border-bottom: 1px solid #22362B">
+<div class="float mono" style="position: absolute; left: 1160px; top: 78px; width: 300px; box-sizing: border-box; border: 1px solid var(--line); border-radius: 14px; background: var(--code-bg); color: var(--code-fg); font-size: 14px; line-height: 1.7; overflow: hidden">
+<div style="display: flex; gap: 6px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--code-header)">
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #E0735F"></span>
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #E8B85C"></span>
-<span style="width: 10px; height: 10px; border-radius: 50%; background: #3DDC84"></span>
-<span style="margin-left: 8px; font-size: 12px; color: #8FA396">Greeting.kt</span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: var(--accent)"></span>
+<span style="margin-left: 8px; font-size: 12px; color: var(--code-fg)">Greeting.kt</span>
 </div>
-<div style="padding: 12px 16px 14px; color: #F2EEE3">
-<span class="line" style="color: #3DDC84">@Composable</span>
-<span class="line l2"><span style="color: #8FB8FF">fun</span> Greeting() {</span>
-<span class="line l3">  Text(<span style="color: #F5C97A">"Hello, Android!"</span>)</span>
-<span class="line l4">}<span class="caret" style="color: #3DDC84">▍</span></span>
+<div style="padding: 12px 16px 14px; color: var(--code-fg)">
+<span class="line" style="color: var(--code-annotation)">@Composable</span>
+<span class="line l2"><span style="color: var(--code-keyword)">fun</span> Greeting() {</span>
+<span class="line l3">  Text(<span style="color: var(--code-string)">"Hello, Android!"</span>)</span>
+<span class="line l4">}<span class="caret" style="color: var(--accent)">▍</span></span>
 </div>
 </div>
 
 <!-- build chip -->
-<div class="chip mono" style="position: absolute; left: 1170px; top: 262px; display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: rgba(22,35,28,.82); border: 1px solid var(--accent); font-size: 13px; font-weight: 600; color: var(--accent); opacity: 0">
+<div class="chip mono" style="position: absolute; left: 1170px; top: 262px; display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: var(--card-bg); border: 1px solid var(--accent); font-size: 13px; font-weight: 600; color: var(--accent); opacity: 0">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
 BUILD SUCCESSFUL
 </div>
 
 <!-- gear -->
-<svg class="gear" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#3A5446" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 1090px; top: 420px" aria-hidden="true">
+<svg class="gear" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="var(--card-muted)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 1090px; top: 420px" aria-hidden="true">
 <circle cx="12" cy="12" r="3"></circle>
 <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path>
 </svg>
 
 <!-- robot buddy -->
 <svg class="float-slow" width="130" height="160" viewBox="0 0 130 160" style="position: absolute; left: 1330px; top: 310px" aria-hidden="true">
-<line x1="60" y1="30" x2="60" y2="8" stroke="#F2EEE3" stroke-width="3" stroke-linecap="round"></line>
-<circle class="tip" cx="60" cy="7" r="6" fill="#3DDC84"></circle>
-<rect x="22" y="30" width="76" height="56" rx="16" fill="#3DDC84"></rect>
-<rect x="32" y="40" width="56" height="36" rx="10" fill="#0D1411"></rect>
-<g class="eye"><rect x="44" y="50" width="8" height="12" rx="4" fill="#3DDC84"></rect></g>
-<g class="eye"><rect x="68" y="50" width="8" height="12" rx="4" fill="#3DDC84"></rect></g>
-<rect x="30" y="92" width="60" height="44" rx="12" fill="#3DDC84"></rect>
-<rect x="48" y="104" width="24" height="6" rx="3" fill="#0D1411"></rect>
-<rect x="8" y="98" width="20" height="10" rx="5" fill="#3DDC84"></rect>
-<rect class="arm" x="92" y="98" width="28" height="10" rx="5" fill="#3DDC84"></rect>
-<rect x="40" y="138" width="12" height="16" rx="5" fill="#3DDC84"></rect>
-<rect x="68" y="138" width="12" height="16" rx="5" fill="#3DDC84"></rect>
+<line x1="60" y1="30" x2="60" y2="8" stroke="var(--fg)" stroke-width="3" stroke-linecap="round"></line>
+<circle class="tip" cx="60" cy="7" r="6" fill="var(--accent)"></circle>
+<rect x="22" y="30" width="76" height="56" rx="16" fill="var(--accent)"></rect>
+<rect x="32" y="40" width="56" height="36" rx="10" fill="var(--bg)"></rect>
+<g class="eye"><rect x="44" y="50" width="8" height="12" rx="4" fill="var(--accent)"></rect></g>
+<g class="eye"><rect x="68" y="50" width="8" height="12" rx="4" fill="var(--accent)"></rect></g>
+<rect x="30" y="92" width="60" height="44" rx="12" fill="var(--accent)"></rect>
+<rect x="48" y="104" width="24" height="6" rx="3" fill="var(--bg)"></rect>
+<rect x="8" y="98" width="20" height="10" rx="5" fill="var(--accent)"></rect>
+<rect class="arm" x="92" y="98" width="28" height="10" rx="5" fill="var(--accent)"></rect>
+<rect x="40" y="138" width="12" height="16" rx="5" fill="var(--accent)"></rect>
+<rect x="68" y="138" width="12" height="16" rx="5" fill="var(--accent)"></rect>
 </svg>
 
 <!-- braces -->
-<div class="mono float" style="position: absolute; left: 1250px; top: 400px; font-size: 40px; font-weight: 600; color: #2E4A3B">{ }</div>
+<div class="mono float" style="position: absolute; left: 1250px; top: 400px; font-size: 40px; font-weight: 600; color: var(--line)">{ }</div>
 
 </div>
 <script>
-  const rootStyle = document.documentElement.style;
+  const root = document.documentElement;
   const setTheme = (theme) => {
     const isLight = theme === 'light';
-    rootStyle.setProperty('--bg', isLight ? '#f2f3f1' : '#0d1411');
-    rootStyle.setProperty('--bg-elevated', isLight ? '#edf2ee' : '#121e18');
-    rootStyle.setProperty('--bg-panel', isLight ? '#f8faf8' : '#16231c');
-    rootStyle.setProperty('--fg', isLight ? '#111214' : '#f2eee3');
-    rootStyle.setProperty('--muted', isLight ? '#404b52' : '#c9d3cc');
-    rootStyle.setProperty('--line', isLight ? '#d9dedd' : '#2e4a3b');
-    rootStyle.setProperty('--soft', isLight ? 'rgba(26,170,115,.08)' : 'rgba(61,220,132,.16)');
-    rootStyle.setProperty('--chip-text', isLight ? '#2d373e' : '#dde6e0');
-    rootStyle.setProperty('--card-bg', isLight ? '#f7faf7' : '#111b16');
-    rootStyle.setProperty('--card-muted', isLight ? '#4a6158' : '#3a5446');
-    rootStyle.setProperty('--accent', isLight ? '#1aaa73' : '#3ddc84');
+    root.setAttribute('data-theme', theme);
+    root.style.setProperty('--bg', isLight ? '#f2f3f1' : '#0d1411');
+    root.style.setProperty('--bg-elevated', isLight ? '#ffffff' : '#121e18');
+    root.style.setProperty('--bg-panel', isLight ? '#ffffff' : '#16231c');
+    root.style.setProperty('--fg', isLight ? '#111214' : '#f2eee3');
+    root.style.setProperty('--muted', isLight ? '#404b52' : '#c9d3cc');
+    root.style.setProperty('--line', isLight ? '#d9dedd' : '#2e4a3b');
+    root.style.setProperty('--soft', isLight ? 'rgba(26,170,115,.08)' : 'rgba(61,220,132,.16)');
+    root.style.setProperty('--chip-text', isLight ? '#2d373e' : '#dde6e0');
+    root.style.setProperty('--card-bg', isLight ? '#f7faf7' : '#111b16');
+    root.style.setProperty('--card-muted', isLight ? '#4a6158' : '#3a5446');
+    root.style.setProperty('--code-bg', isLight ? '#ffffff' : '#2b2b2b');
+    root.style.setProperty('--code-header', isLight ? '#f3f3f3' : '#3c3f41');
+    root.style.setProperty('--code-fg', isLight ? '#000000' : '#a9b7c6');
+    root.style.setProperty('--code-keyword', isLight ? '#0033b3' : '#cc7832');
+    root.style.setProperty('--code-string', isLight ? '#067d17' : '#6a8759');
+    root.style.setProperty('--code-annotation', isLight ? '#9e880d' : '#bbb529');
+    root.style.setProperty('--accent', isLight ? '#1aaa73' : '#3ddc84');
     document.body.style.background = `var(--bg) radial-gradient(var(--soft) 1.2px, transparent 1.4px) 0 0/22px 22px`;
   };
 
   const initTheme = () => {
     const preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    setTheme(localStorage.getItem('theme') || preferred);
+    const theme = localStorage.getItem('theme') || preferred;
+    setTheme(theme === 'light' || theme === 'dark' ? theme : preferred);
   };
 
   window.addEventListener('message', (event) => {
