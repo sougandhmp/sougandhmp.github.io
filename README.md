@@ -96,7 +96,7 @@ In page order:
 4. **Experience** (`#experience`): a vertical timeline, with one `.job` block per role inside `.timeline`, newest first. On desktop, dates sit on the left, a line with a dot per role runs down the middle, and details are on the right. On phones, the line runs down the left edge. The most recent role gets a filled, glowing dot. The line and dots are pure CSS (`.timeline::before`, `.job::before`), so adding a role is just another `.job` block.
 5. **Skills** (`#skills`): three rows, deliberately short so the Android signal isn't diluted: **Core** (`.skillrow.core`, highlighted green), **Engineering** and **Additional**. Add a skill only if you'd want a recruiter to ask about it.
 6. **Projects** (`#projects`): project cards with Android, Jetpack Compose and Flutter filters. Clicking anywhere on a card opens that project's own page, `project.html?id=…` (see **Add or edit project details** under [Common edits](#common-edits)).
-7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word.
+7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word. Main-page cards show a green arrow and a compact excerpt; selecting a card opens the full recommendation in a dialog with inline previous/next navigation arrows. The full-screen dialog also links to all recommendations on LinkedIn.
 8. **About & contact** (`#contact`): photo, short bio, education, languages and contact buttons, followed by the **Send me a message** form (`#message`). The hero's **Get in touch** button links to the form.
 9. **Résumé dialog**: opened by any link with `data-resume`.
 10. **Footer**: the year is filled in by JavaScript.
@@ -261,6 +261,7 @@ If you change a font, update both the Google Fonts `<link>` and the token. `cove
 | Mobile menu | `setMenu()` opens and closes the menu at 960px and below, and keeps `aria-expanded` and the button label in sync. It closes on a link tap, Escape (focus returns to the button), a tap outside the nav, or when the window widens past the breakpoint |
 | Job "Show more" | Toggles `.expanded` on a `.job` to reveal its `li.more` bullets |
 | Project filters | Hides cards whose `data-category` tags don't include the selected filter, and marks the selected button with `aria-pressed` |
+| Recommendations | Opens the selected recommendation in a dialog, supports keyboard activation, and cycles through recommendations with previous/next controls while preserving focus |
 | Active nav link | Highlights the section in view in both the top menu and the phone bottom bar, and sets `aria-current`. Scrolling back to the hero clears it |
 | Scroll reveal | Fades in elements with `data-reveal` as they enter the screen |
 | Résumé viewer | Opens a dialog with the browser's PDF viewer, or with `assets/resume/resume-page-1/2.png` on phones and browsers without one |
@@ -302,6 +303,7 @@ A self-contained 1500×500 banner: name, skill chips, caricature, a code card th
 - **Name position:** the cover also reports where its name is and hides it on request, for the name fly-in (see [JavaScript](#javascript)).
 - **Syncing:** on load, the cover reads the saved theme. When the switch is flipped, `js/theme.js` sends the new theme to every `<iframe data-theme-sync>` with `postMessage`. That also works when previewing from the file system.
 - **Fixed in both themes:** Android green and the Kotlin/Flutter logos.
+- **Shared surfaces:** the phone, avatar ring backdrop, technology tiles and build-success chip use the same card surface as the second layer above the page background. The rotating avatar-ring markers stay green in both themes.
 - **Greeting.kt code card:** it switches too, from a dark editor window to a light one, with its own `--code-*` colours at the top of `cover.html`. The light-theme syntax colours pass AA contrast on white.
 
 ### Regenerating `cover.png` and `og-image.png` (in `assets/images/`)
@@ -353,4 +355,6 @@ Browsers cache icons hard. After changing them, bump the `?v=` number on the thr
 - **Mobile menu button:** it reports its state with `aria-expanded` and `aria-controls`. Escape closes the menu.
 - **Skip link:** "Skip to content" appears on the first Tab press.
 - **Reduced motion:** animations stop for visitors who've asked for less motion.
+- **Touch targets:** buttons, filters, theme controls, close controls and icon links use a minimum 48px target while keeping their compact visual styling.
+- **Theme control:** the visible switch uses a compact 70×38 pill inside its larger touch target, with a green active circle and sun/moon icons.
 - **Contrast:** check it in both themes when changing a colour token.

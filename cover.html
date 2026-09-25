@@ -13,7 +13,7 @@
   --fg: #f2eee3;
   --muted: #c9d3cc;
   --line: #2e4a3b;
-  --soft: rgba(61, 220, 132, .16);
+  --soft: rgba(86, 217, 139, .18);
   --chip-text: #dde6e0;
   --card-bg: #111b16;
   --card-muted: #3a5446;
@@ -23,8 +23,8 @@
   --code-keyword: #cc7832;
   --code-string: #6a8759;
   --code-annotation: #bbb529;
-  --ring-dot: #3ddc84;
-  --accent: #3ddc84;
+  --ring-dot: #56d98b;
+  --accent: #56d98b;
 }
 html[data-theme="light"] {
   --bg: #f2f3f1;
@@ -33,7 +33,7 @@ html[data-theme="light"] {
   --fg: #111214;
   --muted: #404b52;
   --line: #d9dedd;
-  --soft: rgba(26, 170, 115, .08);
+  --soft: rgba(35, 122, 75, .1);
   --chip-text: #2d373e;
   --card-bg: #f7faf7;
   --card-muted: #4a6158;
@@ -43,11 +43,11 @@ html[data-theme="light"] {
   --code-keyword: #0033b3;
   --code-string: #067d17;
   --code-annotation: #9e880d;
-  --ring-dot: #3ddc84;
-  --accent: #1aaa73;
+  --ring-dot: #237a4b;
+  --accent: #237a4b;
 }
 body{margin:0;background:var(--bg) radial-gradient(var(--soft) 1.2px,transparent 1.4px) 0 0/22px 22px;font-family:'Sora',Georgia,serif;color:var(--fg)}
-a{color:var(--accent)}a:hover{color:#8BF0B8}
+a{color:var(--accent)}a:hover{color:#8fe0ad}
 .dots{background-image:radial-gradient(var(--soft) 1.2px,transparent 1.4px);background-size:22px 22px}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
@@ -216,7 +216,7 @@ BUILD SUCCESSFUL
     root.style.setProperty('--fg', isLight ? '#111214' : '#f2eee3');
     root.style.setProperty('--muted', isLight ? '#404b52' : '#c9d3cc');
     root.style.setProperty('--line', isLight ? '#d9dedd' : '#2e4a3b');
-    root.style.setProperty('--soft', isLight ? 'rgba(26,170,115,.08)' : 'rgba(61,220,132,.16)');
+    root.style.setProperty('--soft', isLight ? 'rgba(35,122,75,.1)' : 'rgba(86,217,139,.18)');
     root.style.setProperty('--chip-text', isLight ? '#2d373e' : '#dde6e0');
     root.style.setProperty('--card-bg', isLight ? '#f7faf7' : '#111b16');
     root.style.setProperty('--card-muted', isLight ? '#4a6158' : '#3a5446');
@@ -226,8 +226,8 @@ BUILD SUCCESSFUL
     root.style.setProperty('--code-keyword', isLight ? '#0033b3' : '#cc7832');
     root.style.setProperty('--code-string', isLight ? '#067d17' : '#6a8759');
     root.style.setProperty('--code-annotation', isLight ? '#9e880d' : '#bbb529');
-    root.style.setProperty('--ring-dot', '#3ddc84');
-    root.style.setProperty('--accent', isLight ? '#1aaa73' : '#3ddc84');
+    root.style.setProperty('--ring-dot', isLight ? '#237a4b' : '#56d98b');
+    root.style.setProperty('--accent', isLight ? '#237a4b' : '#56d98b');
     document.body.style.background = `var(--bg) radial-gradient(var(--soft) 1.2px, transparent 1.4px) 0 0/22px 22px`;
   };
 

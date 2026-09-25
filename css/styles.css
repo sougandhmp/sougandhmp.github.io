@@ -5,10 +5,10 @@
   --muted: #c3c7cc;
   --faint: #8b9097;
   --line: #2c2f34;
-  --accent: #3ddc84;
-  --accent-strong: #7ff0ae;
-  --accent-soft: #1b2a22;
-  --secondary: #f5c97a;
+  --accent: #56d98b;
+  --accent-strong: #a1f2bd;
+  --accent-soft: #183a29;
+  --secondary: #d5b86a;
   --card: #18191c;
   --surface: #1d1f23;
   --surface-variant: #24272b;
@@ -20,10 +20,10 @@
   --color-scheme: dark;
   --shadow: 0 12px 32px rgba(0, 0, 0, .35);
   --highlight: rgba(255, 255, 255, .045);
-  --glow-a: rgba(61, 220, 132, .07);
-  --glow-b: rgba(245, 201, 122, .035);
+  --glow-a: rgba(86, 217, 139, .08);
+  --glow-b: rgba(213, 184, 106, .04);
   --danger: #ff8f8a;
-  --dots: rgba(61, 220, 132, .12);
+  --dots: rgba(86, 217, 139, .13);
   --track-off: color-mix(in srgb, var(--surface) 92%, var(--card));
   --track-on: color-mix(in srgb, var(--accent-soft) 80%, var(--surface));
   color-scheme: var(--color-scheme);
@@ -37,10 +37,10 @@
   --muted: #404b52;
   --faint: #667177;
   --line: #d9dedd;
-  --accent: #1aaa73;
-  --accent-strong: #0d6f46;
-  --accent-soft: #e3f8ee;
-  --secondary: #f5c97a;
+  --accent: #237a4b;
+  --accent-strong: #17623a;
+  --accent-soft: #e5f4ea;
+  --secondary: #9a6b1f;
   --card: #f8faf8;
   --surface: #eef2ef;
   --surface-variant: #f6f8f7;
@@ -52,10 +52,10 @@
   --color-scheme: light;
   --shadow: 0 1px 2px rgba(17, 18, 20, .04), 0 16px 34px rgba(17, 18, 20, .08);
   --highlight: rgba(255, 255, 255, .9);
-  --glow-a: rgba(26, 170, 115, .08);
-  --glow-b: rgba(245, 201, 122, .04);
+  --glow-a: rgba(35, 122, 75, .09);
+  --glow-b: rgba(154, 107, 31, .045);
   --danger: #b42318;
-  --dots: rgba(26, 170, 115, .12);
+  --dots: rgba(35, 122, 75, .13);
   --track-off: color-mix(in srgb, var(--surface) 72%, white);
   --track-on: color-mix(in srgb, var(--accent-soft) 78%, white);
   color-scheme: var(--color-scheme);
@@ -98,12 +98,12 @@ nav .menu a { color: var(--muted); text-decoration: none; padding: 7px 11px; bor
 nav .menu a.active, nav .menu a:focus-visible { color: var(--accent-strong); background: var(--accent-soft); }
 @media (hover: hover) { nav .menu a:hover { color: var(--accent-strong); background: var(--accent-soft); } }
 nav .menu .nav-cta { margin-left: 8px; padding: 6px 15px; border: 1px solid var(--accent); color: var(--accent-strong); font-weight: 600; }
-nav .menu .nav-cta:focus-visible, nav .menu .nav-cta:active { background: var(--accent); border-color: var(--accent); color: #111214; }
+nav .menu .nav-cta:focus-visible, nav .menu .nav-cta:active { background: var(--accent); border-color: var(--accent); color: var(--on-primary); }
 nav a:focus-visible, nav button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .nav-actions { display: flex; align-items: center; gap: 2px; flex: none; }
 .icon-btn { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--fg); cursor: pointer; }
 .icon-btn:focus-visible { background: var(--accent-soft); color: var(--accent-strong); }
-@media (hover: hover) { .icon-btn:hover, nav .menu .nav-cta:hover { background: var(--accent-soft); color: var(--accent-strong); } nav .menu .nav-cta:hover { background: var(--accent); color: #111214; } }
+@media (hover: hover) { .icon-btn:hover, nav .menu .nav-cta:hover { background: var(--accent-soft); color: var(--accent-strong); } nav .menu .nav-cta:hover { background: var(--accent); color: var(--on-primary); } }
 .icon-btn svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 /* Theme switch: sun and moon side by side, the green knob sits under the active theme */
 .theme-toggle { position: relative; display: inline-flex; align-items: center; flex: none; width: 70px; height: 48px; padding: 9px 3px; margin-right: 2px;
@@ -146,7 +146,7 @@ nav a:focus-visible, nav button:focus-visible { outline: 2px solid var(--accent)
 nav.menu-open .bars { background: transparent; }
 nav.menu-open .bars:before { transform: translateY(6px) rotate(45deg); }
 nav.menu-open .bars:after { transform: translateY(-6px) rotate(-45deg); }
-.skip-link { position: absolute; left: 16px; top: -64px; z-index: 30; padding: 10px 16px; border-radius: 12px; background: #3ddc84; color: #111214; font-weight: 700; text-decoration: none; transition: top .2s; }
+.skip-link { position: absolute; left: 16px; top: -64px; z-index: 30; padding: 10px 16px; border-radius: 12px; background: var(--accent); color: var(--on-primary); font-weight: 700; text-decoration: none; transition: top .2s; }
 .skip-link:focus { top: 12px; }
 @media (max-width: 1080px) and (min-width: 961px) { .brand-name { display: none; } }
 @media (max-width: 960px) {
@@ -157,7 +157,7 @@ nav.menu-open .bars:after { transform: translateY(-6px) rotate(-45deg); }
   nav.menu-open .menu { display: flex; animation: menu-in .2s ease both; }
   nav .menu a { padding: 12px 14px; border-radius: 14px; }
   nav .menu a.active { box-shadow: inset 3px 0 0 var(--accent); }
-  nav .menu .nav-cta { margin: 8px 0 4px; text-align: center; background: var(--accent); color: #111214; }
+  nav .menu .nav-cta { margin: 8px 0 4px; text-align: center; background: var(--accent); color: var(--on-primary); }
 }
 @keyframes menu-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 main { width: min(100% - 32px, 1180px); min-height: calc(100svh - 90px); margin: 0 auto; padding: clamp(72px, 10vw, 140px) 0 56px; }
@@ -189,7 +189,7 @@ h1 .name { color: var(--secondary); }
   text-decoration: none; border: 1px solid var(--line); color: var(--fg); background: var(--card);
   transition: transform .2s, box-shadow .2s, background .2s, border-color .2s; }
 .btn:hover, .btn:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--accent); }
-.btn.primary { background: #3ddc84; border-color: #3ddc84; color: #111214; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-primary); }
 section { margin-top: clamp(72px, 10vw, 128px); scroll-margin-top: 90px; }
 h2 { font-family: var(--mono); font-weight: 600; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--faint);
   margin: 0 0 22px; display: flex; align-items: center; gap: 12px; }
