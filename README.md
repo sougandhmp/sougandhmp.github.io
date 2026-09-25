@@ -120,7 +120,8 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 │   │   ├── cover.png                          Static 3000×1000 render of cover.html
 │   │   ├── og-image.png                       1200×630 link-preview card (LinkedIn, X, Slack…)
 │   │   └── projects/
-│   │       └── flagmaster/                    App screenshots for the FlagMaster page (480px wide)
+│   │       ├── flagmaster/                    App screenshots for the FlagMaster page (480px wide)
+│   │       └── racehub/                       Android and iOS screenshots for the RaceHub page (480px wide, from the RaceHub repo's docs/screenshots on develop)
 │   └── resume/
 │       ├── sougandh-manikkoth-paremmal-resume.pdf   Résumé for viewing and downloading
 │       └── resume-page-1.png, resume-page-2.png     The pages as images, for phones without a PDF viewer
@@ -154,7 +155,7 @@ In page order:
 3. **Hero**: built so a recruiter gets the essentials in the first few seconds. In order: role tag, headline, a one-line hiring summary (`.summary`), the core stack (`.hero-stack`), location and availability with a pulsing green status dot (`.availability`), call-to-action buttons, then the longer intro paragraph and three highlight tiles.
 4. **Experience** (`#experience`): a vertical timeline, with one `.job` block per role inside `.timeline`, newest first. On desktop, dates sit on the left, a line with a dot per role runs down the middle, and details are on the right. On phones, the line runs down the left edge. The most recent role gets a filled, glowing dot. The line and dots are pure CSS (`.timeline::before`, `.job::before`), so adding a role is just another `.job` block.
 5. **Skills** (`#skills`): three rows, deliberately short so the Android signal isn't diluted: **Core** (`.skillrow.core`, highlighted green), **Engineering** and **Additional**. Add a skill only if you'd want a recruiter to ask about it.
-6. **Projects** (`#projects`): project cards with Android, Jetpack Compose and Flutter filters. Clicking anywhere on a card opens that project's own page, `project.html?id=…` (see **Add or edit project details** under [Common edits](#common-edits)).
+6. **Projects** (`#projects`): project cards with Android, Jetpack Compose, Kotlin Multiplatform and Flutter filters. Clicking anywhere on a card opens that project's own page, `project.html?id=…` (see **Add or edit project details** under [Common edits](#common-edits)).
 7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word. Main-page cards show a green arrow and a compact excerpt; selecting a card opens the full recommendation in a dialog with inline previous/next navigation arrows. The full-screen dialog also links to all recommendations on LinkedIn.
 8. **About & contact** (`#contact`): photo, a status line (open-to-roles status and the live local time, both from `js/site-config.js`), short bio, education, languages and contact buttons (the email button has a **Copy** button beside it), followed by the **Send me a message** form (`#message`). The form has optional topic chips that change the message prompt and go into the email subject, and a character counter. Both cards share one two-column grid (`--contact-col`), so the bio and the form line up. The logic is in `js/contact.js`. The hero's **Get in touch** button links to the form.
 9. **Résumé dialog**: opened by any link with `data-resume`.
@@ -181,7 +182,7 @@ In page order:
 </div>
 ```
 
-**Add a project.** Copy a `<div class="card">` in `#projects`. `data-category` controls which filter buttons show the card. Use space-separated values from `android`, `compose` (Jetpack Compose) and `flutter`. To add a new filter, add a button with a matching `data-filter` next to the existing ones.
+**Add a project.** Copy a `<div class="card">` in `#projects`. `data-category` controls which filter buttons show the card. Use space-separated values from `android`, `compose` (Jetpack Compose), `kmp` (Kotlin Multiplatform) and `flutter`. To add a new filter, add a button with a matching `data-filter` next to the existing ones.
 
 ```html
 <div class="card" data-category="android compose">

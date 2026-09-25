@@ -280,4 +280,54 @@ const PROJECTS = {
       ['View on GitHub', 'https://github.com/sougandhmp/FlagMaster'],
     ],
   },
+
+  racehub: {
+    title: 'RaceHub',
+    kicker: 'Personal project',
+    summary: 'A Formula 1 companion app for Android and iOS: the race calendar, driver and constructor standings, a circuit guide for every Grand Prix, and a community forum. Business logic, networking, storage and sessions live in one shared Kotlin Multiplatform module, with a native UI on each platform.',
+    meta: [
+      ['Type', 'Personal, open source'],
+      ['Started', 'May 2026'],
+      ['Platforms', 'Android 7.0+ · iOS 18.2+'],
+      ['Architecture', 'Clean Architecture · MVI'],
+    ],
+    screenshots: [
+      ['assets/images/projects/racehub/android-race.png', 'Android, light theme: the Race tab with the Canadian GP card, circuit outline, weekend timetable and driver standings'],
+      ['assets/images/projects/racehub/ios-race-dark.png', 'iOS, dark theme: the same Race tab built in SwiftUI, with the next race and driver standings'],
+      ['assets/images/projects/racehub/android-race-detail-dark.png', 'Android race detail: location, circuit, local start time, weather, a circuit map and track facts such as laps, corners and distance'],
+      ['assets/images/projects/racehub/ios-schedule-dark.png', 'iOS full calendar: completed rounds in Australia, China and Japan, each with its date and circuit map'],
+      ['assets/images/projects/racehub/android-forum.png', 'Android forum feed with Latest, Most popular and Most commented filters, thread cards with likes and comments, and a button to start a thread'],
+      ['assets/images/projects/racehub/ios-thread-detail-dark.png', 'iOS thread detail showing the full post and an inline reply box'],
+      ['assets/images/projects/racehub/android-profile.png', 'Android profile with avatar initials, stats, account details and the System, Dark or Light appearance setting'],
+      ['assets/images/projects/racehub/ios-signup.png', 'iOS sign-up screen with username, email, password and country fields'],
+    ],
+    sections: [
+      ['Features', [
+        'Sign-in and sign-up, with email verification by one-time code, a forgot-password flow and server-side sign-out. The session token is encrypted at rest: AES-256 EncryptedSharedPreferences on Android, the Keychain on iOS.',
+        'Next-race card with the round, date, country flag, circuit outline and the full weekend timetable (FP1, FP2, FP3, Qualifying, Race).',
+        'Driver and constructor standings with team colours, plus a full season calendar with each race’s status, date, weather and circuit map.',
+        'Race detail with the local start time, weather, a large circuit map and track facts: laps, corners, distance and lap record.',
+        'Community forum: Latest, Most popular and Most commented feeds, new threads by category, and thread detail with likes and inline replies.',
+        'Profile with stats, recent and saved posts, and a System, Dark or Light theme that’s remembered across launches.',
+        'Offline cache: races, standings and trending threads are saved locally, so the app shows the last data it had when the network is down.',
+      ]],
+      ['How it’s built', [
+        'One shared Kotlin Multiplatform module holds the domain layer (models, repository interfaces, use cases) and the data layer (Ktor GraphQL client, DTOs and mappers, SQLDelight cache, session storage).',
+        'A native UI on each platform: Jetpack Compose with Material 3 on Android, SwiftUI on iOS through the shared XCFramework. Both use MVI with the same State, Intent and Effect contract for every screen.',
+        'Repositories are the error boundary: network and parsing failures become domain results, so the UI never sees raw exceptions.',
+        'expect/actual for platform code: OkHttp or Darwin for HTTP, the Android or native SQLite driver, EncryptedSharedPreferences or the Keychain, and DI start-up.',
+        'Koin for dependency injection, with dependency providers that expose the shared use cases to Swift.',
+        'Localised strings on both platforms (strings.xml and Localizable.strings).',
+      ]],
+      ['Testing & CI', [
+        'Unit tests for every use case, the DTO mappers and the user session, using fake repositories, so no network or device is needed. They run on the JVM and on the iOS simulator.',
+        'Kover coverage reports focused on the domain logic.',
+        'GitHub Actions builds the Android APK and the iOS app on every pull request to develop.',
+      ]],
+    ],
+    stack: ['Kotlin Multiplatform', 'Jetpack Compose', 'SwiftUI', 'Clean Architecture', 'MVI', 'Ktor', 'GraphQL', 'SQLDelight', 'Koin', 'Coroutines & Flow', 'kotlinx.serialization', 'Material 3', 'EncryptedSharedPreferences', 'Keychain', 'Kover', 'GitHub Actions'],
+    links: [
+      ['View on GitHub', 'https://github.com/sougandhmp/RaceHub'],
+    ],
+  },
 };
