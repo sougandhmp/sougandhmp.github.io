@@ -6,20 +6,35 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
 <style>
-/* Colours follow the site theme (Graphite). The page sends the current theme with postMessage; see js/theme.js.
-   Android green stays the same in both themes; --green-text is the readable version for text on light backgrounds.
-   The Greeting.kt code card switches between a dark and a light editor style with the theme. */
-:root{--bg:#111214;--dots:rgba(61,220,132,.14);--fg:#eceef0;--muted:#c3c7cc;--line:#2a2d31;--chip:#dfe2e5;--tile:#17181b;--ring:#1c1e21;--soft:#1b2a22;
-  --screen:#151618;--dim:#3a3d42;--dim2:#26292d;--green-text:#3DDC84;--kmp:#C9B8FF;--shadow:rgba(0,0,0,.35);--avatar-shadow:rgba(0,0,0,.45);--shine:rgba(236,238,240,.18);
-  --code-bg:#17181b;--code-border:#2a2d31;--code-divider:#26292d;--code-muted:#8b9097;--code-fg:#eceef0;--code-annot:#3DDC84;--code-kw:#8FB8FF;--code-str:#F5C97A;--code-shadow:none}
-[data-theme="light"]{--bg:#f6f7f8;--dots:rgba(14,122,67,.13);--fg:#111214;--muted:#41464c;--line:#dcdfe3;--chip:#2a2d31;--tile:#ffffff;--ring:#eef0f2;--soft:#dcf3e6;
-  --screen:#ffffff;--dim:#c9cdd2;--dim2:#e6e8eb;--green-text:#0e7a43;--kmp:#6b3fd4;--shadow:rgba(17,18,20,.10);--avatar-shadow:rgba(17,18,20,.18);--shine:rgba(17,18,20,.07);
-  --code-bg:#ffffff;--code-border:#dcdfe3;--code-divider:#e6e8eb;--code-muted:#60666d;--code-fg:#111214;--code-annot:#0e7a43;--code-kw:#0b57d0;--code-str:#9a5b00;--code-shadow:0 12px 28px rgba(17,18,20,.10)}
-body{margin:0;background:transparent;font-family:'Sora',Georgia,serif;color:var(--fg)}
-/* Embedded in the page, the cover is see-through so the page's own background (colour, dots, glow) shows behind it with no seam.
-   Opened on its own (e.g. when rendering cover.png), it paints the same background itself. */
-html.standalone body{background:var(--bg) radial-gradient(var(--dots) 1.2px,transparent 1.4px) 0 0/22px 22px}
-:root{color-scheme:dark}[data-theme="light"]{color-scheme:light} /* must match the page's, or browsers paint the iframe opaque */
+:root {
+  --bg: #0d1411;
+  --bg-elevated: #121e18;
+  --bg-panel: #16231c;
+  --fg: #f2eee3;
+  --muted: #c9d3cc;
+  --line: #2e4a3b;
+  --soft: rgba(61, 220, 132, .16);
+  --chip-text: #dde6e0;
+  --card-bg: #111b16;
+  --card-muted: #3a5446;
+  --accent: #3ddc84;
+}
+html[data-theme="light"] {
+  --bg: #f2f3f1;
+  --bg-elevated: #edf2ee;
+  --bg-panel: #f8faf8;
+  --fg: #111214;
+  --muted: #404b52;
+  --line: #d9dedd;
+  --soft: rgba(26, 170, 115, .08);
+  --chip-text: #2d373e;
+  --card-bg: #f7faf7;
+  --card-muted: #4a6158;
+  --accent: #1aaa73;
+}
+body{margin:0;background:var(--bg) radial-gradient(var(--soft) 1.2px,transparent 1.4px) 0 0/22px 22px;font-family:'Sora',Georgia,serif;color:var(--fg)}
+a{color:var(--accent)}a:hover{color:#8BF0B8}
+.dots{background-image:radial-gradient(var(--soft) 1.2px,transparent 1.4px);background-size:22px 22px}
 .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes floatY2{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(10px) rotate(-4deg)}}
@@ -51,7 +66,7 @@ html.standalone body{background:var(--bg) radial-gradient(var(--dots) 1.2px,tran
 .tip{animation:glow 1.6s ease-in-out infinite}
 .chip{animation:pop 5.5s ease-out 1 forwards}
 .shine{animation:shimmer 2.4s ease-in-out infinite}
-.tech{position:absolute;width:58px;height:58px;display:grid;place-items:center;box-sizing:border-box;border-radius:16px;background:var(--tile);border:1px solid var(--line);box-shadow:0 12px 28px var(--shadow);transform:rotate(var(--r));animation:drift var(--d) ease-in-out var(--delay) infinite}
+.tech{position:absolute;width:58px;height:58px;display:grid;place-items:center;box-sizing:border-box;border-radius:16px;background:var(--bg-elevated);border:1px solid var(--line);box-shadow:0 12px 28px rgba(0,0,0,.35);transform:rotate(var(--r));animation:drift var(--d) ease-in-out var(--delay) infinite}
 .tech svg{width:30px;height:30px;display:block}
 @keyframes drift{0%,100%{transform:translate(0,0) rotate(var(--r))}33%{transform:translate(7px,-12px) rotate(calc(var(--r) * -.4))}66%{transform:translate(-5px,-5px) rotate(calc(var(--r) * 1.4))}}
 .still *{animation:none !important}
@@ -65,9 +80,9 @@ html,body{overflow:hidden}
 
 <!-- stars -->
 <div class="star" style="position: absolute; left: 700px; top: 40px; width: 8px; height: 8px; border-radius: 50%; background: #3DDC84"></div>
-<div class="star s2" style="position: absolute; left: 1100px; top: 250px; width: 6px; height: 6px; border-radius: 50%; background: var(--fg)"></div>
+<div class="star s2" style="position: absolute; left: 1100px; top: 250px; width: 6px; height: 6px; border-radius: 50%; background: #F2EEE3"></div>
 <div class="star s3" style="position: absolute; left: 600px; top: 440px; width: 7px; height: 7px; border-radius: 50%; background: #3DDC84"></div>
-<div class="star s4" style="position: absolute; left: 1440px; top: 30px; width: 6px; height: 6px; border-radius: 50%; background: var(--fg)"></div>
+<div class="star s4" style="position: absolute; left: 1440px; top: 30px; width: 6px; height: 6px; border-radius: 50%; background: #F2EEE3"></div>
 <div class="star s2" style="position: absolute; left: 60px; top: 460px; width: 6px; height: 6px; border-radius: 50%; background: #3DDC84"></div>
 
 <!-- rings behind caricature -->
@@ -76,92 +91,96 @@ html,body{overflow:hidden}
 <circle cx="210" cy="10" r="7" fill="#3DDC84"></circle>
 </svg>
 <svg class="ring-rev" width="340" height="340" viewBox="0 0 340 340" style="position: absolute; left: 790px; top: 60px" aria-hidden="true">
-<circle cx="170" cy="170" r="160" style="fill: var(--ring)" stroke="#3DDC84" stroke-opacity=".5" stroke-width="1.5"></circle>
-<circle cx="330" cy="170" r="5" style="fill: var(--fg)"></circle>
+<circle cx="170" cy="170" r="160" fill="#16231C" stroke="#3DDC84" stroke-opacity=".5" stroke-width="1.5"></circle>
+<circle cx="330" cy="170" r="5" fill="#F2EEE3"></circle>
 </svg>
 
 <!-- left text block -->
 <div style="position: absolute; left: 90px; top: 118px; width: 600px; display: flex; flex-direction: column; gap: 14px">
-<div class="mono" style="font-size: 15px; letter-spacing: 0.12em; color: var(--green-text)">&lt;hello_world /&gt; I'M</div>
+<div class="mono" style="font-size: 15px; letter-spacing: 0.12em; color: var(--accent)">&lt;hello_world /&gt; I'M</div>
 <div style="display: flex; flex-direction: column; gap: 2px">
-<h1 data-name="first" style="margin: 0; font-size: 92px; line-height: 0.95; font-weight: 800; letter-spacing: -0.035em; color: var(--fg)">Sougandh</h1>
-<div data-name="rest" style="font-size: 34px; font-weight: 500; letter-spacing: -0.015em; color: var(--muted)">Manikkoth Paremmal</div>
+<h1 style="margin: 0; font-size: 92px; line-height: 0.95; font-weight: 800; letter-spacing: -0.035em; color: var(--fg)">Sougandh</h1>
+<div style="font-size: 34px; font-weight: 500; letter-spacing: -0.015em; color: var(--muted)">Manikkoth Paremmal</div>
 </div>
-<div class="mono" style="display: flex; gap: 10px; margin-top: 10px; font-size: 14px">
-<span style="padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip)">Kotlin</span>
-<span style="padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip)">Jetpack Compose</span>
-<span style="padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip)">Clean Architecture</span>
+<div class="mono" style="display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 10px; font-size: 13px; max-width: 620px">
+<span style="padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip-text)">Kotlin</span>
+<span style="padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip-text)">Jetpack Compose</span>
+<span style="padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip-text)">Clean Architecture</span>
+<span style="padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip-text)">MVVM</span>
+<span style="padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip-text)">MVI</span>
+<span style="padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip-text)">Coroutines</span>
+<span style="padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--chip-text)">CI/CD</span>
 </div>
 </div>
 
 <!-- floating phone -->
-<div class="phone" style="position: absolute; left: 668px; top: 250px; width: 78px; height: 150px; box-sizing: border-box; border: 3px solid var(--fg); border-radius: 16px; padding: 14px 8px 10px; display: flex; flex-direction: column; gap: 7px; background: var(--screen); overflow: hidden">
-<div style="position: absolute; left: 30px; top: 5px; width: 12px; height: 4px; border-radius: 2px; background: var(--fg)"></div>
+<div class="phone" style="position: absolute; left: 668px; top: 250px; width: 78px; height: 150px; box-sizing: border-box; border: 3px solid #F2EEE3; border-radius: 16px; padding: 14px 8px 10px; display: flex; flex-direction: column; gap: 7px; background: #111B16; overflow: hidden">
+<div style="position: absolute; left: 30px; top: 5px; width: 12px; height: 4px; border-radius: 2px; background: #F2EEE3"></div>
 <div style="height: 22px; border-radius: 6px; background: #3DDC84"></div>
-<div style="height: 8px; width: 80%; border-radius: 4px; background: var(--dim)"></div>
-<div style="height: 8px; width: 60%; border-radius: 4px; background: var(--dim)"></div>
-<div style="height: 30px; border-radius: 6px; background: var(--dim2); position: relative; overflow: hidden">
-<div class="shine" style="position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: var(--shine)"></div>
+<div style="height: 8px; width: 80%; border-radius: 4px; background: #3A5446"></div>
+<div style="height: 8px; width: 60%; border-radius: 4px; background: #3A5446"></div>
+<div style="height: 30px; border-radius: 6px; background: #22362B; position: relative; overflow: hidden">
+<div class="shine" style="position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: rgba(242,238,227,.18)"></div>
 </div>
-<div style="height: 8px; width: 70%; border-radius: 4px; background: var(--dim)"></div>
+<div style="height: 8px; width: 70%; border-radius: 4px; background: #3A5446"></div>
 </div>
 
-<!-- avatar (GitHub profile picture, background removed) -->
-<img src="assets/images/avatar-caricature.png" alt="Sougandh's avatar" width="440" height="440" style="position: absolute; left: 740px; top: 60px; width: 440px; height: 440px; filter: drop-shadow(0 18px 36px var(--avatar-shadow))">
+<!-- avatar (caricature image) -->
+<img src="assets/images/avatar-caricature.png" alt="Sougandh's avatar" width="440" height="440" style="position: absolute; left: 740px; top: 60px; width: 440px; height: 440px; object-fit: contain; object-position: center; filter: drop-shadow(0 18px 36px rgba(0,0,0,.45))">
 
 <!-- floating tech icons -->
 <div class="tech" title="Kotlin" style="left: 596px; top: 96px; --r: -8deg; --d: 7s; --delay: 0s">
 <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="kt" x1="24" y1="0" x2="0" y2="24" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7F52FF"></stop><stop offset=".55" stop-color="#C711E1"></stop><stop offset="1" stop-color="#E54857"></stop></linearGradient></defs><path d="M24 24H0V0h24L12 12Z" fill="url(#kt)"></path></svg>
 </div>
 <div class="tech" title="Android" style="left: 330px; top: 420px; --r: 6deg; --d: 8.5s; --delay: -2s">
-<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="9" x2="5" y2="5.5" stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round"></line><line x1="17" y1="9" x2="19" y2="5.5" stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round"></line><path d="M2.5 19a9.5 9.5 0 0 1 19 0Z" fill="#3DDC84"></path><circle cx="8.3" cy="14.6" r="1.2" style="fill: var(--tile)"></circle><circle cx="15.7" cy="14.6" r="1.2" style="fill: var(--tile)"></circle></svg>
+<svg viewBox="0 0 24 24" aria-hidden="true"><line x1="7" y1="9" x2="5" y2="5.5" stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round"></line><line x1="17" y1="9" x2="19" y2="5.5" stroke="#3DDC84" stroke-width="1.6" stroke-linecap="round"></line><path d="M2.5 19a9.5 9.5 0 0 1 19 0Z" fill="#3DDC84"></path><circle cx="8.3" cy="14.6" r="1.2" fill="#121E18"></circle><circle cx="15.7" cy="14.6" r="1.2" fill="#121E18"></circle></svg>
 </div>
 <div class="tech" title="Flutter" style="left: 1180px; top: 336px; --r: 8deg; --d: 6.5s; --delay: -4s">
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.3 0 2.3 12 6 15.7 21.7 0Z" fill="#54C5F8"></path><path d="M14.3 11.1 7.9 17.5l6.4 6.5h7.4l-6.5-6.5 6.5-6.4Z" fill="#01579B"></path><path d="M11.1 20.7 14.3 24h7.4l-6.5-6.5Z" fill="#29B6F6" opacity=".6"></path></svg>
 </div>
 <div class="tech" title="Kotlin Multiplatform" style="left: 548px; top: 428px; --r: -5deg; --d: 9s; --delay: -6s; gap: 2px; align-content: center">
 <svg viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px"><defs><linearGradient id="kmp" x1="24" y1="0" x2="0" y2="24" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#7F52FF"></stop><stop offset=".55" stop-color="#C711E1"></stop><stop offset="1" stop-color="#E54857"></stop></linearGradient></defs><path d="M24 24H0V0h24L12 12Z" fill="url(#kmp)"></path></svg>
-<span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--kmp)">KMP</span>
+<span class="mono" style="font-size: 11px; font-weight: 600; letter-spacing: .06em; color: #C9B8FF">KMP</span>
 </div>
 
 <!-- code card -->
-<div class="float mono" style="position: absolute; left: 1160px; top: 78px; width: 300px; box-sizing: border-box; border: 1px solid var(--code-border); border-radius: 14px; background: var(--code-bg); box-shadow: var(--code-shadow); font-size: 14px; line-height: 1.7; overflow: hidden">
-<div style="display: flex; gap: 6px; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--code-divider)">
+<div class="float mono" style="position: absolute; left: 1160px; top: 78px; width: 300px; box-sizing: border-box; border: 1px solid #2E4A3B; border-radius: 14px; background: #121E18; font-size: 14px; line-height: 1.7; overflow: hidden">
+<div style="display: flex; gap: 6px; align-items: center; padding: 10px 14px; border-bottom: 1px solid #22362B">
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #E0735F"></span>
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #E8B85C"></span>
 <span style="width: 10px; height: 10px; border-radius: 50%; background: #3DDC84"></span>
-<span style="margin-left: 8px; font-size: 12px; color: var(--code-muted)">Greeting.kt</span>
+<span style="margin-left: 8px; font-size: 12px; color: #8FA396">Greeting.kt</span>
 </div>
-<div style="padding: 12px 16px 14px; color: var(--code-fg)">
-<span class="line" style="color: var(--code-annot)">@Composable</span>
-<span class="line l2"><span style="color: var(--code-kw)">fun</span> Greeting() {</span>
-<span class="line l3" style="padding-left: 4ch">Text(<span style="color: var(--code-str)">"Hello, Android!"</span>)</span>
-<span class="line l4">}<span class="caret" style="color: var(--code-annot)">▍</span></span>
+<div style="padding: 12px 16px 14px; color: #F2EEE3">
+<span class="line" style="color: #3DDC84">@Composable</span>
+<span class="line l2"><span style="color: #8FB8FF">fun</span> Greeting() {</span>
+<span class="line l3">  Text(<span style="color: #F5C97A">"Hello, Android!"</span>)</span>
+<span class="line l4">}<span class="caret" style="color: #3DDC84">▍</span></span>
 </div>
 </div>
 
 <!-- build chip -->
-<div class="chip mono" style="position: absolute; left: 1170px; top: 262px; display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: var(--soft); border: 1px solid #3DDC84; font-size: 13px; font-weight: 600; color: var(--green-text); opacity: 0">
+<div class="chip mono" style="position: absolute; left: 1170px; top: 262px; display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: rgba(22,35,28,.82); border: 1px solid var(--accent); font-size: 13px; font-weight: 600; color: var(--accent); opacity: 0">
 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
 BUILD SUCCESSFUL
 </div>
 
 <!-- gear -->
-<svg class="gear" width="54" height="54" viewBox="0 0 24 24" fill="none" style="stroke: var(--dim); position: absolute; left: 1090px; top: 420px" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<svg class="gear" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#3A5446" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 1090px; top: 420px" aria-hidden="true">
 <circle cx="12" cy="12" r="3"></circle>
 <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path>
 </svg>
 
 <!-- robot buddy -->
 <svg class="float-slow" width="130" height="160" viewBox="0 0 130 160" style="position: absolute; left: 1330px; top: 310px" aria-hidden="true">
-<line x1="60" y1="30" x2="60" y2="8" style="stroke: var(--fg)" stroke-width="3" stroke-linecap="round"></line>
+<line x1="60" y1="30" x2="60" y2="8" stroke="#F2EEE3" stroke-width="3" stroke-linecap="round"></line>
 <circle class="tip" cx="60" cy="7" r="6" fill="#3DDC84"></circle>
 <rect x="22" y="30" width="76" height="56" rx="16" fill="#3DDC84"></rect>
-<rect x="32" y="40" width="56" height="36" rx="10" fill="#111214"></rect>
+<rect x="32" y="40" width="56" height="36" rx="10" fill="#0D1411"></rect>
 <g class="eye"><rect x="44" y="50" width="8" height="12" rx="4" fill="#3DDC84"></rect></g>
 <g class="eye"><rect x="68" y="50" width="8" height="12" rx="4" fill="#3DDC84"></rect></g>
 <rect x="30" y="92" width="60" height="44" rx="12" fill="#3DDC84"></rect>
-<rect x="48" y="104" width="24" height="6" rx="3" fill="#111214"></rect>
+<rect x="48" y="104" width="24" height="6" rx="3" fill="#0D1411"></rect>
 <rect x="8" y="98" width="20" height="10" rx="5" fill="#3DDC84"></rect>
 <rect class="arm" x="92" y="98" width="28" height="10" rx="5" fill="#3DDC84"></rect>
 <rect x="40" y="138" width="12" height="16" rx="5" fill="#3DDC84"></rect>
@@ -169,37 +188,38 @@ BUILD SUCCESSFUL
 </svg>
 
 <!-- braces -->
-<div class="mono float" style="position: absolute; left: 1250px; top: 400px; font-size: 40px; font-weight: 600; color: var(--dim)">{ }</div>
+<div class="mono float" style="position: absolute; left: 1250px; top: 400px; font-size: 40px; font-weight: 600; color: #2E4A3B">{ }</div>
 
 </div>
 <script>
-if (window.parent === window) document.documentElement.classList.add('standalone');
-// until the page sends the theme: the saved choice, otherwise the device setting (same rule as js/theme.js)
-let t = null;
-try { t = localStorage.getItem('theme'); } catch (e) {}
-document.documentElement.dataset.theme = t || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-addEventListener('message', (e) => {
-  if (!e.data) return;
-  if (e.data.theme) document.documentElement.dataset.theme = e.data.theme;
-  // the page hides the name while its own copies fly it into the nav (js/name-morph.js)
-  if ('hideName' in e.data) document.querySelectorAll('[data-name]').forEach((el) => { el.style.visibility = e.data.hideName ? 'hidden' : ''; });
-});
-// tell the page where each part of the name sits (its glyph box, not the element's line box) and how it's styled
-const reportName = () => {
-  const parts = {};
-  document.querySelectorAll('[data-name]').forEach((el) => {
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    const r = range.getBoundingClientRect();
-    const cs = getComputedStyle(el);
-    parts[el.dataset.name] = { x: r.left, y: r.top, fontSize: parseFloat(cs.fontSize), weight: parseFloat(cs.fontWeight),
-      letterSpacing: parseFloat(cs.letterSpacing) / parseFloat(cs.fontSize) };
+  const rootStyle = document.documentElement.style;
+  const setTheme = (theme) => {
+    const isLight = theme === 'light';
+    rootStyle.setProperty('--bg', isLight ? '#f2f3f1' : '#0d1411');
+    rootStyle.setProperty('--bg-elevated', isLight ? '#edf2ee' : '#121e18');
+    rootStyle.setProperty('--bg-panel', isLight ? '#f8faf8' : '#16231c');
+    rootStyle.setProperty('--fg', isLight ? '#111214' : '#f2eee3');
+    rootStyle.setProperty('--muted', isLight ? '#404b52' : '#c9d3cc');
+    rootStyle.setProperty('--line', isLight ? '#d9dedd' : '#2e4a3b');
+    rootStyle.setProperty('--soft', isLight ? 'rgba(26,170,115,.08)' : 'rgba(61,220,132,.16)');
+    rootStyle.setProperty('--chip-text', isLight ? '#2d373e' : '#dde6e0');
+    rootStyle.setProperty('--card-bg', isLight ? '#f7faf7' : '#111b16');
+    rootStyle.setProperty('--card-muted', isLight ? '#4a6158' : '#3a5446');
+    rootStyle.setProperty('--accent', isLight ? '#1aaa73' : '#3ddc84');
+    document.body.style.background = `var(--bg) radial-gradient(var(--soft) 1.2px, transparent 1.4px) 0 0/22px 22px`;
+  };
+
+  const initTheme = () => {
+    const preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    setTheme(localStorage.getItem('theme') || preferred);
+  };
+
+  window.addEventListener('message', (event) => {
+    const incoming = event.data && typeof event.data === 'object' ? event.data.theme : null;
+    if (incoming === 'light' || incoming === 'dark') setTheme(incoming);
   });
-  parent.postMessage({ coverName: parts }, '*');
-};
-document.fonts.ready.then(reportName);
-addEventListener('resize', reportName);
-addEventListener('message', (e) => { if (e.data && e.data.requestName) reportName(); });
+
+  initTheme();
 </script>
 </body>
 </html>
