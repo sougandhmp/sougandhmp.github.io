@@ -161,7 +161,7 @@ In page order:
 },
 ```
 
-Every field except `title` is optional. The Previous and Next links at the bottom of each project page follow the order of the entries in `js/projects.js`, so keep it the same as the cards. Keep the content factual: it's taken from the résumé and, for FlagMaster, the repo README.
+Every field except `title` is optional. The Previous and Next links at the bottom of each project page follow the order of the entries in `js/projects.js`, so keep it the same as the cards. Keep the content factual: it's taken from the résumé, details Sougandh supplied and, for FlagMaster, the repo README.
 
 **Add an award badge.** It appears on the Synechron job and the banking project card:
 
