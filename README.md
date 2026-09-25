@@ -38,10 +38,15 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 
 | Path | What it is |
 |---|---|
+| `project.html` | One page for every project, e.g. `project.html?id=flagmaster`. It's filled in by `js/project-page.js` |
 | `index.html` | All page content: hero, experience, skills, projects, recommendations, about/contact, résumé viewer |
 | `css/styles.css` | All styles. Theme colours and fonts are at the top |
 | `js/main.js` | Page behaviour (see [JavaScript](#javascript)) |
 | `js/floaters.js` | The floating tech-logo tiles in the page margins, as a data list |
+| `js/theme.js` | Light/dark theme switch, shared by both pages. It's loaded in `<head>` so a saved theme applies before the page appears |
+| `js/projects.js` | Content for the project pages: one entry per project |
+| `js/project-page.js` | Builds `project.html` from `js/projects.js`, including the Previous/Next project links and a "not found" message for unknown IDs |
+| `images/flagmaster/` | FlagMaster app screenshots shown on its project page (resized to 480px wide) |
 | `cover.html` | Animated cover banner (1500×500), embedded in the hero through an `<iframe>` |
 | `tools/og-card.html` | Source for the link-preview image `og-image.png` |
 | `cover.png` | Static 3000×1000 render of `cover.html` |
@@ -68,7 +73,7 @@ In page order:
 3. **Hero**: eyebrow tag, headline, intro paragraph, location line, call-to-action buttons and three highlight tiles.
 4. **Experience** (`#experience`): one `.job` block per role.
 5. **Skills** (`#skills`): one `.skillrow` per category.
-6. **Projects** (`#projects`): project cards with Android and Compose filters.
+6. **Projects** (`#projects`): project cards with Android, Jetpack Compose and Flutter filters. Clicking anywhere on a card opens that project's own page, `project.html?id=…` (see **Add or edit project details** under [Common edits](#common-edits)).
 7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word.
 8. **About & contact** (`#contact`): photo, short bio, education, languages and contact buttons.
 9. **Résumé dialog**: opened by any link with `data-resume`.
@@ -93,19 +98,47 @@ In page order:
 </div>
 ```
 
-**Add a project.** Copy a `<div class="card">` in `#projects`. `data-category` controls which filter buttons show the card. Use space-separated values from `android` and `compose`.
+**Add a project.** Copy a `<div class="card">` in `#projects`. `data-category` controls which filter buttons show the card. Use space-separated values from `android`, `compose` (Jetpack Compose) and `flutter`. To add a new filter, add a button with a matching `data-filter` next to the existing ones.
 
 ```html
 <div class="card" data-category="android compose">
-  <h3>Project name</h3>
+  <h3><a class="card-link" href="project.html?id=my-app">Project name</a></h3>
   <p>One or two sentences on what it is and what you did.</p>
-  <div class="stack">Kotlin · Jetpack Compose</div>
+  <ul class="stack"><li>Kotlin</li><li>Jetpack Compose</li></ul>
   <a href="https://github.com/…">View on GitHub →</a>
 </div>
 ```
 
+- **Whole card is a link:** the title link (`.card-link`) is stretched over the card, so clicking anywhere on it opens the project page. Other links inside the card, like GitHub, still open their own destinations.
+- **Tech stack:** each `<li>` in `.stack` shows as one amber chip.
+- **Featured project:** add `featured` to the card's class (`class="card featured"`) to make it span two columns on screens 700px and wider, as MEGA Android does. The desktop grid has three columns.
+
 - **Several links:** wrap them in `<div class="links">…</div>`, as on the MEGA Android card.
 - **No public link:** use `<span class="note">Client work, not public</span>` instead.
+
+**Add or edit project details.** Each project page is built from its entry in `js/projects.js`, so you don't edit any HTML for it. The ID in the card's title link must match the entry's key:
+
+```html
+<h3><a class="card-link" href="project.html?id=my-app">My App</a></h3>
+```
+
+```js
+'my-app': {
+  title: 'My App',                                   // required
+  kicker: 'Personal project',                        // small green line above the title
+  award: 'Top Engineer of the Month · Feb 2026',     // optional badge
+  summary: 'One or two sentences on what it is.',
+  meta: [['Role', '…'], ['When', '…']],              // label/value pairs shown in a row
+  impact: [['33%', 'faster auto-fill']],             // big-number tiles
+  screenshots: [['images/my-app/home.png', 'Describe what the screenshot shows']],
+  sections: [['What I did', ['First point.', 'Second point.']]],
+  stack: ['Kotlin', 'Jetpack Compose'],
+  links: [['View on GitHub', 'https://github.com/…']],
+  note: 'Client work, not public',
+},
+```
+
+Every field except `title` is optional. The Previous and Next links at the bottom of each project page follow the order of the entries in `js/projects.js`, so keep it the same as the cards. Keep the content factual: it's taken from the résumé and, for FlagMaster, the repo README.
 
 **Add an award badge.** It appears on the Synechron job and the banking project card:
 
@@ -176,10 +209,10 @@ If you change a font, update both the Google Fonts `<link>` and the token. `cove
 |---|---|
 | Cover scaling | A `ResizeObserver` scales the 1500×500 cover iframe to fill the banner without cropping |
 | Nav name | An `IntersectionObserver` on the cover toggles `nav.hide-brand`. The name shows once less than 35% of the cover is visible |
-| Theme switch | Switches `data-theme` on `<html>` and remembers the choice in `localStorage`. The green knob under the active sun or moon icon moves in CSS |
+| Theme switch | In `js/theme.js`, shared with `project.html`. It switches `data-theme` on `<html>` and remembers the choice in `localStorage`. The green knob under the active sun or moon icon moves in CSS |
 | Mobile menu | `setMenu()` opens and closes the menu at 960px and below, and keeps `aria-expanded` and the button label in sync. It closes on a link tap, Escape (focus returns to the button), a tap outside the nav, or when the window widens past the breakpoint |
 | Job "Show more" | Toggles `.expanded` on a `.job` to reveal its `li.more` bullets |
-| Project filters | Hides cards whose `data-category` doesn't include the selected filter |
+| Project filters | Hides cards whose `data-category` tags don't include the selected filter, and marks the selected button with `aria-pressed` |
 | Active nav link | Highlights the section in view in both the top menu and the phone bottom bar, and sets `aria-current`. Scrolling back to the hero clears it |
 | Scroll reveal | Fades in elements with `data-reveal` as they enter the screen |
 | Résumé viewer | Opens a dialog with the browser's PDF viewer, or with `resume-1/2.png` on phones and browsers without one |

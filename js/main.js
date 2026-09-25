@@ -8,26 +8,12 @@ if (cover) new ResizeObserver(([e]) => {
 }).observe(cover);
 document.getElementById('y').textContent = new Date().getFullYear();
 
-const root = document.documentElement;
 const nav = document.querySelector('nav');
 // the cover already shows the name; only put it in the nav once the cover scrolls away
 if (cover) new IntersectionObserver(([e]) => nav.classList.toggle('hide-brand', e.intersectionRatio > 0.35),
   { threshold: [0, 0.35, 1] }).observe(cover);
 const menuToggle = document.querySelector('.menu-toggle');
-const themeToggle = document.querySelector('.theme-toggle');
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) root.dataset.theme = savedTheme;
-// the sun/moon icon swaps in CSS; only the label needs updating here
-const updateThemeButton = () => {
-  const dark = root.dataset.theme !== 'light';
-  themeToggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
-};
-updateThemeButton();
-themeToggle.addEventListener('click', () => {
-  root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
-  localStorage.setItem('theme', root.dataset.theme);
-  updateThemeButton();
-});
+// theme switching lives in js/theme.js
 
 // Mobile menu: closes on link tap, Escape, a tap outside the nav, or when the window grows past the breakpoint
 const setMenu = (open) => {
@@ -56,13 +42,16 @@ document.querySelectorAll('.job-toggle').forEach((button) => {
   });
 });
 
+// Project filters: a card shows when its space-separated data-category contains the chosen tag
 document.querySelectorAll('.filter').forEach((button) => {
   button.addEventListener('click', () => {
-    document.querySelectorAll('.filter').forEach((item) => item.classList.remove('active'));
-    button.classList.add('active');
+    document.querySelectorAll('.filter').forEach((item) => {
+      item.classList.toggle('active', item === button);
+      item.setAttribute('aria-pressed', item === button);
+    });
     const filter = button.dataset.filter;
     document.querySelectorAll('.card').forEach((card) => {
-      card.hidden = filter !== 'all' && !card.dataset.category.includes(filter);
+      card.hidden = filter !== 'all' && !card.dataset.category.split(' ').includes(filter);
     });
   });
 });

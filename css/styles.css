@@ -12,6 +12,7 @@
   --card: #fbf9f3; --surface: #e9e6da; --shadow: 0 10px 30px rgba(13, 20, 17, .1);
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; } /* components set display: flex/grid, which would otherwise override the hidden attribute */
 html { scroll-behavior: smooth; }
 body { min-height: 100svh; margin: 0; background: var(--bg); color: var(--fg);
   font: 16.5px/1.65 var(--body);
@@ -144,13 +145,16 @@ h2:after { content: ""; height: 1px; background: var(--line); flex: 1; }
 .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin: -8px 0 18px; }
 .filter { border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 6px 13px; cursor: pointer; font: inherit; font-size: .86rem; }
 .filter.active, .filter:hover, .filter:focus-visible { background: var(--accent-soft); color: var(--accent-strong); border-color: transparent; }
-.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 24px;
   display: flex; flex-direction: column; box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
 .card:hover { transform: translateY(-7px); border-color: var(--accent); box-shadow: 0 16px 38px rgba(0, 0, 0, .25); }
 .card h3 { margin: 0 0 6px; font-size: 1.08rem; }
 .card p { margin: 0 0 14px; color: var(--muted); font-size: .95rem; flex: 1; }
-.card .stack { color: var(--secondary); font-family: var(--mono); font-size: .8rem; margin-bottom: 12px; font-weight: 600; }
+.card .stack { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0 0 14px; padding: 0; }
+.card .stack li { padding: 2px 9px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--secondary) 35%, transparent);
+  color: var(--secondary); font-family: var(--mono); font-size: .72rem; font-weight: 600; line-height: 1.6; }
+@media (min-width: 700px) { .card.featured { grid-column: span 2; } }
 .card a { font-weight: 700; text-decoration: none; }
 .card .note { color: var(--faint); font-size: .85rem; }
 .card .award { align-self: flex-start; margin: -4px 0 12px; }
@@ -187,6 +191,70 @@ h2:after { content: ""; height: 1px; background: var(--line); flex: 1; }
 .quotes-more a { font-weight: 700; text-decoration: none; }
 .contact { background: var(--accent-soft); border: 1px solid var(--line); border-radius: 28px; padding: 30px; }
 .contact p { color: var(--muted); margin: 0 0 18px; max-width: 560px; }
+/* Project cards: the whole card opens the project page. The title link is stretched over the card with ::after,
+   and the card's other links sit above that layer so they still work. */
+.card { position: relative; cursor: pointer; }
+.card h3 { padding-right: 30px; }
+.card-link { color: inherit; text-decoration: none; }
+.card-link::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.card a:not(.card-link) { position: relative; z-index: 2; }
+.card-link:focus-visible { outline: none; }
+.card:has(.card-link:focus-visible) { outline: 2px solid var(--accent); outline-offset: 3px; border-color: var(--accent); }
+.card:has(.card-link)::before { content: "→"; position: absolute; top: 22px; right: 22px; color: var(--accent-strong); font-weight: 700; font-size: 1.1rem;
+  transition: transform .2s; pointer-events: none; }
+@media (hover: hover) { .card:hover::before { transform: translateX(4px); } }
+.card:active { border-color: var(--accent); }
+
+/* Project page (project.html, filled by js/project-page.js) */
+@view-transition { navigation: auto; } /* smooth cross-fade between the home page and project pages in supporting browsers */
+.project-main { width: min(100% - 32px, 880px); min-height: auto; padding-top: 44px; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px 8px 10px; border-radius: 999px;
+  color: var(--fg); font-weight: 600; font-size: .95rem; text-decoration: none; transition: background .2s, color .2s; }
+.back-link svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
+.back-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.back-link:active { background: var(--accent-soft); }
+@media (hover: hover) { .back-link:hover { background: var(--accent-soft); color: var(--accent-strong); } .back-link:hover svg { transform: translateX(-3px); } }
+.project-page .nav-actions { gap: 8px; }
+.pd-kicker { margin: 0 0 8px; font-family: var(--mono); font-size: .8rem; font-weight: 600; color: var(--accent-strong); }
+.pd-title { margin: 0 0 14px; font-family: var(--display); font-size: clamp(2.1rem, 6vw, 3.4rem); font-weight: 800; line-height: 1.05; letter-spacing: -.035em; }
+.project-body > .award { margin: 0 0 14px; }
+.pd-summary { margin: 0 0 24px; max-width: 700px; font-size: 1.15rem; color: var(--muted); }
+.pd-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px 20px; margin: 0 0 26px; padding: 18px 0; border-block: 1px solid var(--line); }
+.pd-meta dt { font-family: var(--mono); font-size: .72rem; color: var(--faint); }
+.pd-meta dd { margin: 2px 0 0; font-weight: 600; }
+.pd-impact { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 0 0 8px; }
+.pd-impact .stat b { font-size: 1.8rem; }
+.pd-shots { display: flex; gap: 16px; overflow-x: auto; margin: 26px 0 0; padding: 4px 2px 12px; scroll-snap-type: x mandatory; }
+.pd-shots img { flex: none; width: 200px; height: auto; border-radius: 24px; border: 1px solid var(--line); box-shadow: var(--shadow); scroll-snap-align: start; }
+.project-body h2.pd-heading { margin: 38px 0 14px; }
+.pd-list { margin: 0; padding-left: 20px; color: var(--muted); }
+.pd-list li { margin: 8px 0; }
+.pd-list li::marker { color: var(--accent); }
+.project-body .stack { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.project-body .stack li { padding: 3px 11px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--secondary) 35%, transparent);
+  color: var(--secondary); font-family: var(--mono); font-size: .76rem; font-weight: 600; line-height: 1.6; }
+.pd-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+.pd-note { margin: 26px 0 0; color: var(--faint); font-size: .92rem; }
+/* previous / next project; it's a <nav>, so undo the sticky top-bar styles */
+.project-nav { position: static; width: auto; margin: 56px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  background: none; border: 0; border-radius: 0; box-shadow: none; backdrop-filter: none; }
+.project-nav a { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding: 16px 20px; border: 1px solid var(--line); border-radius: 18px;
+  background: var(--card); text-decoration: none; transition: border-color .2s, transform .2s; }
+.project-nav .pd-next { align-items: flex-end; text-align: right; }
+.project-nav small { font-family: var(--mono); font-size: .72rem; color: var(--faint); }
+.project-nav span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 700; color: var(--accent-strong); }
+.project-nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (hover: hover) { .project-nav a:hover { border-color: var(--accent); transform: translateY(-3px); } }
+.project-page { padding-bottom: env(safe-area-inset-bottom); } /* no bottom tab bar on project pages */
+@media (max-width: 700px) {
+  .project-main { padding-top: 28px; }
+  .pd-shots { margin-inline: -16px; padding-inline: 16px; }
+  .pd-shots img { width: 160px; }
+  .project-nav { grid-template-columns: 1fr; }
+  .project-nav .pd-next { align-items: flex-start; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
 .resume-dialog { width: min(920px, 100% - 32px); height: min(92vh, 1180px); max-width: none; max-height: none; padding: 0;
   border: 1px solid var(--line); border-radius: 22px; background: var(--card); color: var(--fg); box-shadow: 0 30px 80px rgba(0, 0, 0, .5); overflow: hidden; }
 .resume-dialog[open] { display: flex; flex-direction: column; }

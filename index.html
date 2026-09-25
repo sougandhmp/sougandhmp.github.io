@@ -26,6 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <script src="js/theme.js"></script>
 </head>
 <body>
   <div class="floaters" aria-hidden="true"></div>
@@ -159,7 +160,7 @@
         <div class="skillrow"><div class="label">Android</div>
           <ul class="tags"><li>Jetpack Compose</li><li>Material 3</li><li>Coroutines &amp; Flow</li><li>ViewModel</li><li>Navigation</li><li>WorkManager</li><li>Room</li><li>DataStore</li><li>Paging 3</li></ul></div>
         <div class="skillrow"><div class="label">Architecture</div>
-          <ul class="tags"><li>Clean Architecture</li><li>MVVM</li><li>Multi-module</li><li>TDD</li></ul></div>
+          <ul class="tags"><li>Clean Architecture</li><li>MVVM</li><li>MVI</li><li>Multi-module</li><li>TDD</li></ul></div>
         <div class="skillrow"><div class="label">Libraries</div>
           <ul class="tags"><li>Hilt</li><li>Dagger</li><li>Retrofit</li><li>OkHttp</li></ul></div>
         <div class="skillrow"><div class="label">Testing</div>
@@ -182,15 +183,16 @@
     <section id="projects" data-reveal>
       <h2>Projects</h2>
       <div class="filter-bar" aria-label="Filter projects">
-        <button class="filter active" type="button" data-filter="all">All projects</button>
-        <button class="filter" type="button" data-filter="android">Android</button>
-        <button class="filter" type="button" data-filter="compose">Compose</button>
+        <button class="filter active" type="button" data-filter="all" aria-pressed="true">All projects</button>
+        <button class="filter" type="button" data-filter="android" aria-pressed="false">Android</button>
+        <button class="filter" type="button" data-filter="compose" aria-pressed="false">Jetpack Compose</button>
+        <button class="filter" type="button" data-filter="flutter" aria-pressed="false">Flutter</button>
       </div>
       <div class="grid">
-        <div class="card" data-category="android compose">
-          <h3>MEGA Android</h3>
+        <div class="card featured" data-category="android compose">
+          <h3><a class="card-link" href="project.html?id=mega-android">MEGA Android</a></h3>
           <p>Professional work: delivered features end to end across MEGA Cloud in MEGA's open-source, end-to-end encrypted Android app.</p>
-          <div class="stack">Kotlin · Jetpack Compose</div>
+          <ul class="stack"><li>Java</li><li>Kotlin</li><li>Jetpack Compose</li><li>XML</li><li>Clean Architecture</li><li>MVVM</li><li>Hilt</li><li>JUnit</li><li>Coroutines &amp; Flow</li><li>ViewModel</li><li>WorkManager</li><li>Room</li><li>DataStore</li><li>GitLab</li><li>Crashlytics</li></ul>
           <div class="links">
             <a href="https://mega.io/mobile">About MEGA →</a>
             <a href="https://play.google.com/store/apps/details?id=mega.privacy.android.app">Google Play →</a>
@@ -198,28 +200,28 @@
           </div>
         </div>
         <div class="card" data-category="android compose">
-          <h3>MEGA Password Manager</h3>
+          <h3><a class="card-link" href="project.html?id=mega-pass">MEGA Password Manager</a></h3>
           <p>Professional work: owned Search and TOTP authentication, made auto-fill 33% faster and moved the UI to Jetpack Compose, for a privacy product with 300M+ users.</p>
-          <div class="stack">Kotlin · Jetpack Compose</div>
+          <ul class="stack"><li>Kotlin</li><li>Jetpack Compose</li></ul>
           <a href="https://mega.io/pass">About MEGA Pass →</a>
         </div>
         <div class="card" data-category="android">
-          <h3>Banking payments platform</h3>
+          <h3><a class="card-link" href="project.html?id=banking-payments">Banking payments platform</a></h3>
           <span class="award" title="Top Engineer of the Month, February 2026"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10v2h4v3a5 5 0 0 1-4.6 5A6 6 0 0 1 13 15.9V18h4v4H7v-4h4v-2.1A6 6 0 0 1 7.6 12 5 5 0 0 1 3 7V4h4Zm10 4v3.9A3 3 0 0 0 19 7V6ZM5 6v1a3 3 0 0 0 2 2.9V6Z"/></svg>Top Engineer of the Month</span>
           <p>Professional work at Synechron: owned payment workflows for fund transfers, bill payments and beneficiary management in a next-generation retail banking app for a leading UAE bank.</p>
-          <div class="stack">Kotlin · Android</div>
+          <ul class="stack"><li>Kotlin</li><li>Android</li></ul>
           <span class="note">Client work, not public</span>
         </div>
-        <div class="card" data-category="android">
-          <h3>FieldCatcher</h3>
+        <div class="card" data-category="flutter">
+          <h3><a class="card-link" href="project.html?id=fieldcatcher">FieldCatcher</a></h3>
           <p>Professional work at TCS: led the move from native Android to Flutter for a digital farming app, shipped the MVP on schedule and added on-device AI with TensorFlow models and custom Flutter plugins.</p>
-          <div class="stack">Flutter · Dart · TensorFlow</div>
+          <ul class="stack"><li>Flutter</li><li>Dart</li><li>TensorFlow</li></ul>
           <span class="note">Client work, not public</span>
         </div>
         <div class="card" data-category="android compose">
-          <h3>FlagMaster</h3>
+          <h3><a class="card-link" href="project.html?id=flagmaster">FlagMaster</a></h3>
           <p>A time-based Android quiz game that tests your knowledge of world flags, in a visually engaging UI.</p>
-          <div class="stack">Kotlin · Jetpack Compose</div>
+          <ul class="stack"><li>Kotlin</li><li>Jetpack Compose</li></ul>
           <a href="https://github.com/sougandhmp/FlagMaster">View on GitHub →</a>
         </div>
       </div>
