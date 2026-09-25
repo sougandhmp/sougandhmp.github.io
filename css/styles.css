@@ -133,7 +133,14 @@ h1 { font-family: var(--display); font-size: clamp(2.65rem, 8vw, 4.8rem); line-h
 h1 .name { color: var(--secondary); }
 @media (min-width: 701px) { h1 .name { white-space: nowrap; } }
 .lead { font-size: 1.15rem; color: var(--muted); max-width: 670px; margin: 0; }
-.meta { color: var(--faint); font-size: .92rem; margin-top: 16px; }
+/* hiring summary under the headline: role, stack and availability, readable in the first few seconds */
+.summary { margin: -6px 0 16px; max-width: 720px; font-size: clamp(1.15rem, 2vw, 1.35rem); line-height: 1.5; font-weight: 500; color: var(--fg); }
+.hero-stack { display: flex; flex-wrap: wrap; gap: 4px 0; margin: 0; padding: 0; list-style: none; font-family: var(--mono); font-size: .86rem; font-weight: 600; color: var(--accent-strong); }
+.hero-stack li:not(:last-child)::after { content: "·"; margin: 0 10px; color: var(--faint); font-weight: 400; }
+.availability { display: flex; align-items: center; gap: 10px; margin: 14px 0 0; font-size: .95rem; color: var(--muted); }
+.status-dot { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent); animation: status-pulse 2.4s ease-in-out infinite; }
+@keyframes status-pulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 0%, transparent); } }
+.lead.intro { margin-top: 30px; font-size: 1.05rem; }
 .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 .btn { display: inline-flex; align-items: center; padding: 10px 19px; border-radius: 999px; font-weight: 700;
   text-decoration: none; border: 1px solid var(--line); color: var(--fg); background: var(--card);
@@ -205,6 +212,12 @@ h2:after { content: ""; height: 1px; background: var(--line); flex: 1; }
   background: color-mix(in srgb, var(--secondary) 12%, transparent); border: 1px solid color-mix(in srgb, var(--secondary) 45%, transparent); }
 .award svg { width: 13px; height: 13px; flex: none; }
 .job .award { margin: 6px 0 4px; }
+/* larger award on the timeline, so the recognition stands out */
+.award.award-lg { margin: 4px 0 12px; padding: 6px 14px 6px 10px; font-size: .8rem; gap: 8px;
+  background: color-mix(in srgb, var(--secondary) 16%, transparent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--secondary) 7%, transparent); }
+.award.award-lg svg { width: 16px; height: 16px; }
+/* Core skills stand out from the rest */
+.skillrow.core .tags li { border-color: color-mix(in srgb, var(--accent) 45%, transparent); color: var(--accent-strong); background: var(--accent-soft); }
 .card .links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
 .about { display: grid; grid-template-columns: 200px 1fr; gap: 20px 36px; align-items: center; }
 .about .about-lede { margin: 0 0 14px; font-family: var(--display); font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.2; font-weight: 700; letter-spacing: -.02em; color: var(--fg); max-width: 560px; }

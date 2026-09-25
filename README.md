@@ -92,9 +92,9 @@ In page order:
    - **700px and below (phones):** a bottom navigation bar (`.tabbar`, Material 3 style) replaces the top menu, with Work, Skills, Projects, Reviews and About one thumb-tap away. The top bar keeps just the monogram and the theme switch.
    - **Keyboard:** a "Skip to content" link appears when a keyboard user presses Tab on arrival.
 2. **Cover**: `cover.html` in an iframe. It's scaled to fit the window by a `ResizeObserver` in `main.js`.
-3. **Hero**: eyebrow tag, headline, intro paragraph, location line, call-to-action buttons and three highlight tiles.
+3. **Hero**: built so a recruiter gets the essentials in the first few seconds. In order: role tag, headline, a one-line hiring summary (`.summary`), the core stack (`.hero-stack`), location and availability with a pulsing green status dot (`.availability`), call-to-action buttons, then the longer intro paragraph and three highlight tiles.
 4. **Experience** (`#experience`): a vertical timeline, with one `.job` block per role inside `.timeline`, newest first. On desktop, dates sit on the left, a line with a dot per role runs down the middle, and details are on the right. On phones, the line runs down the left edge. The most recent role gets a filled, glowing dot. The line and dots are pure CSS (`.timeline::before`, `.job::before`), so adding a role is just another `.job` block.
-5. **Skills** (`#skills`): one `.skillrow` per category.
+5. **Skills** (`#skills`): three rows, deliberately short so the Android signal isn't diluted: **Core** (`.skillrow.core`, highlighted green), **Engineering** and **Additional**. Add a skill only if you'd want a recruiter to ask about it.
 6. **Projects** (`#projects`): project cards with Android, Jetpack Compose and Flutter filters. Clicking anywhere on a card opens that project's own page, `project.html?id=…` (see **Add or edit project details** under [Common edits](#common-edits)).
 7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word.
 8. **About & contact** (`#contact`): photo, short bio, education, languages and contact buttons, followed by the **Send me a message** form (`#message`). The hero's **Get in touch** button links to the form.

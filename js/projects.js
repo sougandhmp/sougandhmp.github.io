@@ -66,7 +66,7 @@ const PROJECTS = {
     award: 'Top Engineer of the Month · Feb 2026',
     summary: 'A next-generation retail banking Android app for a leading UAE retail bank. I was a core contributor, owning major functionality in the Payments module.',
     meta: [
-      ['Role', 'Senior Software Engineer'],
+      ['Role', 'Senior Software Engineer / Technology Lead'],
       ['Company', 'Synechron'],
       ['When', 'Oct 2025 – Apr 2026'],
       ['Where', 'Bengaluru, India'],
