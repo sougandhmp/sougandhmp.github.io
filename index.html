@@ -24,7 +24,7 @@
   <meta name="theme-color" content="#0d1411">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Sora:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0d1411; --fg: #f2eee3; --muted: #c9d3cc; --faint: #8fa396; --line: #2e4a3b;
@@ -66,8 +66,9 @@
       border-radius: 48% 52% 56% 44%; background: var(--accent-soft); opacity: .7; filter: blur(1px); }
     .eyebrow { display: inline-flex; color: var(--accent-strong); background: var(--accent-soft); border-radius: 999px;
       font-family: var(--mono); font-weight: 600; font-size: .8rem; border: 1px solid var(--line); padding: 5px 13px; margin: 0 0 18px; }
-    h1, h3, .stat b { font-family: var(--display); }
-    h1 { font-size: clamp(2.65rem, 8vw, 4.8rem); line-height: 1.02; margin: 0 0 22px; font-weight: 800; letter-spacing: -.03em; max-width: 770px; }
+    h3, .stat b { font-family: var(--display); }
+    h1 { font-family: "Lobster", var(--display); font-size: clamp(2.65rem, 8vw, 4.8rem); line-height: 1.1; margin: 0 0 22px; font-weight: 400; letter-spacing: 0; max-width: 820px; }
+    h1 .name { color: var(--secondary); }
     .lead { font-size: 1.15rem; color: var(--muted); max-width: 670px; margin: 0; }
     .meta { color: var(--faint); font-size: .92rem; margin-top: 16px; }
     .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
@@ -114,6 +115,13 @@
     .card p { margin: 0 0 14px; color: var(--muted); font-size: .95rem; flex: 1; }
     .card .stack { color: var(--secondary); font-family: var(--mono); font-size: .8rem; margin-bottom: 12px; font-weight: 600; }
     .card a { font-weight: 700; text-decoration: none; }
+    .card .note { color: var(--faint); font-size: .85rem; }
+    .card .award { align-self: flex-start; margin: -4px 0 12px; }
+    .award { display: inline-flex; align-items: center; gap: 6px; padding: 3px 11px 3px 8px; border-radius: 999px; vertical-align: middle;
+      font-family: var(--mono); font-size: .72rem; font-weight: 600; letter-spacing: .01em; line-height: 1.5; color: var(--secondary);
+      background: color-mix(in srgb, var(--secondary) 12%, transparent); border: 1px solid color-mix(in srgb, var(--secondary) 45%, transparent); }
+    .award svg { width: 13px; height: 13px; flex: none; }
+    .job .award { margin: 6px 0 4px; }
     .card .links { display: flex; flex-wrap: wrap; gap: 6px 16px; }
     .about { display: grid; grid-template-columns: 200px 1fr; gap: 20px 36px; align-items: center; }
     .about .about-lede { margin: 0 0 14px; font-family: var(--display); font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.2; font-weight: 700; letter-spacing: -.02em; color: var(--fg); max-width: 560px; }
@@ -234,8 +242,8 @@
     <div class="cover" aria-hidden="true"><iframe src="cover.html" title="Profile cover" tabindex="-1"></iframe></div>
     <div class="hero">
     <p class="eyebrow">Senior Android Engineer &amp; Tech Lead</p>
-    <h1>Hi, I'm Sougandh.<br>I build Android apps people rely on.</h1>
-    <p class="lead">11+ years shipping Android apps in Kotlin, Java and Jetpack Compose, from banking payments to a privacy product used by 300M+ people.</p>
+    <h1>I build <span class="name">Android apps</span><br>people rely on.</h1>
+    <p class="lead">For the past 11+ years, I've been building Android apps that people use every day. That's included helping 300M+ people keep their passwords safe at MEGA, and building apps for a national postal service, a major US insurer and a global agritech leader. Banking, privacy, insurance, logistics, farming: every domain has taught me something new about what users really need.</p>
     <p class="meta">Based in Sydney, Australia · Open to Android and mobile engineering roles</p>
     <div class="cta">
       <a class="btn primary" href="mailto:sougandhmp@gmail.com">Get in touch</a>
@@ -259,6 +267,7 @@
         <div>
           <h3>Senior Software Engineer</h3>
           <div class="org">Synechron · Bengaluru</div>
+          <span class="award" style="margin:0 0 10px"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10v2h4v3a5 5 0 0 1-4.6 5A6 6 0 0 1 13 15.9V18h4v4H7v-4h4v-2.1A6 6 0 0 1 7.6 12 5 5 0 0 1 3 7V4h4Zm10 4v3.9A3 3 0 0 0 19 7V6ZM5 6v1a3 3 0 0 0 2 2.9V6Z"/></svg>Top Engineer of the Month · Feb 2026</span>
           <ul>
             <li>Owned major functionality in the Payments module of a next-generation retail banking app for a leading UAE bank: fund transfers, bill payments and beneficiary management.</li>
             <li>Named Top Engineer of the Month (Feb 2026) for technical contribution and delivery on the payments platform.</li>
@@ -365,7 +374,7 @@
       <div class="grid">
         <div class="card" data-category="android compose">
           <h3>MEGA Android</h3>
-          <p>Professional work: features end to end and an XML-to-Compose migration in MEGA's open-source, encrypted cloud storage app.</p>
+          <p>Professional work: delivered features end to end across MEGA Cloud in MEGA's open-source, end-to-end encrypted Android app.</p>
           <div class="stack">Kotlin · Jetpack Compose</div>
           <div class="links">
             <a href="https://github.com/meganz/android">GitHub →</a>
@@ -375,9 +384,22 @@
         </div>
         <div class="card" data-category="android compose">
           <h3>MEGA Password Manager</h3>
-          <p>Professional work: Search, TOTP authentication and a 33% faster auto-fill for a privacy app with 300M+ users.</p>
+          <p>Professional work: owned Search and TOTP authentication, made auto-fill 33% faster and moved the UI to Jetpack Compose, for a privacy product with 300M+ users.</p>
           <div class="stack">Kotlin · Jetpack Compose</div>
           <a href="https://mega.io/pass">About MEGA Pass →</a>
+        </div>
+        <div class="card" data-category="android">
+          <h3>Banking payments platform</h3>
+          <span class="award" title="Top Engineer of the Month, February 2026"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h10v2h4v3a5 5 0 0 1-4.6 5A6 6 0 0 1 13 15.9V18h4v4H7v-4h4v-2.1A6 6 0 0 1 7.6 12 5 5 0 0 1 3 7V4h4Zm10 4v3.9A3 3 0 0 0 19 7V6ZM5 6v1a3 3 0 0 0 2 2.9V6Z"/></svg>Top Engineer of the Month</span>
+          <p>Professional work at Synechron: owned payment workflows for fund transfers, bill payments and beneficiary management in a next-generation retail banking app for a leading UAE bank.</p>
+          <div class="stack">Kotlin · Android</div>
+          <span class="note">Client work, not public</span>
+        </div>
+        <div class="card" data-category="android">
+          <h3>FieldCatcher</h3>
+          <p>Professional work at TCS: led the move from native Android to Flutter for a digital farming app, shipped the MVP on schedule and added on-device AI with TensorFlow models and custom Flutter plugins.</p>
+          <div class="stack">Flutter · Dart · TensorFlow</div>
+          <span class="note">Client work, not public</span>
         </div>
         <div class="card" data-category="android compose">
           <h3>FlagMaster</h3>
