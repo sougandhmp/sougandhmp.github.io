@@ -42,6 +42,61 @@ document.querySelectorAll('.job-toggle').forEach((button) => {
   });
 });
 
+// Recommendations are compact cards by default; open the complete text in a focused dialog.
+const recommendationDialog = document.querySelector('.recommendation-dialog');
+if (recommendationDialog) {
+  const recommendationTitle = recommendationDialog.querySelector('.recommendation-title');
+  const recommendationContent = recommendationDialog.querySelector('.recommendation-content');
+  const recommendationClose = recommendationDialog.querySelector('.recommendation-close');
+  const recommendations = [...document.querySelectorAll('.quote-trigger')];
+  const recommendationPrev = recommendationDialog.querySelector('.recommendation-prev');
+  const recommendationNext = recommendationDialog.querySelector('.recommendation-next');
+  let lastRecommendation = null;
+  let recommendationIndex = 0;
+
+  recommendations.forEach((quote) => {
+    quote.dataset.truncated = quote.querySelectorAll('blockquote p').length > 1;
+  });
+
+  const openRecommendation = (quote, focusTarget = recommendationClose) => {
+    lastRecommendation = quote;
+    recommendationIndex = recommendations.indexOf(quote);
+    recommendationTitle.textContent = quote.querySelector('figcaption b').textContent;
+    recommendationPrev.querySelector('span').textContent = recommendations[(recommendationIndex - 1 + recommendations.length) % recommendations.length].querySelector('figcaption b').textContent;
+    recommendationNext.querySelector('span').textContent = recommendations[(recommendationIndex + 1) % recommendations.length].querySelector('figcaption b').textContent;
+    recommendationContent.replaceChildren(
+      quote.querySelector('blockquote').cloneNode(true),
+      quote.querySelector('figcaption').cloneNode(true)
+    );
+    if (!recommendationDialog.open) {
+      if (typeof recommendationDialog.showModal === 'function') recommendationDialog.showModal();
+      else recommendationDialog.setAttribute('open', '');
+    }
+    focusTarget.focus();
+  };
+
+  document.querySelectorAll('.quote-trigger').forEach((quote) => {
+    quote.addEventListener('click', () => openRecommendation(quote));
+    quote.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openRecommendation(quote);
+      }
+    });
+  });
+  recommendationClose.addEventListener('click', () => recommendationDialog.close());
+  recommendationPrev.addEventListener('click', () => openRecommendation(
+    recommendations[(recommendationIndex - 1 + recommendations.length) % recommendations.length], recommendationPrev
+  ));
+  recommendationNext.addEventListener('click', () => openRecommendation(
+    recommendations[(recommendationIndex + 1) % recommendations.length], recommendationNext
+  ));
+  recommendationDialog.addEventListener('click', (event) => {
+    if (event.target === recommendationDialog) recommendationDialog.close();
+  });
+  recommendationDialog.addEventListener('close', () => lastRecommendation?.focus());
+}
+
 // Project filters: a card shows when its space-separated data-category contains the chosen tag
 document.querySelectorAll('.filter').forEach((button) => {
   button.addEventListener('click', () => {

@@ -23,6 +23,7 @@
   --code-keyword: #cc7832;
   --code-string: #6a8759;
   --code-annotation: #bbb529;
+  --ring-dot: #3ddc84;
   --accent: #3ddc84;
 }
 html[data-theme="light"] {
@@ -42,6 +43,7 @@ html[data-theme="light"] {
   --code-keyword: #0033b3;
   --code-string: #067d17;
   --code-annotation: #9e880d;
+  --ring-dot: #3ddc84;
   --accent: #1aaa73;
 }
 body{margin:0;background:var(--bg) radial-gradient(var(--soft) 1.2px,transparent 1.4px) 0 0/22px 22px;font-family:'Sora',Georgia,serif;color:var(--fg)}
@@ -100,11 +102,11 @@ html,body{overflow:hidden}
 <!-- rings behind caricature -->
 <svg class="ring" width="420" height="420" viewBox="0 0 420 420" style="position: absolute; left: 750px; top: 20px" aria-hidden="true">
 <circle cx="210" cy="210" r="200" fill="none" stroke="var(--accent)" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 14"></circle>
-<circle cx="210" cy="10" r="7" fill="var(--accent)"></circle>
+<circle cx="210" cy="10" r="7" fill="var(--ring-dot)"></circle>
 </svg>
 <svg class="ring-rev" width="340" height="340" viewBox="0 0 340 340" style="position: absolute; left: 790px; top: 60px" aria-hidden="true">
 <circle cx="170" cy="170" r="160" fill="var(--card-bg)" stroke="var(--accent)" stroke-opacity=".5" stroke-width="1.5"></circle>
-<circle cx="330" cy="170" r="5" fill="var(--fg)"></circle>
+<circle cx="330" cy="170" r="5" fill="var(--ring-dot)"></circle>
 </svg>
 
 <!-- left text block -->
@@ -224,6 +226,7 @@ BUILD SUCCESSFUL
     root.style.setProperty('--code-keyword', isLight ? '#0033b3' : '#cc7832');
     root.style.setProperty('--code-string', isLight ? '#067d17' : '#6a8759');
     root.style.setProperty('--code-annotation', isLight ? '#9e880d' : '#bbb529');
+    root.style.setProperty('--ring-dot', '#3ddc84');
     root.style.setProperty('--accent', isLight ? '#1aaa73' : '#3ddc84');
     document.body.style.background = `var(--bg) radial-gradient(var(--soft) 1.2px, transparent 1.4px) 0 0/22px 22px`;
   };

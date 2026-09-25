@@ -19,6 +19,7 @@
   const apply = (theme) => {
     const nextTheme = normalizeTheme(theme);
     root.dataset.theme = nextTheme;
+    root.style.setProperty('--color-scheme', nextTheme);
     root.style.colorScheme = nextTheme;
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', BAR_COLOURS[nextTheme]);
     const toggle = document.querySelector('.theme-toggle');

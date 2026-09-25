@@ -219,25 +219,37 @@
     <section id="recommendations" data-reveal>
       <h2>What people say</h2>
       <div class="quotes">
-        <figure class="quote">
+        <figure class="quote quote-trigger" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Read the full recommendation from Yenel Rodríguez Hernández">
           <blockquote><p>I’ve had the pleasure of working with Sougandh at MEGA, where he has consistently impressed me with his adaptability, technical expertise, and professionalism. He has the ability to take on tasks of any complexity and deliver high-quality results, no matter the challenge.</p><p>Sougandh is not only a highly skilled engineer but also a fantastic teammate. He brings a positive attitude to every situation, treats everyone with kindness and respect, and contributes meaningfully to team collaboration. He’s always open to feedback and committed to continuous improvement, which makes him a true asset in any environment.</p><p>I’m confident that any team lucky enough to work with Sougandh will benefit greatly from his contributions. His dedication and talent will undoubtedly take him far in his career.</p></blockquote>
           <figcaption><span class="initials" aria-hidden="true">YR</span><span><b>Yenel Rodríguez Hernández</b><span class="role">Android Team Leader, MEGA</span><span class="rel">Managed Sougandh directly</span></span></figcaption>
         </figure>
-        <figure class="quote">
+        <figure class="quote quote-trigger" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Read the full recommendation from Bhavna Thacker">
           <blockquote><p>I had the pleasure of working with Sougandh at MEGA for over two years, and I can confidently say he is one of the most humble and dedicated professionals I’ve come across. As an Android developer, his technical skills are top-notch—he consistently followed clean architecture principles and adhered to the highest coding standards, which greatly improved the maintainability and scalability of our products.</p><p>What truly sets Sougandh apart is his attitude. He’s an excellent team player who never hesitates to help others, always approachable and generous with his knowledge.</p><p>Anyone looking for a talented, grounded, and dependable Android developer would be lucky to have Sougandh on their team. I wholeheartedly recommend him.</p></blockquote>
           <figcaption><span class="initials" aria-hidden="true">BT</span><span><b>Bhavna Thacker</b><span class="role">Ex-Android APAC Team Lead at MEGA, former Google Developer Expert</span><span class="rel">Senior colleague at MEGA</span></span></figcaption>
         </figure>
-        <figure class="quote">
+        <figure class="quote quote-trigger" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Read the full recommendation from Abhijit Haridas Namboothiri">
           <blockquote><p>I had the pleasure of working alongside Sougandh on multiple Android development projects, and he is a highly talented team member. Sougandh possesses strong technical skills in Android development and consistently delivers high-quality work. Sougandh is proactive and possess great communication skills facilitating better team alignments.</p><p>Sougandh would be a valuable asset to any Android development team and I wholeheartedly recommend him and would welcome the opportunity to work with them again in the future.</p></blockquote>
           <figcaption><span class="initials" aria-hidden="true">AN</span><span><b>Abhijit Haridas Namboothiri</b><span class="role">Technical Lead, Android at ALDI DX</span><span class="rel">Worked on the same team</span></span></figcaption>
         </figure>
-        <figure class="quote">
+        <figure class="quote quote-trigger" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Read the full recommendation from Akhil Babu Korkandi">
           <blockquote><p>I had the pleasure of working with Sougandh, who is highly skilled in Android programming and consistently delivers quality work. He has great work ethics, a positive attitude, and is always reliable. I’d strongly recommend him for any role where technical expertise and professionalism are valued.</p></blockquote>
           <figcaption><span class="initials" aria-hidden="true">AK</span><span><b>Akhil Babu Korkandi</b><span class="role">Senior Full Stack Software Engineer, Cognizant</span><span class="rel">Worked together on different teams</span></span></figcaption>
         </figure>
       </div>
-      <p class="quotes-more"><a href="https://www.linkedin.com/in/sougandhmp/details/recommendations/">View these recommendations on LinkedIn →</a></p>
+      <p class="quotes-more"><a href="https://www.linkedin.com/in/sougandhmp/details/recommendations/">View all recommendations on LinkedIn →</a></p>
     </section>
+
+    <dialog class="recommendation-dialog" aria-labelledby="recommendation-title">
+      <div class="recommendation-bar">
+        <p class="recommendation-title" id="recommendation-title">Recommendation</p>
+        <button class="recommendation-close" type="button" aria-label="Close recommendation">×</button>
+      </div>
+      <div class="recommendation-content"></div>
+      <div class="recommendation-nav" aria-label="Recommendation navigation">
+        <button class="recommendation-nav-button recommendation-prev" type="button"><small>Previous recommendation</small><span></span></button>
+        <button class="recommendation-nav-button recommendation-next" type="button"><small>Next recommendation</small><span></span></button>
+      </div>
+    </dialog>
 
     <section id="contact" data-reveal>
       <h2>About &amp; contact</h2>
