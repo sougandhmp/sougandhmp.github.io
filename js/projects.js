@@ -6,15 +6,16 @@ const PROJECTS = {
   'mega-android': {
     title: 'MEGA Android',
     kicker: 'Professional work · MEGA',
-    summary: 'MEGA’s open-source Android app for end-to-end encrypted cloud storage, part of a privacy product used by 300M+ people.',
+    summary: 'MEGA’s open-source Android app for end-to-end encrypted cloud storage, part of a privacy product used by 300M+ registered users.',
     meta: [
       ['Role', 'Senior Android Engineer'],
       ['Company', 'MEGA (MEGA Privacy)'],
       ['When', 'Jan 2023 – May 2025'],
       ['Where', 'Remote'],
+      ['Architecture', 'Clean Architecture · MVVM'],
     ],
     impact: [
-      ['300M+', 'people use the MEGA privacy product'],
+      ['300M+', 'registered users on MEGA products'],
       ['15%', 'fewer production bugs'],
     ],
     sections: [
@@ -36,12 +37,13 @@ const PROJECTS = {
   'mega-pass': {
     title: 'MEGA Password Manager',
     kicker: 'Professional work · MEGA',
-    summary: 'MEGA’s password manager, part of the same privacy product used by 300M+ people. I owned two of its features from design to release and made auto-fill a third faster.',
+    summary: 'MEGA’s password manager, part of the same privacy product used by 300M+ registered users. I owned two of its features from design to release and made auto-fill a third faster.',
     meta: [
       ['Role', 'Senior Android Engineer'],
       ['Company', 'MEGA (MEGA Privacy)'],
       ['When', 'Jan 2023 – May 2025'],
       ['Where', 'Remote'],
+      ['Architecture', 'Clean Architecture · MVVM'],
     ],
     impact: [
       ['33%', 'faster auto-fill'],
@@ -54,7 +56,7 @@ const PROJECTS = {
         'Moved the UI to Jetpack Compose.',
       ]],
     ],
-    stack: ['Kotlin', 'Jetpack Compose'],
+    stack: ['Kotlin', 'Jetpack Compose', 'Clean Architecture', 'MVVM'],
     links: [
       ['About MEGA Pass', 'https://mega.io/pass'],
     ],
@@ -70,6 +72,7 @@ const PROJECTS = {
       ['Company', 'Synechron'],
       ['When', 'Oct 2025 – Apr 2026'],
       ['Where', 'Bengaluru, India'],
+      ['Architecture', 'Clean Architecture · MVI'],
     ],
     sections: [
       ['What I did', [
@@ -84,7 +87,7 @@ const PROJECTS = {
         'Named Top Engineer of the Month (February 2026) for technical contribution and delivery on the payments platform.',
       ]],
     ],
-    stack: ['Kotlin', 'Android'],
+    stack: ['Kotlin', 'Android', 'Clean Architecture', 'MVI'],
     note: 'Client work, not public',
   },
 
@@ -97,6 +100,7 @@ const PROJECTS = {
       ['Company', 'Tata Consultancy Services'],
       ['When', 'Aug 2019 – Jan 2023'],
       ['Where', 'Cologne, Germany · Kochi, India'],
+      ['Architecture', 'Clean Architecture · Riverpod'],
     ],
     impact: [
       ['80%', 'unit-test coverage'],
@@ -114,7 +118,7 @@ const PROJECTS = {
         'Raised unit-test coverage to 80%, reducing production bugs by 20%.',
       ]],
     ],
-    stack: ['Flutter', 'Dart', 'TensorFlow', 'PyTorch', 'GraphQL', 'GitLab CI/CD', 'Fastlane'],
+    stack: ['Flutter', 'Dart', 'Clean Architecture', 'Riverpod', 'TensorFlow', 'PyTorch', 'GraphQL', 'GitLab CI/CD', 'Fastlane'],
     note: 'Client work, not public',
   },
 
@@ -126,6 +130,7 @@ const PROJECTS = {
       ['Type', 'Personal, open source'],
       ['Started', 'July 2025'],
       ['Platform', 'Android 7.0 and later'],
+      ['Architecture', 'Clean Architecture · MVVM'],
     ],
     screenshots: [
       ['assets/images/projects/flagmaster/start-screen.png', 'Start screen with difficulty and question-count choices, and buttons to start now or schedule the challenge'],

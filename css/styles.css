@@ -230,11 +230,18 @@ h2:after { content: ""; height: 1px; background: var(--line); flex: 1; }
 .filter { min-height: 48px; border: 1px solid var(--line); background: transparent; color: var(--muted); border-radius: 999px; padding: 6px 13px; cursor: pointer; font: inherit; font-size: .86rem; }
 .filter.active, .filter:hover, .filter:focus-visible { background: var(--accent-soft); color: var(--accent-strong); border-color: transparent; }
 .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 24px;
+.card { min-height: 100%; background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 24px;
   display: flex; flex-direction: column; box-shadow: var(--shadow), inset 0 1px 0 var(--highlight); transition: transform .2s, box-shadow .2s; }
 .card:hover { transform: translateY(-7px); border-color: var(--accent); box-shadow: 0 16px 38px rgba(0, 0, 0, .25); }
 .card h3 { margin: 0 0 6px; font-size: 1.08rem; }
 .card p { margin: 0 0 14px; color: var(--muted); font-size: .95rem; flex: 1; }
+.card .project-card-summary { flex: none; margin-bottom: 16px; color: var(--fg); }
+.project-card-facts { display: grid; gap: 8px; flex: none; margin: 0 0 16px; padding: 12px 0; border-block: 1px solid var(--line); }
+.project-card-facts div { display: grid; grid-template-columns: 110px 1fr; gap: 8px; }
+.project-card-facts b { color: var(--accent-strong); font-family: var(--mono); font-size: .72rem; }
+.project-card-facts span { color: var(--muted); font-size: .88rem; }
+.project-card-highlights { display: grid; gap: 5px; margin: 0 0 16px; padding-left: 18px; color: var(--muted); font-size: .88rem; }
+.project-card-highlights li::marker { color: var(--accent); }
 .card .stack { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0 0 14px; padding: 0; }
 .card .stack li { padding: 2px 9px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--secondary) 35%, transparent);
   color: var(--secondary); font-family: var(--mono); font-size: .72rem; font-weight: 600; line-height: 1.6; }
@@ -263,6 +270,7 @@ h2:after { content: ""; height: 1px; background: var(--line); flex: 1; }
 .award.award-lg svg { width: 16px; height: 16px; }
 /* Core skills stand out from the rest */
 .skillrow.core .tags li { border-color: color-mix(in srgb, var(--accent) 58%, transparent); color: var(--accent-strong); background: color-mix(in srgb, var(--accent-soft) 80%, var(--surface)); }
+.card .links, .card > .note { margin-top: auto; }
 .card .links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
 .about { display: grid; grid-template-columns: minmax(200px, 280px) minmax(0, 1fr); gap: 26px 32px; align-items: center; text-align: left; }
 .about > div { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
@@ -476,6 +484,7 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line);
   h1 { font-size: clamp(2.45rem, 13vw, 4.2rem); }
   .lead { font-size: 1.05rem; }
   .skillrow { grid-template-columns: 1fr; }
+  .project-card-facts div { grid-template-columns: 1fr; gap: 2px; }
   /* phones: the line runs down the left edge; date sits above each role */
   .timeline { --rail: 7px; }
   .job { grid-template-columns: 1fr; row-gap: 4px; padding: 0 0 30px 34px; }
