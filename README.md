@@ -153,7 +153,7 @@ In page order:
 7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word. Main-page cards show a green arrow and a compact excerpt; selecting a card opens the full recommendation in a dialog with inline previous/next navigation arrows. The full-screen dialog also links to all recommendations on LinkedIn.
 8. **About & contact** (`#contact`): photo, a status line (open-to-roles status and the live local time, both from `js/site-config.js`), short bio, education, languages and contact buttons (the email button has a **Copy** button beside it), followed by the **Send me a message** form (`#message`). The form has optional topic chips that change the message prompt and go into the email subject, and a character counter. Both cards share one two-column grid (`--contact-col`), so the bio and the form line up. The logic is in `js/contact.js`. The hero's **Get in touch** button links to the form.
 9. **Résumé dialog**: opened by any link with `data-resume`.
-10. **Footer**: the year is filled in by JavaScript.
+10. **Footer** (`.site-footer`, the same on `index.html` and `project.html`): a "Like what you see? Let’s talk →" line (`.footer-cta`) linking to the message form (`#message` on the home page, `index.html#message` on project pages), then the copyright on the left, with the year filled in by JavaScript, and LinkedIn, GitHub, Email and **Back to top ↑** links on the right. On phones the links sit above the copyright. If you change a link, change it on both pages.
 
 ### Common edits
 
