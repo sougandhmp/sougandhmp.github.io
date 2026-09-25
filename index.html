@@ -134,6 +134,21 @@
     .facts div { display: grid; grid-template-columns: 110px 1fr; gap: 4px 16px; }
     .facts dt { color: var(--faint); font-family: var(--mono); font-size: .8rem; padding-top: 3px; }
     .facts dd { margin: 0; color: var(--muted); }
+    .quotes { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); }
+    .quote { margin: 0; display: flex; flex-direction: column; gap: 18px; background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 26px 26px 22px; box-shadow: var(--shadow); }
+    .quote blockquote { margin: 0; flex: 1; position: relative; padding-top: 30px; color: var(--fg); font-size: .98rem; line-height: 1.6; }
+    .quote blockquote p { margin: 0 0 12px; }
+    .quote blockquote p:last-child { margin-bottom: 0; }
+    .quote blockquote:before { content: "\201C"; position: absolute; top: -14px; left: -4px; font-family: var(--display); font-size: 4rem; line-height: 1; color: var(--accent); }
+    .quote figcaption { display: flex; gap: 12px; align-items: center; padding-top: 16px; border-top: 1px solid var(--line); }
+    .quote figcaption > span:last-child { display: flex; flex-direction: column; line-height: 1.35; }
+    .quote b { font-weight: 600; }
+    .quote .role { color: var(--muted); font-size: .88rem; }
+    .quote .rel { color: var(--faint); font-family: var(--mono); font-size: .72rem; margin-top: 2px; }
+    .initials { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-strong);
+      border: 1px solid var(--line); font-family: var(--mono); font-size: .8rem; font-weight: 600; }
+    .quotes-more { margin: 18px 0 0; }
+    .quotes-more a { font-weight: 700; text-decoration: none; }
     .contact { background: var(--accent-soft); border: 1px solid var(--line); border-radius: 28px; padding: 30px; }
     .contact p { color: var(--muted); margin: 0 0 18px; max-width: 560px; }
     .resume-dialog { width: min(920px, 100% - 32px); height: min(92vh, 1180px); max-width: none; max-height: none; padding: 0;
@@ -409,6 +424,29 @@
           <a href="https://github.com/sougandhmp/FlagMaster">View on GitHub →</a>
         </div>
       </div>
+    </section>
+
+    <section id="recommendations" data-reveal>
+      <h2>What people say</h2>
+      <div class="quotes">
+        <figure class="quote">
+          <blockquote><p>I’ve had the pleasure of working with Sougandh at MEGA, where he has consistently impressed me with his adaptability, technical expertise, and professionalism. He has the ability to take on tasks of any complexity and deliver high-quality results, no matter the challenge.</p><p>Sougandh is not only a highly skilled engineer but also a fantastic teammate. He brings a positive attitude to every situation, treats everyone with kindness and respect, and contributes meaningfully to team collaboration. He’s always open to feedback and committed to continuous improvement, which makes him a true asset in any environment.</p><p>I’m confident that any team lucky enough to work with Sougandh will benefit greatly from his contributions. His dedication and talent will undoubtedly take him far in his career.</p></blockquote>
+          <figcaption><span class="initials" aria-hidden="true">YR</span><span><b>Yenel Rodríguez Hernández</b><span class="role">Android Team Leader, MEGA</span><span class="rel">Managed Sougandh directly</span></span></figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote><p>I had the pleasure of working with Sougandh at MEGA for over two years, and I can confidently say he is one of the most humble and dedicated professionals I’ve come across. As an Android developer, his technical skills are top-notch—he consistently followed clean architecture principles and adhered to the highest coding standards, which greatly improved the maintainability and scalability of our products.</p><p>What truly sets Sougandh apart is his attitude. He’s an excellent team player who never hesitates to help others, always approachable and generous with his knowledge.</p><p>Anyone looking for a talented, grounded, and dependable Android developer would be lucky to have Sougandh on their team. I wholeheartedly recommend him.</p></blockquote>
+          <figcaption><span class="initials" aria-hidden="true">BT</span><span><b>Bhavna Thacker</b><span class="role">Ex-Android APAC Team Lead at MEGA, former Google Developer Expert</span><span class="rel">Senior colleague at MEGA</span></span></figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote><p>I had the pleasure of working alongside Sougandh on multiple Android development projects, and he is a highly talented team member. Sougandh possesses strong technical skills in Android development and consistently delivers high-quality work. Sougandh is proactive and possess great communication skills facilitating better team alignments.</p><p>Sougandh would be a valuable asset to any Android development team and I wholeheartedly recommend him and would welcome the opportunity to work with them again in the future.</p></blockquote>
+          <figcaption><span class="initials" aria-hidden="true">AN</span><span><b>Abhijit Haridas Namboothiri</b><span class="role">Technical Lead, Android at ALDI DX</span><span class="rel">Worked on the same team</span></span></figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote><p>I had the pleasure of working with Sougandh, who is highly skilled in Android programming and consistently delivers quality work. He has great work ethics, a positive attitude, and is always reliable. I’d strongly recommend him for any role where technical expertise and professionalism are valued.</p></blockquote>
+          <figcaption><span class="initials" aria-hidden="true">AK</span><span><b>Akhil Babu Korkandi</b><span class="role">Senior Full Stack Software Engineer, Cognizant</span><span class="rel">Worked together on different teams</span></span></figcaption>
+        </figure>
+      </div>
+      <p class="quotes-more"><a href="https://www.linkedin.com/in/sougandhmp/details/recommendations/">View these recommendations on LinkedIn →</a></p>
     </section>
 
     <section id="contact" data-reveal>
