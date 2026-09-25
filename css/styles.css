@@ -124,8 +124,8 @@ nav a:focus-visible, nav button:focus-visible { outline: 2px solid var(--accent)
   html, body { overflow-x: hidden; }
   body { text-align: left; }
   .tabbar { position: fixed; top: auto; left: 0; right: 0; bottom: 0; z-index: 20; display: grid; grid-template-columns: repeat(5, 1fr);
-    width: auto; margin: 0; border-radius: 0; border: 0; border-top: 1px solid var(--line);
-    padding: 8px 6px calc(8px + env(safe-area-inset-bottom));
+    width: auto; height: calc(68px + env(safe-area-inset-bottom)); margin: 0; border-radius: 0; border: 0; border-top: 1px solid var(--line);
+    padding: 8px 6px env(safe-area-inset-bottom);
     background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(14px); box-shadow: 0 -8px 24px rgba(0, 0, 0, .18); }
   .tabbar a { display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 52px; padding: 2px 0;
     color: var(--muted); text-decoration: none; font-size: .72rem; font-weight: 600; letter-spacing: .01em; -webkit-tap-highlight-color: transparent; }
@@ -490,5 +490,6 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line);
 /* Phones: the bottom navigation bar replaces the top menu (kept last so it wins over the 960px menu rules) */
 @media (max-width: 700px) {
   .menu-toggle, nav .menu, nav.menu-open .menu { display: none; }
-  body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+  html { scroll-padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+  body { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
 }
