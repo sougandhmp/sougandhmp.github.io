@@ -17,9 +17,9 @@ const menuToggle = document.querySelector('.menu-toggle');
 const themeToggle = document.querySelector('.theme-toggle');
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) root.dataset.theme = savedTheme;
+// the sun/moon icon swaps in CSS; only the label needs updating here
 const updateThemeButton = () => {
   const dark = root.dataset.theme !== 'light';
-  themeToggle.textContent = dark ? '☀' : '☾';
   themeToggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
 };
 updateThemeButton();
@@ -29,21 +29,24 @@ themeToggle.addEventListener('click', () => {
   updateThemeButton();
 });
 
-menuToggle.addEventListener('click', () => {
-  const open = nav.classList.toggle('menu-open');
+// Mobile menu: closes on link tap, Escape, a tap outside the nav, or when the window grows past the breakpoint
+const setMenu = (open) => {
+  nav.classList.toggle('menu-open', open);
   menuToggle.setAttribute('aria-expanded', open);
-  menuToggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-  menuToggle.textContent = open ? '×' : '☰';
+  menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+};
+menuToggle.addEventListener('click', () => setMenu(!nav.classList.contains('menu-open')));
+document.querySelectorAll('nav .menu a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && nav.classList.contains('menu-open')) {
+    setMenu(false);
+    menuToggle.focus();
+  }
 });
-
-document.querySelectorAll('nav .menu a').forEach((link) => {
-  link.addEventListener('click', () => {
-    nav.classList.remove('menu-open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    menuToggle.setAttribute('aria-label', 'Open navigation');
-    menuToggle.textContent = '☰';
-  });
+document.addEventListener('click', (event) => {
+  if (nav.classList.contains('menu-open') && !nav.contains(event.target)) setMenu(false);
 });
+matchMedia('(min-width: 961px)').addEventListener('change', (event) => { if (event.matches) setMenu(false); });
 
 document.querySelectorAll('.job-toggle').forEach((button) => {
   button.addEventListener('click', () => {
@@ -64,13 +67,18 @@ document.querySelectorAll('.filter').forEach((button) => {
   });
 });
 
-const sections = document.querySelectorAll('main section');
-const navLinks = document.querySelectorAll('nav .menu a');
+// Highlight the nav link for the section in view; the hero has no link, so reaching it clears the highlight
+const sections = document.querySelectorAll('.hero, main section');
+const navLinks = document.querySelectorAll('nav .menu a[href^="#"], .tabbar a');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
-    }
+    if (!entry.isIntersecting) return;
+    navLinks.forEach((link) => {
+      const current = link.getAttribute('href') === `#${entry.target.id}`;
+      link.classList.toggle('active', current);
+      if (current) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
   });
 }, { rootMargin: '-35% 0px -55% 0px' });
 sections.forEach((section) => observer.observe(section));

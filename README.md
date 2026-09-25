@@ -59,7 +59,11 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 
 In page order:
 
-1. **Nav**: the SMP monogram, the section links and the theme toggle. The full name next to the monogram appears only after the cover scrolls out of view.
+1. **Nav**: the SMP monogram, section links (Experience, Skills, Projects, Recommendations, About), a Résumé button and the sun/moon theme switch.
+   - **Name:** the full name next to the monogram appears only after the cover scrolls out of view. It's hidden between 961px and 1080px, where there isn't room for it.
+   - **701px to 960px (tablets):** the links collapse behind a menu button. The theme switch stays in the bar.
+   - **700px and below (phones):** a bottom navigation bar (`.tabbar`, Material 3 style) replaces the top menu, with Work, Skills, Projects, Reviews and About one thumb-tap away. The top bar keeps just the monogram and the theme switch.
+   - **Keyboard:** a "Skip to content" link appears when a keyboard user presses Tab on arrival.
 2. **Cover**: `cover.html` in an iframe. It's scaled to fit the window by a `ResizeObserver` in `main.js`.
 3. **Hero**: eyebrow tag, headline, intro paragraph, location line, call-to-action buttons and three highlight tiles.
 4. **Experience** (`#experience`): one `.job` block per role.
@@ -114,7 +118,7 @@ In page order:
 **Change the headline.** Edit the `<h1>` in the hero. Wrap the words you want highlighted in amber in `<span class="name">…</span>`.
 
 **Update the résumé.**
-1. Replace `Sougandh_MP_Resume_Sydney.pdf`. If you rename it, update the four references in `index.html`.
+1. Replace `Sougandh_MP_Resume_Sydney.pdf`. If you rename it, update the five references in `index.html`.
 2. Re-export `resume-1.png` and `resume-2.png` from the new PDF, one image per page (the current ones are 1224×1584).
 
 **Update page titles and link previews.** The `<title>`, `description`, `og:*` and `twitter:*` tags are at the top of `index.html`.
@@ -157,7 +161,8 @@ If you change a font, update both the Google Fonts `<link>` and the token. `cove
 
 ### Responsive layout and motion
 
-- **Breakpoint:** most mobile rules sit in one `@media (max-width: 700px)` block.
+- **Breakpoints:** the nav collapses to a menu at `max-width: 960px`. At `max-width: 700px` the phone bottom bar takes over, and the rule that hides the top menu is last in the file so it wins. Most other phone rules sit in one `@media (max-width: 700px)` block.
+- **Touch screens:** hover effects in the nav only apply on devices with a real pointer (`@media (hover: hover)`), so a tap doesn't leave a button looking stuck.
 - **Floating icons:** they get smaller and fainter below 1300px, and half of them are hidden below 700px.
 - **Reduced motion:** a `prefers-reduced-motion` block turns off every animation for visitors who ask for less motion.
 
@@ -171,11 +176,11 @@ If you change a font, update both the Google Fonts `<link>` and the token. `cove
 |---|---|
 | Cover scaling | A `ResizeObserver` scales the 1500×500 cover iframe to fill the banner without cropping |
 | Nav name | An `IntersectionObserver` on the cover toggles `nav.hide-brand`. The name shows once less than 35% of the cover is visible |
-| Theme toggle | Switches `data-theme` on `<html>` and remembers the choice in `localStorage` |
-| Mobile menu | The ☰ button opens and closes the nav links and updates `aria-expanded` |
+| Theme switch | Switches `data-theme` on `<html>` and remembers the choice in `localStorage`. The green knob under the active sun or moon icon moves in CSS |
+| Mobile menu | `setMenu()` opens and closes the menu at 960px and below, and keeps `aria-expanded` and the button label in sync. It closes on a link tap, Escape (focus returns to the button), a tap outside the nav, or when the window widens past the breakpoint |
 | Job "Show more" | Toggles `.expanded` on a `.job` to reveal its `li.more` bullets |
 | Project filters | Hides cards whose `data-category` doesn't include the selected filter |
-| Active nav link | Highlights the nav link for the section currently in view |
+| Active nav link | Highlights the section in view in both the top menu and the phone bottom bar, and sets `aria-current`. Scrolling back to the hero clears it |
 | Scroll reveal | Fades in elements with `data-reveal` as they enter the screen |
 | Résumé viewer | Opens a dialog with the browser's PDF viewer, or with `resume-1/2.png` on phones and browsers without one |
 | Footer year | Fills in the current year |
@@ -241,6 +246,8 @@ After pushing a new card, paste https://sougandh.dev into [LinkedIn Post Inspect
 
 - **Decorative elements:** the cover iframe and floating logos are `aria-hidden` and can't receive keyboard focus.
 - **Monogram link:** it has `aria-label="Sougandh Manikkoth Paremmal, back to top"`.
-- **Mobile menu button:** it reports its state with `aria-expanded`.
+- **Nav:** the top bar has `aria-label="Main"` and the phone bottom bar has `aria-label="Sections"`. The current section's link gets `aria-current="location"`.
+- **Mobile menu button:** it reports its state with `aria-expanded` and `aria-controls`. Escape closes the menu.
+- **Skip link:** "Skip to content" appears on the first Tab press.
 - **Reduced motion:** animations stop for visitors who've asked for less motion.
 - **Contrast:** check it in both themes when changing a colour token.
