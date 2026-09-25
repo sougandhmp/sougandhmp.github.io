@@ -461,8 +461,11 @@ footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line);
 @keyframes hero-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 @media (max-width: 700px) {
   .stat:last-child:nth-child(odd) { grid-column: 1 / -1; }
-  nav { top: 8px; width: calc(100% - 20px); }
-  nav .in { padding: 7px 8px 7px 12px; }
+  nav { position: sticky; top: 8px; z-index: 30; width: calc(100% - 20px); }
+  nav .in { flex-wrap: nowrap; min-height: 56px; padding: 4px 8px 4px 12px; }
+  nav .brand { flex: 1 1 auto; min-width: 0; }
+  nav .brand-name { max-width: min(42vw, 220px); }
+  .nav-actions { margin-left: auto; }
   main { width: calc(100% - 32px); padding-top: 72px; }
   .cover { margin-top: -72px; }
   .hero { margin-top: 12px; }
