@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sougandh MP · Cover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0D1411;font-family:'Bricolage Grotesque',Georgia,serif;color:#F2EEE3}
+a{color:#3DDC84}a:hover{color:#8BF0B8}
+.dots{background-image:radial-gradient(rgba(61,220,132,.16) 1.2px,transparent 1.4px);background-size:22px 22px}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes floatY2{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(10px) rotate(-4deg)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spinRev{to{transform:rotate(-360deg)}}
+@keyframes bob{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2.5deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes wave{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(-55deg)}}
+@keyframes type{from{max-width:0}to{max-width:40ch}}
+@keyframes caret{50%{opacity:0}}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+@keyframes glow{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes pop{0%,70%{transform:scale(.6);opacity:0}80%{transform:scale(1.06);opacity:1}88%,100%{transform:scale(1);opacity:1}}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(220%)}}
+.float{animation:floatY 5s ease-in-out infinite}
+.float-slow{animation:floatY 7s ease-in-out infinite}
+.phone{animation:floatY2 6s ease-in-out infinite}
+.ring{animation:spin 40s linear infinite}
+.ring-rev{animation:spinRev 28s linear infinite}
+.gear{animation:spin 8s linear infinite;transform-origin:center}
+.head{animation:bob 4s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+.eye{animation:blink 5s infinite;transform-box:fill-box;transform-origin:center}
+.arm{animation:wave 1.4s ease-in-out infinite;transform-box:fill-box;transform-origin:0% 50%}
+.line{display:block;overflow:hidden;white-space:nowrap;max-width:0;animation:type 1.2s steps(24) forwards}
+.l2{animation-delay:1.3s}.l3{animation-delay:2.6s}.l4{animation-delay:3.9s}
+.caret{animation:caret 1s steps(1) infinite}
+.star{animation:twinkle 3s ease-in-out infinite}
+.s2{animation-delay:.8s}.s3{animation-delay:1.6s}.s4{animation-delay:2.2s}
+.tip{animation:glow 1.6s ease-in-out infinite}
+.chip{animation:pop 5.5s ease-out 1 forwards}
+.shine{animation:shimmer 2.4s ease-in-out infinite}
+.still *{animation:none !important}
+html,body{overflow:hidden}
+.still .line{max-width:40ch}
+@media (prefers-reduced-motion: reduce){*{animation:none !important}.line{max-width:40ch}.chip{opacity:1 !important}}
+</style>
+</head>
+<body>
+<div class="dots" style="width: 1500px; height: 500px; position: relative; overflow: hidden; background-color: #0D1411; box-sizing: border-box">
+
+<!-- stars -->
+<div class="star" style="position: absolute; left: 700px; top: 40px; width: 8px; height: 8px; border-radius: 50%; background: #3DDC84"></div>
+<div class="star s2" style="position: absolute; left: 1100px; top: 250px; width: 6px; height: 6px; border-radius: 50%; background: #F2EEE3"></div>
+<div class="star s3" style="position: absolute; left: 600px; top: 440px; width: 7px; height: 7px; border-radius: 50%; background: #3DDC84"></div>
+<div class="star s4" style="position: absolute; left: 1440px; top: 30px; width: 6px; height: 6px; border-radius: 50%; background: #F2EEE3"></div>
+<div class="star s2" style="position: absolute; left: 60px; top: 460px; width: 6px; height: 6px; border-radius: 50%; background: #3DDC84"></div>
+
+<!-- rings behind caricature -->
+<svg class="ring" width="420" height="420" viewBox="0 0 420 420" style="position: absolute; left: 750px; top: 20px" aria-hidden="true">
+<circle cx="210" cy="210" r="200" fill="none" stroke="#3DDC84" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 14"></circle>
+<circle cx="210" cy="10" r="7" fill="#3DDC84"></circle>
+</svg>
+<svg class="ring-rev" width="340" height="340" viewBox="0 0 340 340" style="position: absolute; left: 790px; top: 60px" aria-hidden="true">
+<circle cx="170" cy="170" r="160" fill="#16231C" stroke="#3DDC84" stroke-opacity=".5" stroke-width="1.5"></circle>
+<circle cx="330" cy="170" r="5" fill="#F2EEE3"></circle>
+</svg>
+
+<!-- left text block -->
+<div style="position: absolute; left: 90px; top: 92px; width: 600px; display: flex; flex-direction: column; gap: 14px">
+<div class="mono" style="font-size: 15px; letter-spacing: 0.12em; color: #3DDC84">&lt;hello_world /&gt; I'M</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<h1 style="margin: 0; font-size: 104px; line-height: 0.95; font-weight: 800; letter-spacing: -0.03em; color: #F2EEE3">Sougandh</h1>
+<div style="font-size: 38px; font-weight: 500; letter-spacing: -0.01em; color: #C9D3CC">Manikkoth Paremmal</div>
+</div>
+<div style="display: flex; align-items: center; gap: 14px; margin-top: 8px">
+<div style="width: 44px; height: 4px; border-radius: 2px; background: #3DDC84"></div>
+<div style="font-size: 28px; font-weight: 800; color: #3DDC84">Android Developer</div>
+</div>
+<div class="mono" style="display: flex; gap: 10px; margin-top: 10px; font-size: 14px">
+<span style="padding: 7px 14px; border: 1px solid #2E4A3B; border-radius: 999px; color: #DDE6E0">Kotlin</span>
+<span style="padding: 7px 14px; border: 1px solid #2E4A3B; border-radius: 999px; color: #DDE6E0">Jetpack Compose</span>
+<span style="padding: 7px 14px; border: 1px solid #2E4A3B; border-radius: 999px; color: #DDE6E0">Clean Architecture</span>
+</div>
+</div>
+
+<!-- floating phone -->
+<div class="phone" style="position: absolute; left: 668px; top: 250px; width: 78px; height: 150px; box-sizing: border-box; border: 3px solid #F2EEE3; border-radius: 16px; padding: 14px 8px 10px; display: flex; flex-direction: column; gap: 7px; background: #111B16; overflow: hidden">
+<div style="position: absolute; left: 30px; top: 5px; width: 12px; height: 4px; border-radius: 2px; background: #F2EEE3"></div>
+<div style="height: 22px; border-radius: 6px; background: #3DDC84"></div>
+<div style="height: 8px; width: 80%; border-radius: 4px; background: #3A5446"></div>
+<div style="height: 8px; width: 60%; border-radius: 4px; background: #3A5446"></div>
+<div style="height: 30px; border-radius: 6px; background: #22362B; position: relative; overflow: hidden">
+<div class="shine" style="position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: rgba(242,238,227,.18)"></div>
+</div>
+<div style="height: 8px; width: 70%; border-radius: 4px; background: #3A5446"></div>
+</div>
+
+<!-- caricature -->
+<svg width="420" height="500" viewBox="0 0 400 480" style="position: absolute; left: 750px; top: 4px" role="img" aria-label="Cartoon caricature of Sougandh smiling in a black hoodie">
+<!-- hoodie -->
+<path d="M40 480 C52 400 100 356 160 346 L240 346 C300 356 348 400 360 480 Z" fill="#1C1F22"></path>
+<path d="M146 350 L254 350 L270 480 L130 480 Z" fill="#E6E9EE"></path>
+<path d="M146 350 C120 380 118 440 124 480" fill="none" stroke="#2C3136" stroke-width="10"></path>
+<path d="M254 350 C280 380 282 440 276 480" fill="none" stroke="#2C3136" stroke-width="10"></path>
+<!-- neck -->
+<path d="M172 292 L228 292 L232 352 C214 366 186 366 168 352 Z" fill="#7F5133"></path>
+<path d="M168 352 C186 366 214 366 232 352 L236 356 C214 374 186 374 164 356 Z" fill="#D4D8DE"></path>
+<!-- lanyard + badge -->
+<path d="M170 356 L196 440 L206 440 L182 356 Z" fill="#2F3FC0"></path>
+<path d="M230 356 L204 440 L194 440 L218 356 Z" fill="#2F3FC0"></path>
+<rect x="172" y="436" width="56" height="44" rx="4" fill="#F7F7F9"></rect>
+<rect x="172" y="436" width="56" height="10" rx="2" fill="#3DDC84"></rect>
+<text x="200" y="468" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="13" font-weight="600" fill="#1C1F22">&lt;/&gt;</text>
+<!-- head group -->
+<g class="head">
+<ellipse cx="86" cy="196" rx="24" ry="34" fill="#8A5838"></ellipse>
+<ellipse cx="90" cy="198" rx="12" ry="20" fill="#6E4329"></ellipse>
+<ellipse cx="314" cy="196" rx="24" ry="34" fill="#8A5838"></ellipse>
+<ellipse cx="310" cy="198" rx="12" ry="20" fill="#6E4329"></ellipse>
+<path d="M200 58 C272 58 310 110 310 186 C310 256 268 316 200 320 C132 316 90 256 90 186 C90 110 128 58 200 58 Z" fill="#9A6441"></path>
+<path d="M112 250 C130 296 162 316 200 320 C168 306 136 284 112 250 Z" fill="#7F5133"></path>
+<!-- hair -->
+<path d="M88 176 C80 92 132 40 204 40 C276 40 324 88 312 178 C304 146 290 122 266 112 C232 100 170 100 136 112 C112 122 96 146 88 176 Z" fill="#17120F"></path>
+<circle cx="140" cy="62" r="18" fill="#17120F"></circle>
+<circle cx="176" cy="44" r="20" fill="#17120F"></circle>
+<circle cx="216" cy="40" r="20" fill="#17120F"></circle>
+<circle cx="256" cy="52" r="20" fill="#17120F"></circle>
+<circle cx="286" cy="76" r="16" fill="#17120F"></circle>
+<!-- brows -->
+<path d="M132 146 C146 134 168 134 182 144" fill="none" stroke="#1E1612" stroke-width="9" stroke-linecap="round"></path>
+<path d="M218 144 C232 134 254 134 268 146" fill="none" stroke="#1E1612" stroke-width="9" stroke-linecap="round"></path>
+<!-- eyes -->
+<g class="eye">
+<ellipse cx="158" cy="172" rx="18" ry="11" fill="#FBF7EF"></ellipse>
+<circle cx="160" cy="171" r="8" fill="#2A1A12"></circle>
+<circle cx="163" cy="168" r="2.5" fill="#FFFFFF"></circle>
+</g>
+<g class="eye">
+<ellipse cx="242" cy="172" rx="18" ry="11" fill="#FBF7EF"></ellipse>
+<circle cx="240" cy="171" r="8" fill="#2A1A12"></circle>
+<circle cx="243" cy="168" r="2.5" fill="#FFFFFF"></circle>
+</g>
+<path d="M136 178 Q158 171 180 178 L180 188 L136 188 Z" fill="#9A6441"></path>
+<path d="M220 178 Q242 171 264 178 L264 188 L220 188 Z" fill="#9A6441"></path>
+<path d="M140 180 Q158 174 176 180" fill="none" stroke="#6E4329" stroke-width="2.5" stroke-linecap="round"></path>
+<path d="M224 180 Q242 174 260 180" fill="none" stroke="#6E4329" stroke-width="2.5" stroke-linecap="round"></path>
+<!-- nose -->
+<path d="M195 178 C193 204 176 220 182 232 C188 242 212 242 218 232 C224 220 207 204 205 178 Z" fill="#8A5838"></path>
+<ellipse cx="190" cy="232" rx="5" ry="3" fill="#4A2A1A"></ellipse>
+<ellipse cx="210" cy="232" rx="5" ry="3" fill="#4A2A1A"></ellipse>
+<!-- cheeks -->
+<path d="M126 232 C134 250 146 258 152 262" fill="none" stroke="#7F5133" stroke-width="3" stroke-linecap="round"></path>
+<path d="M274 232 C266 250 254 258 248 262" fill="none" stroke="#7F5133" stroke-width="3" stroke-linecap="round"></path>
+<!-- mouth -->
+<path d="M146 258 C160 312 240 312 254 258 C232 268 168 268 146 258 Z" fill="#5A1F1A"></path>
+<path d="M152 261 C176 270 224 270 248 261 C244 280 156 280 152 261 Z" fill="#FFFDF8"></path>
+<path d="M172 294 C190 302 210 302 228 294 C214 292 186 292 172 294 Z" fill="#C55A55"></path>
+<!-- moustache -->
+<path d="M154 254 C170 240 190 242 200 248 C210 242 230 240 246 254 C230 250 212 252 200 255 C188 252 170 250 154 254 Z" fill="#17120F"></path>
+<!-- chin -->
+<path d="M186 314 Q200 320 214 314" fill="none" stroke="#7F5133" stroke-width="2.5" stroke-linecap="round"></path>
+</g>
+</svg>
+
+<!-- code card -->
+<div class="float mono" style="position: absolute; left: 1160px; top: 58px; width: 300px; box-sizing: border-box; border: 1px solid #2E4A3B; border-radius: 14px; background: #121E18; font-size: 14px; line-height: 1.7; overflow: hidden">
+<div style="display: flex; gap: 6px; align-items: center; padding: 10px 14px; border-bottom: 1px solid #22362B">
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #E0735F"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #E8B85C"></span>
+<span style="width: 10px; height: 10px; border-radius: 50%; background: #3DDC84"></span>
+<span style="margin-left: 8px; font-size: 12px; color: #8FA396">Greeting.kt</span>
+</div>
+<div style="padding: 12px 16px 14px; color: #F2EEE3">
+<span class="line" style="color: #3DDC84">@Composable</span>
+<span class="line l2"><span style="color: #8FB8FF">fun</span> Greeting() {</span>
+<span class="line l3">  Text(<span style="color: #F5C97A">"Hello, Android!"</span>)</span>
+<span class="line l4">}<span class="caret" style="color: #3DDC84">▍</span></span>
+</div>
+</div>
+
+<!-- build chip -->
+<div class="chip mono" style="position: absolute; left: 1170px; top: 262px; display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: #1A2B22; border: 1px solid #3DDC84; font-size: 13px; font-weight: 600; color: #3DDC84; opacity: 0">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
+BUILD SUCCESSFUL
+</div>
+
+<!-- gear -->
+<svg class="gear" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#3A5446" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 1090px; top: 420px" aria-hidden="true">
+<circle cx="12" cy="12" r="3"></circle>
+<path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path>
+</svg>
+
+<!-- robot buddy -->
+<svg class="float-slow" width="130" height="160" viewBox="0 0 130 160" style="position: absolute; left: 1330px; top: 310px" aria-hidden="true">
+<line x1="60" y1="30" x2="60" y2="8" stroke="#F2EEE3" stroke-width="3" stroke-linecap="round"></line>
+<circle class="tip" cx="60" cy="7" r="6" fill="#3DDC84"></circle>
+<rect x="22" y="30" width="76" height="56" rx="16" fill="#3DDC84"></rect>
+<rect x="32" y="40" width="56" height="36" rx="10" fill="#0D1411"></rect>
+<g class="eye"><rect x="44" y="50" width="8" height="12" rx="4" fill="#3DDC84"></rect></g>
+<g class="eye"><rect x="68" y="50" width="8" height="12" rx="4" fill="#3DDC84"></rect></g>
+<rect x="30" y="92" width="60" height="44" rx="12" fill="#3DDC84"></rect>
+<rect x="48" y="104" width="24" height="6" rx="3" fill="#0D1411"></rect>
+<rect x="8" y="98" width="20" height="10" rx="5" fill="#3DDC84"></rect>
+<rect class="arm" x="92" y="98" width="28" height="10" rx="5" fill="#3DDC84"></rect>
+<rect x="40" y="138" width="12" height="16" rx="5" fill="#3DDC84"></rect>
+<rect x="68" y="138" width="12" height="16" rx="5" fill="#3DDC84"></rect>
+</svg>
+
+<!-- braces -->
+<div class="mono float" style="position: absolute; left: 1250px; top: 400px; font-size: 40px; font-weight: 600; color: #2E4A3B">{ }</div>
+
+</div>
+</body>
+</html>
