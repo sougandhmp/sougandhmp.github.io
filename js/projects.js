@@ -319,6 +319,15 @@ const PROJECTS = {
         'Koin for dependency injection, with dependency providers that expose the shared use cases to Swift.',
         'Localised strings on both platforms (strings.xml and Localizable.strings).',
       ]],
+      ['Engineering details', [
+        'Offline-first caching with two refresh strategies. The calendar waits for a network refresh (capped at 5 seconds), then falls back to cached rows. Standings and trending threads return cached rows straight away and refresh in the background on a long-lived SupervisorJob scope, so one failed sync never cancels the others. With an empty cache, the app waits for the first sync.',
+        'Secure sessions. The auth token is encrypted at rest with EncryptedSharedPreferences (AES-256-GCM values, AES-256-SIV keys) on Android. On iOS it’s kept in the Keychain as “after first unlock, this device only”. The signed-in user is exposed as a StateFlow and restored at launch.',
+        'Safe network logging: Ktor logs only the method, URL, status and timing, and redacts the Authorization header, so passwords, one-time codes and bearer tokens never reach the logs.',
+        'Typed results at the auth boundary. Login, sign-up, one-time-code verification and password reset return AuthResult, EmailVerificationResult or PasswordResetResult instead of throwing.',
+        'Swift interop without Koin in Swift. Dependency providers hand use cases and repositories to the SwiftUI view models, which call the shared suspend functions with async/await.',
+        'Testable threading: repositories take an injected CoroutineDispatcher (the platform IO dispatcher by default), and dispatchers and logging are expect/actual.',
+        'Compose performance: a stability configuration marks the shared domain models as stable, so screens skip needless recompositions. State is collected with collectAsStateWithLifecycle, and one-off effects go through a Channel.',
+      ]],
       ['Testing & CI', [
         'Unit tests for every use case, the DTO mappers and the user session, using fake repositories, so no network or device is needed. They run on the JVM and on the iOS simulator.',
         'Kover coverage reports focused on the domain logic.',
