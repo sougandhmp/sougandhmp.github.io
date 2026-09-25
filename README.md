@@ -97,7 +97,7 @@ In page order:
 5. **Skills** (`#skills`): three rows, deliberately short so the Android signal isn't diluted: **Core** (`.skillrow.core`, highlighted green), **Engineering** and **Additional**. Add a skill only if you'd want a recruiter to ask about it.
 6. **Projects** (`#projects`): project cards with Android, Jetpack Compose and Flutter filters. Clicking anywhere on a card opens that project's own page, `project.html?id=…` (see **Add or edit project details** under [Common edits](#common-edits)).
 7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word. Main-page cards show a green arrow and a compact excerpt; selecting a card opens the full recommendation in a dialog with inline previous/next navigation arrows. The full-screen dialog also links to all recommendations on LinkedIn.
-8. **About & contact** (`#contact`): photo, short bio, education, languages and contact buttons, followed by the **Send me a message** form (`#message`). The hero's **Get in touch** button links to the form.
+8. **About & contact** (`#contact`): photo, a status line with the live time in Sydney, short bio, education, languages and contact buttons (the email button has a **Copy** button beside it), followed by the **Send me a message** form (`#message`). The form has optional topic chips that change the message prompt and go into the email subject, and a character counter. Both cards share one two-column grid (`--contact-col`), so the bio and the form line up. The logic is in `js/contact.js`. The hero's **Get in touch** button links to the form.
 9. **Résumé dialog**: opened by any link with `data-resume`.
 10. **Footer**: the year is filled in by JavaScript.
 
@@ -134,7 +134,7 @@ In page order:
 - **Whole card is a link:** the title link (`.card-link`) is stretched over the card, so clicking anywhere on it opens the project page. Other links inside the card, like GitHub, still open their own destinations.
 - **Tech stack:** each `<li>` in `.stack` shows as one amber chip. Cards show only the **first three** technologies from the project's `stack` in `js/projects.js`, plus a dashed `<li class="more">+N</li>` chip for the rest. The full list is on the project page. When you change a stack, update the card's three chips and the count.
 - **GitHub and Google Play links:** use round icon buttons (`<a class="icon-link" … aria-label="My App on GitHub" title="GitHub">` with the logo SVG). Copy an existing one from `index.html`. On project pages, links to github.com and play.google.com become icon buttons automatically. Other links stay as text buttons.
-- **Featured project:** add `featured` to the card's class (`class="card featured"`) to make it span two columns on screens 700px and wider, as MEGA Android does. The desktop grid has three columns.
+- **Card size:** every card is the same width and a fixed height (`--card-h` on `.grid`, 405px). When the text doesn't fit, `fitCards()` in `js/main.js` cuts the description to the lines that fit and ends it with "…", and drops highlight bullets that don't fit. The full text is on the project page. A card only grows taller if its title, facts, chips and links alone don't fit. The desktop grid has three columns.
 
 - **Several links:** wrap them in `<div class="links">…</div>`, as on the MEGA Android card.
 - **No public link:** use `<span class="note">Client work, not public</span>` instead.

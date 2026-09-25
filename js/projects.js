@@ -3,6 +3,47 @@
 // List the most important technologies first in each stack: the project cards on the home page show the first three.
 // Facts come from the résumé, details Sougandh supplied and, for FlagMaster, the GitHub README; keep them accurate.
 const PROJECTS = {
+  'banking-payments': {
+    title: 'NextGen Retail Banking App',
+    kicker: 'Professional work · Synechron',
+    award: 'Top Engineer of the Month · Feb 2026',
+    summary: 'A next-generation retail banking Android app for a leading UAE retail bank. I was a core contributor, owning major functionality in the Payments module.',
+    meta: [
+      ['Role', 'Senior Software Engineer / Technology Lead'],
+      ['Company', 'Synechron'],
+      ['When', 'Oct 2025 – Apr 2026'],
+      ['Where', 'Bengaluru, India'],
+      ['Team', 'Led a 3–5 person Android payments pod'],
+      ['Architecture', 'Clean Architecture · MVI'],
+    ],
+    sections: [
+      ['What I did', [
+        'Designed and delivered payment workflows for fund transfers, bill payments and beneficiary management, with a focus on reliability, security and maintainability.',
+        'Contributed to technical design, implementation, defect resolution and release readiness across the payments workstream.',
+        'Increased automated unit-test coverage across payment workflows, reducing regression risk and improving release confidence.',
+        'Built automation scripts that streamlined testing and cut manual QA effort across release cycles.',
+        'Worked with developers, QA, product and business teams throughout, including business demos and stakeholder feedback.',
+        'Used GitHub Copilot and Claude Code for development, code reviews and test generation.',
+      ]],
+      ['Security', [
+        'OTP and step-up authentication before payments are confirmed.',
+        'OAuth2 and JWT token-based sessions.',
+        'Certificate pinning on the payment APIs.',
+        'Code obfuscation and app-integrity checks with DexGuard, R8 and the Play Integrity API.',
+      ]],
+      ['Testing & automation', [
+        'Unit tests with JUnit, MockK and Turbine across payment workflows.',
+        'Appium UI automation for payment journeys.',
+        'Scripts that set up test data, such as beneficiaries, so QA could test payment flows quickly.',
+      ]],
+      ['Recognition', [
+        'Named Top Engineer of the Month (February 2026) for technical contribution and delivery on the payments platform.',
+      ]],
+    ],
+    stack: ['Kotlin', 'Jetpack Compose', 'Clean Architecture', 'MVI', 'Hilt', 'Coroutines & Flow', 'Retrofit', 'OkHttp', 'JUnit', 'MockK', 'Turbine', 'Appium', 'DexGuard', 'Play Integrity API'],
+    note: 'Client work, not public',
+  },
+
   'mega-android': {
     title: 'MEGA Android',
     kicker: 'Professional work · MEGA',
@@ -95,47 +136,6 @@ const PROJECTS = {
     links: [
       ['About MEGA Pass', 'https://mega.io/pass'],
     ],
-  },
-
-  'banking-payments': {
-    title: 'NextGen Retail Banking App',
-    kicker: 'Professional work · Synechron',
-    award: 'Top Engineer of the Month · Feb 2026',
-    summary: 'A next-generation retail banking Android app for a leading UAE retail bank. I was a core contributor, owning major functionality in the Payments module.',
-    meta: [
-      ['Role', 'Senior Software Engineer / Technology Lead'],
-      ['Company', 'Synechron'],
-      ['When', 'Oct 2025 – Apr 2026'],
-      ['Where', 'Bengaluru, India'],
-      ['Team', 'Led a 3–5 person Android payments pod'],
-      ['Architecture', 'Clean Architecture · MVI'],
-    ],
-    sections: [
-      ['What I did', [
-        'Designed and delivered payment workflows for fund transfers, bill payments and beneficiary management, with a focus on reliability, security and maintainability.',
-        'Contributed to technical design, implementation, defect resolution and release readiness across the payments workstream.',
-        'Increased automated unit-test coverage across payment workflows, reducing regression risk and improving release confidence.',
-        'Built automation scripts that streamlined testing and cut manual QA effort across release cycles.',
-        'Worked with developers, QA, product and business teams throughout, including business demos and stakeholder feedback.',
-        'Used GitHub Copilot and Claude Code for development, code reviews and test generation.',
-      ]],
-      ['Security', [
-        'OTP and step-up authentication before payments are confirmed.',
-        'OAuth2 and JWT token-based sessions.',
-        'Certificate pinning on the payment APIs.',
-        'Code obfuscation and app-integrity checks with DexGuard, R8 and the Play Integrity API.',
-      ]],
-      ['Testing & automation', [
-        'Unit tests with JUnit, MockK and Turbine across payment workflows.',
-        'Appium UI automation for payment journeys.',
-        'Scripts that set up test data, such as beneficiaries, so QA could test payment flows quickly.',
-      ]],
-      ['Recognition', [
-        'Named Top Engineer of the Month (February 2026) for technical contribution and delivery on the payments platform.',
-      ]],
-    ],
-    stack: ['Kotlin', 'Jetpack Compose', 'Clean Architecture', 'MVI', 'Hilt', 'Coroutines & Flow', 'Retrofit', 'OkHttp', 'JUnit', 'MockK', 'Turbine', 'Appium', 'DexGuard', 'Play Integrity API'],
-    note: 'Client work, not public',
   },
 
   fieldcatcher: {

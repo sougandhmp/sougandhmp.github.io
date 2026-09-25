@@ -97,6 +97,34 @@ if (recommendationDialog) {
   recommendationDialog.addEventListener('close', () => lastRecommendation?.focus());
 }
 
+// Project cards share one height: clamp each description to the lines that fit (the browser adds "…"),
+// and drop highlight bullets that don't fit, ending the list with "…"
+const fitCards = () => {
+  document.querySelectorAll('#projects .card > p:not(.project-card-summary)').forEach((p) => {
+    p.style.webkitLineClamp = '';
+    p.style.flex = '';
+    const line = parseFloat(getComputedStyle(p).lineHeight) || 24;
+    if (p.scrollHeight > p.clientHeight + 1) {
+      p.style.webkitLineClamp = Math.max(1, Math.floor(p.clientHeight / line));
+      p.style.flex = 'none'; // shrink the box to the clamped lines so no partial line shows below the "…"
+    }
+  });
+  document.querySelectorAll('#projects .project-card-highlights').forEach((list) => {
+    const items = [...list.children];
+    items.forEach((li) => { li.hidden = false; });
+    list.classList.remove('clipped');
+    list.hidden = false;
+    while (list.scrollHeight > list.clientHeight + 1 && items.some((li) => !li.hidden)) {
+      items.filter((li) => !li.hidden).pop().hidden = true;
+      list.classList.add('clipped');
+    }
+    list.hidden = items.every((li) => li.hidden); // no room for any bullet: drop the list rather than show a lone "…"
+  });
+};
+fitCards();
+addEventListener('resize', fitCards);
+document.fonts?.ready.then(fitCards);
+
 // Project filters: a card shows when its space-separated data-category contains the chosen tag
 document.querySelectorAll('.filter').forEach((button) => {
   button.addEventListener('click', () => {
@@ -108,6 +136,7 @@ document.querySelectorAll('.filter').forEach((button) => {
     document.querySelectorAll('.card').forEach((card) => {
       card.hidden = filter !== 'all' && !card.dataset.category.split(' ').includes(filter);
     });
+    fitCards();
   });
 });
 
