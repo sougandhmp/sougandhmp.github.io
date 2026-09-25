@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <!-- Security: only this site's own files may load; the contact form may also post to Web3Forms. See "Security" in README.md. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <!-- One page for every project: js/project-page.js fills it from js/projects.js using ?id=… -->
   <title>Project · Sougandh Manikkoth Paremmal</title>
@@ -10,9 +13,9 @@
   <link rel="icon" href="assets/icons/favicon-192.png?v=2" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png?v=2">
   <meta name="theme-color" content="#111214">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/fonts/sora-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/theme.js"></script>
 </head>
@@ -34,7 +37,6 @@
       <a class="pd-next" href="index.html#projects"><small>Next project →</small><span></span></a>
     </nav>
     <footer class="site-footer">
-      <p class="footer-cta">Like what you see? <a href="index.html#message">Let’s talk <span aria-hidden="true">→</span></a></p>
       <span>© <span id="y"></span> Sougandh Manikkoth Paremmal</span>
       <div class="footer-links">
         <a href="https://www.linkedin.com/in/sougandhmp">LinkedIn</a>

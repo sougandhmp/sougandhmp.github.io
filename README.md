@@ -69,7 +69,7 @@ Open `index.html` in a browser:
 open index.html
 ```
 
-Everything works from the file system. Fonts load from Google Fonts, so you need an internet connection to see the right typefaces.
+Everything works from the file system, offline too: the fonts are stored in the repo (`assets/fonts/`).
 
 ## Deploy
 
@@ -85,6 +85,8 @@ The custom domain comes from `CNAME` (`sougandh.dev`). Don't delete that file.
 
 Don't amend or force-push commits that are already on GitHub. Make a new commit instead, so your local branch and GitHub don't drift apart.
 
+**Who can change the site.** Only the repository owner (`sougandhmp`) has write access. Others can fork the repo or open a pull request, but only the owner can merge one. A GitHub ruleset, **Protect develop (live site)** (Settings → Rules → Rulesets), also blocks force pushes to `develop` and deleting it, so the live site's history can't be overwritten or removed by mistake. Normal pushes aren't affected. To add a collaborator later, give them the **Write** role, and consider adding a "Require a pull request before merging" rule so their changes need your approval.
+
 ---
 
 ## Project structure
@@ -97,6 +99,7 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 ├── CNAME                      Custom domain for GitHub Pages (sougandh.dev). Don't delete
 ├── README.md
 ├── css/
+│   ├── fonts.css              @font-face rules for the self-hosted fonts (see Fonts)
 │   └── styles.css             All styles. Theme colours and fonts are at the top
 ├── js/
 │   ├── theme.js               Light/dark theme (loaded in <head> on both pages)
@@ -105,9 +108,11 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 │   ├── floaters.js            Floating tech-logo tiles, as a data list
 │   ├── name-morph.js          Scroll animation: "Sougandh" flies from the cover into the nav
 │   ├── contact.js             "Send me a message" form (see Contact form)
+│   ├── cover.js               Cover banner theme (loaded by cover.html; kept out of the HTML for the security policy)
 │   ├── projects.js            Content for the project pages: one entry per project
 │   └── project-page.js        Builds project.html from js/projects.js
 ├── assets/
+│   ├── fonts/                 Self-hosted .woff2 font files (see Fonts)
 │   ├── icons/                 favicon-32.png, favicon-192.png, apple-touch-icon.png (SMP monogram)
 │   ├── images/
 │   │   ├── avatar-caricature.png              Caricature used on the cover
@@ -153,7 +158,7 @@ In page order:
 7. **What people say** (`#recommendations`): LinkedIn recommendations, quoted word for word. Main-page cards show a green arrow and a compact excerpt; selecting a card opens the full recommendation in a dialog with inline previous/next navigation arrows. The full-screen dialog also links to all recommendations on LinkedIn.
 8. **About & contact** (`#contact`): photo, a status line (open-to-roles status and the live local time, both from `js/site-config.js`), short bio, education, languages and contact buttons (the email button has a **Copy** button beside it), followed by the **Send me a message** form (`#message`). The form has optional topic chips that change the message prompt and go into the email subject, and a character counter. Both cards share one two-column grid (`--contact-col`), so the bio and the form line up. The logic is in `js/contact.js`. The hero's **Get in touch** button links to the form.
 9. **Résumé dialog**: opened by any link with `data-resume`.
-10. **Footer** (`.site-footer`, the same on `index.html` and `project.html`): a "Like what you see? Let’s talk →" line (`.footer-cta`) linking to the message form (`#message` on the home page, `index.html#message` on project pages), then the copyright on the left, with the year filled in by JavaScript, and LinkedIn, GitHub, Email and **Back to top ↑** links on the right. On phones the links sit above the copyright. If you change a link, change it on both pages.
+10. **Footer** (`.site-footer`, the same on `index.html` and `project.html`): the copyright on the left, with the year filled in by JavaScript, and LinkedIn, GitHub, Email and **Back to top ↑** links on the right. On phones the links sit above the copyright. If you change a link, change it on both pages.
 
 ### Common edits
 
@@ -285,7 +290,7 @@ The primary button (`.btn.primary`) always uses Android green `#3ddc84`, in both
 
 ### Fonts
 
-The fonts are loaded from Google Fonts in the `<head>` of `index.html` and assigned in `:root`:
+The fonts are self-hosted: the files are in `assets/fonts/` and declared in `css/fonts.css`, which `index.html`, `project.html`, `cover.html` and the `tools/` pages load. Visitors make no requests to Google. The fonts are assigned in `:root` of `css/styles.css`:
 
 | Token | Font | Used for |
 |---|---|---|
@@ -293,7 +298,13 @@ The fonts are loaded from Google Fonts in the `<head>` of `index.html` and assig
 | `--body` | Instrument Sans | Body text |
 | `--mono` | JetBrains Mono | Section labels, tags, dates, code-style details |
 
-If you change a font, update both the Google Fonts `<link>` and the token. `cover.html` loads Sora and JetBrains Mono on its own.
+Each font is one variable file per character set (`latin`, plus `latin-ext` for accented letters), covering the weights the site uses: Sora 500–800, Instrument Sans 400–700 and JetBrains Mono 400–800. The two fonts needed first (Sora and Instrument Sans, latin) are preloaded in the `<head>` of both pages.
+
+**Change or add a font:**
+1. Get the CSS from Google Fonts with a weight range, e.g. `https://fonts.googleapis.com/css2?family=Sora:wght@500..800&display=swap`. Open it in Chrome, so you get `.woff2` links.
+2. Download the `latin` and `latin-ext` files into `assets/fonts/` (names like `sora-latin.woff2`).
+3. Copy those two `@font-face` blocks into `css/fonts.css`, pointing `src` at `../assets/fonts/…`.
+4. Update the token in `:root`, and the `preload` links in `index.html` and `project.html` if you replaced Sora or Instrument Sans.
 
 ### Responsive layout and motion
 
@@ -402,6 +413,29 @@ render 180 assets/icons/apple-touch-icon.png '&bleed=1'
 ```
 
 Browsers cache icons hard. After changing them, bump the `?v=` number on the three icon links in both `index.html` and `project.html`.
+
+## Security
+
+The site is static (no server, database or logins) and loads no third-party code. GitHub Pages enforces HTTPS.
+
+**Content-Security-Policy.** `index.html`, `project.html` and `cover.html` each start with a `<meta http-equiv="Content-Security-Policy">` tag. It lets pages load files only from this site, and lets the contact form post only to Web3Forms:
+
+| Directive | Allows | Why |
+|---|---|---|
+| `default-src 'self'` | This site only | Everything not listed below |
+| `script-src 'self'` | Script files from this site; **no inline scripts** | Blocks injected scripts. That's why the cover's script is in `js/cover.js` |
+| `style-src 'self' 'unsafe-inline'` | Stylesheets from this site, plus inline styles | `cover.html` and the floating tiles use `style=""` attributes |
+| `font-src`, `img-src`, `frame-src 'self'` | This site only | Self-hosted fonts, images, the cover and résumé iframes |
+| `connect-src 'self' https://api.web3forms.com` | Web3Forms | The contact form (`js/contact.js`) |
+| `object-src 'none'`, `base-uri 'self'`, `form-action 'self'` | Nothing extra | Blocks plugin embeds, `<base>` hijacking and forms posting elsewhere |
+
+GitHub Pages can't send HTTP headers, so the policy is set in the HTML. That means `frame-ancestors` (protection against other sites framing yours) isn't available.
+
+**If you add something external** (an analytics script, a YouTube embed, images from another site), it will be blocked until you add its origin to the matching directive on every page that uses it. For example, `script-src 'self' https://example.com`. Check the browser console for "Refused to load…" errors. Keep scripts in `.js` files: inline `<script>` blocks and `onclick="…"` attributes won't run.
+
+**Referrer policy.** `<meta name="referrer" content="strict-origin-when-cross-origin">`: links to other sites only reveal `https://sougandh.dev`, not the full page address.
+
+**Things only you can do:** verify `sougandh.dev` under GitHub Settings → Pages → Verified domains, keep two-factor authentication on for GitHub and your domain registrar, and keep your phone number out of the public résumé.
 
 ## Accessibility notes
 
