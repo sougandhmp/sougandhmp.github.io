@@ -121,7 +121,7 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 │   │   ├── og-image.png                       1200×630 link-preview card (LinkedIn, X, Slack…)
 │   │   └── projects/
 │   │       ├── flagmaster/                    App screenshots for the FlagMaster page (480px wide)
-│   │       └── racehub/                       Android and iOS screenshots for the RaceHub page (480px wide, from the RaceHub repo's docs/screenshots on develop)
+│   │       └── racehub/                       Android and iOS screenshots for the RaceHub page (480px wide, synced from the RaceHub repo's docs/screenshots on master)
 │   └── resume/
 │       ├── sougandh-manikkoth-paremmal-resume.pdf   Résumé for viewing and downloading
 │       └── resume-page-1.png, resume-page-2.png     The pages as images, for phones without a PDF viewer
