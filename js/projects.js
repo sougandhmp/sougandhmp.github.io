@@ -1,10 +1,12 @@
 // Content for the project detail view (opened from each project card).
 // The keys match data-project on the cards in index.html. Every field except title is optional.
+// platforms: any of 'android', 'kmp', 'flutter', shown as badges under the title; keep them in step with the card's data-category.
 // List the most important technologies first in each stack: the project cards on the home page show the first three.
 // Facts come from the résumé, details Sougandh supplied and, for FlagMaster, the GitHub README; keep them accurate.
 const PROJECTS = {
   'banking-payments': {
     title: 'NextGen Retail Banking App',
+    platforms: ['android'],
     kicker: 'Professional work · Synechron',
     award: 'Top Engineer of the Month · Feb 2026',
     summary: 'A next-generation retail banking Android app for a leading UAE retail bank. I was a core contributor, owning major functionality in the Payments module.',
@@ -46,6 +48,7 @@ const PROJECTS = {
 
   'mega-android': {
     title: 'MEGA Android',
+    platforms: ['android'],
     kicker: 'Professional work · MEGA',
     summary: 'MEGA’s open-source Android app for end-to-end encrypted cloud storage, part of a privacy product used by 300M+ registered users.',
     meta: [
@@ -95,6 +98,7 @@ const PROJECTS = {
 
   'mega-pass': {
     title: 'MEGA Password Manager',
+    platforms: ['android'],
     kicker: 'Professional work · MEGA',
     summary: 'MEGA’s password manager, part of the same privacy product used by 300M+ registered users. I owned two of its features from design to release and made auto-fill a third faster.',
     meta: [
@@ -140,6 +144,7 @@ const PROJECTS = {
 
   fieldcatcher: {
     title: 'FieldCatcher',
+    platforms: ['flutter'],
     kicker: 'Professional work · Tata Consultancy Services',
     summary: 'A mobile app for a digital farming portfolio. I led the team that built the native Android app, then led its move to Flutter and added on-device AI.',
     meta: [
@@ -183,6 +188,7 @@ const PROJECTS = {
 
   'postal-delivery': {
     title: 'Postal & Parcel Delivery Apps',
+    platforms: ['android'],
     kicker: 'Professional work · Tata Consultancy Services',
     summary: 'A suite of Android apps for a UK postal-service client, covering customer parcel tracking, couriers on their rounds, depot and warehouse operations, and internal staff tools.',
     meta: [
@@ -213,6 +219,7 @@ const PROJECTS = {
 
   'telematics-insurance': {
     title: 'Telematics Insurance App',
+    platforms: ['android'],
     kicker: 'Professional work · Tata Consultancy Services',
     summary: 'An Android telematics app for a leading US insurer. It collected GPS data from the phone and a connected in-car device to understand how each customer drives, feeding their insurance data.',
     meta: [
@@ -241,6 +248,7 @@ const PROJECTS = {
 
   flagmaster: {
     title: 'FlagMaster',
+    platforms: ['android'],
     kicker: 'Personal project',
     summary: 'An Android quiz game where you race the clock to identify world flags. Pick a difficulty and a number of questions, schedule a challenge or jump straight in, and climb a live leaderboard.',
     meta: [
@@ -283,6 +291,7 @@ const PROJECTS = {
 
   racehub: {
     title: 'RaceHub',
+    platforms: ['android', 'kmp'],
     kicker: 'Personal project',
     summary: 'A Formula 1 companion app for Android and iOS: the race calendar, driver and constructor standings, a circuit guide for every Grand Prix, and a community forum. Everything except the views is shared in one Kotlin Multiplatform module, including the MVI ViewModels. Jetpack Compose and SwiftUI just render them.',
     meta: [

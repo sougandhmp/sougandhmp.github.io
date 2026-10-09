@@ -36,6 +36,7 @@
   body.innerHTML = `
     <p class="pd-kicker">${esc(p.kicker || '')}</p>
     <h1 class="pd-title">${esc(p.title)}</h1>
+    ${p.platforms ? platformBadges(p.platforms) : ''}
     ${p.award ? `<span class="award">${trophy}${esc(p.award)}</span>` : ''}
     ${p.summary ? `<p class="pd-summary">${esc(p.summary)}</p>` : ''}
     ${p.meta ? `<dl class="pd-meta">${p.meta.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>` : ''}

@@ -104,6 +104,11 @@ if (recommendationDialog) {
   recommendationDialog.addEventListener('close', () => lastRecommendation?.focus());
 }
 
+// Platform badges under each project title, from the platform tags in data-category (see js/platforms.js)
+document.querySelectorAll('#projects .card').forEach((card) => {
+  card.querySelector('h3').insertAdjacentHTML('afterend', platformBadges(card.dataset.category.split(' ')));
+});
+
 // Project cards share one height: clamp each description to the lines that fit (the browser adds "…"),
 // and drop highlight bullets that don't fit, ending the list with "…"
 const fitCards = () => {

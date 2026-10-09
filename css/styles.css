@@ -278,6 +278,20 @@ h2:after { content: ""; height: 1px; background: var(--line); flex: 1; }
 .award.award-lg svg { width: 16px; height: 16px; }
 /* Core skills stand out from the rest */
 .skillrow.core .tags li { border-color: color-mix(in srgb, var(--accent) 58%, transparent); color: var(--accent-strong); background: color-mix(in srgb, var(--accent-soft) 80%, var(--surface)); }
+/* platform badges (Android, Kotlin Multiplatform, Flutter) under project titles; built by js/platforms.js */
+.platforms { --android: #3ddc84; --kmp: #a98bff; --flutter: #54c5f8;
+  display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 2px 0 14px; padding: 0; }
+[data-theme="light"] .platforms { --android: #13804a; --kmp: #6b3fe8; --flutter: #0167ad; }
+.platforms li { --c: var(--fg); display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px 3px 8px; border-radius: 999px;
+  color: var(--c); background: color-mix(in srgb, var(--c) 10%, transparent); border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+  font-family: var(--mono); font-size: .72rem; font-weight: 600; line-height: 1.5; }
+.platforms svg { width: 14px; height: 14px; flex: none; fill: currentColor; }
+.platforms .platform-android { --c: var(--android); }
+.platforms .platform-kmp { --c: var(--kmp); }
+.platforms .platform-flutter { --c: var(--flutter); }
+.project-body > .platforms { margin: 0 0 16px; }
+.project-body > .platforms li { padding: 5px 13px 5px 10px; font-size: .8rem; }
+.project-body > .platforms svg { width: 16px; height: 16px; }
 .card .links, .card > .note { margin-top: auto; }
 .card .links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
 .about, .message-card { --contact-col: 250px; display: grid; grid-template-columns: var(--contact-col) minmax(0, 1fr); gap: 26px 36px; align-items: start; text-align: left; }
