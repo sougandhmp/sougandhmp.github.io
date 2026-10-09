@@ -109,7 +109,7 @@ Don't amend or force-push commits that are already on GitHub. Make a new commit 
 │   ├── name-morph.js          Scroll animation: "Sougandh" flies from the cover into the nav
 │   ├── contact.js             "Send me a message" form (see Contact form)
 │   ├── cover.js               Cover banner theme (loaded by cover.html; kept out of the HTML for the security policy)
-│   ├── platforms.js           Platform badges (Android, KMP, Flutter) for cards and project pages
+│   ├── platforms.js           Platform badges (Android, iOS, KMP, Flutter) for cards and project pages
 │   ├── projects.js            Content for the project pages: one entry per project
 │   └── project-page.js        Builds project.html from js/projects.js
 ├── assets/
@@ -183,7 +183,7 @@ In page order:
 </div>
 ```
 
-**Add a project.** Copy a `<div class="card">` in `#projects`. `data-category` controls which filter buttons show the card. Use space-separated values from `android`, `compose` (Jetpack Compose), `kmp` (Kotlin Multiplatform) and `flutter`. To add a new filter, add a button with a matching `data-filter` next to the existing ones. The `android`, `kmp` and `flutter` values also show as platform badges under the card's title (`js/platforms.js`); the project page shows the same badges from the entry's `platforms` in `js/projects.js`.
+**Add a project.** Copy a `<div class="card">` in `#projects`. `data-category` controls which filter buttons show the card. Use space-separated values from `android`, `compose` (Jetpack Compose), `kmp` (Kotlin Multiplatform) and `flutter`. To add a new filter, add a button with a matching `data-filter` next to the existing ones. Add `ios` for apps that also ship on iOS (there's no iOS filter). The `android`, `ios`, `kmp` and `flutter` values also show as platform badges under the card's title (`js/platforms.js`); the project page shows the same badges from the entry's `platforms` in `js/projects.js`.
 
 ```html
 <div class="card" data-category="android compose">

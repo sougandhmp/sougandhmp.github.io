@@ -1,6 +1,6 @@
 // Content for the project detail view (opened from each project card).
 // The keys match data-project on the cards in index.html. Every field except title is optional.
-// platforms: any of 'android', 'kmp', 'flutter', shown as badges under the title; keep them in step with the card's data-category.
+// platforms: any of 'android', 'ios', 'kmp', 'flutter', shown as badges under the title; keep them in step with the card's data-category.
 // List the most important technologies first in each stack: the project cards on the home page show the first three.
 // Facts come from the résumé, details Sougandh supplied and, for FlagMaster, the GitHub README; keep them accurate.
 const PROJECTS = {
@@ -144,7 +144,7 @@ const PROJECTS = {
 
   fieldcatcher: {
     title: 'FieldCatcher',
-    platforms: ['flutter'],
+    platforms: ['android', 'flutter'],
     kicker: 'Professional work · Tata Consultancy Services',
     summary: 'A mobile app for a digital farming portfolio. I led the team that built the native Android app, then led its move to Flutter and added on-device AI.',
     meta: [
@@ -291,7 +291,7 @@ const PROJECTS = {
 
   racehub: {
     title: 'RaceHub',
-    platforms: ['android', 'kmp'],
+    platforms: ['android', 'ios', 'kmp'],
     kicker: 'Personal project',
     summary: 'A Formula 1 companion app for Android and iOS: the race calendar, driver and constructor standings, a circuit guide for every Grand Prix, and a community forum. Everything except the views is shared in one Kotlin Multiplatform module, including the MVI ViewModels. Jetpack Compose and SwiftUI just render them.',
     meta: [
