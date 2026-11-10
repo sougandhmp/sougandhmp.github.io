@@ -11,7 +11,7 @@ const PROJECTS = {
     award: 'Top Engineer of the Month · Feb 2026',
     summary: 'A next-generation retail banking Android app for a leading UAE retail bank. I was a core contributor, owning major functionality in the Payments module.',
     meta: [
-      ['Role', 'Senior Software Engineer / Technology Lead'],
+      ['Role', 'Technology Lead (Android)'],
       ['Company', 'Synechron'],
       ['When', 'Oct 2025 – Apr 2026'],
       ['Where', 'Bengaluru, India'],
@@ -22,10 +22,10 @@ const PROJECTS = {
       ['What I did', [
         'Designed and delivered payment workflows for fund transfers, bill payments and beneficiary management, with a focus on reliability, security and maintainability.',
         'Contributed to technical design, implementation, defect resolution and release readiness across the payments workstream.',
-        'Increased automated unit-test coverage across payment workflows, reducing regression risk and improving release confidence.',
+        'Raised unit-test coverage across payment flows to 90%, reducing regression risk and improving release confidence.',
         'Built automation scripts that streamlined testing and cut manual QA effort across release cycles.',
         'Worked with developers, QA, product and business teams throughout, including business demos and stakeholder feedback.',
-        'Used GitHub Copilot and Claude Code for development, code reviews and test generation.',
+        'Used Claude Code and GitHub Copilot for development, code reviews and test generation.',
       ]],
       ['Security', [
         'OTP and step-up authentication before payments are confirmed.',
@@ -52,10 +52,10 @@ const PROJECTS = {
     kicker: 'Professional work · MEGA',
     summary: 'MEGA’s open-source Android app for end-to-end encrypted cloud storage, part of a privacy product used by 300M+ registered users.',
     meta: [
-      ['Role', 'Senior Android Engineer'],
+      ['Role', 'Senior Android Engineer (Contract)'],
       ['Company', 'MEGA (MEGA Privacy)'],
       ['When', 'Jan 2023 – May 2025'],
-      ['Where', 'Remote'],
+      ['Where', 'Auckland, NZ (remote)'],
       ['Architecture', 'Clean Architecture · MVVM'],
     ],
     impact: [
@@ -102,10 +102,10 @@ const PROJECTS = {
     kicker: 'Professional work · MEGA',
     summary: 'MEGA’s password manager, part of the same privacy product used by 300M+ registered users. I owned two of its features from design to release and made auto-fill a third faster.',
     meta: [
-      ['Role', 'Senior Android Engineer'],
+      ['Role', 'Senior Android Engineer (Contract)'],
       ['Company', 'MEGA (MEGA Privacy)'],
       ['When', 'Jan 2023 – May 2025'],
-      ['Where', 'Remote'],
+      ['Where', 'Auckland, NZ (remote)'],
       ['Architecture', 'Clean Architecture · MVVM'],
     ],
     impact: [
@@ -148,7 +148,7 @@ const PROJECTS = {
     kicker: 'Professional work · Tata Consultancy Services',
     summary: 'A mobile app for a digital farming portfolio. I led the team that built the native Android app, then led its move to Flutter and added on-device AI.',
     meta: [
-      ['Role', 'IT Analyst, team lead'],
+      ['Role', 'IT Analyst (Android & Flutter), team lead'],
       ['Company', 'Tata Consultancy Services'],
       ['When', 'Aug 2019 – Jan 2023'],
       ['Where', 'Cologne, Germany · Kochi, India'],
@@ -164,7 +164,7 @@ const PROJECTS = {
       ['What I did', [
         'Led a team of engineers delivering the FieldCatcher Android app, coordinating development and delivery across locations.',
         'Led the migration from Android to Flutter, helped the team adopt the framework and delivered the MVP on schedule.',
-        'Integrated TensorFlow models and built custom Flutter plugins for on-device AI, and later integrated PyTorch models.',
+        'Built custom Flutter plugins that run PyTorch and TensorFlow Lite models on-device, delivering AI features without a server call, and later shipped PyTorch-based AI features.',
         'Set up GitLab and Fastlane CI/CD pipelines, speeding up releases and cutting manual deployment work.',
         'Implemented automated data sync using GraphQL.',
         'Upgraded the app to Flutter 3.0 and cut loading time by 25% through image-size optimisation.',
