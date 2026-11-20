@@ -366,4 +366,155 @@ const PROJECTS = {
       ['View on GitHub', 'https://github.com/sougandhmp/RaceHub'],
     ],
   },
+
+  animenest: {
+    title: 'AnimeNest',
+    platforms: ['android', 'ios'],
+    kicker: 'Sample project',
+    summary: 'A cross-platform anime discovery app for iOS, Android and web. It browses lists and details from the AniList GraphQL API and lets you keep your own watchlist.',
+    meta: [
+      ['Type', 'Personal sample, open source'],
+      ['Platform', 'iOS, Android and web'],
+      ['Data', 'AniList GraphQL API, no key needed'],
+      ['Framework', 'React Native (CLI) · TypeScript'],
+    ],
+    screenshots: [
+      ['assets/images/projects/animenest/home.png', 'Home feed with a trending carousel, genre chips and rows of anime'],
+      ['assets/images/projects/animenest/schedule.png', 'Airing schedule grouped by day with episode air times'],
+      ['assets/images/projects/animenest/search.png', 'Search with a genre filter'],
+      ['assets/images/projects/animenest/detail.png', 'Anime details with score, synopsis and personal notes'],
+      ['assets/images/projects/animenest/library.png', 'Watchlist with status and episode progress'],
+      ['assets/images/projects/animenest/profile.png', 'Profile with watch stats and top genres'],
+    ],
+    sections: [
+      ['Features', [
+        'Home feed with a trending carousel, genre chips and rows such as top airing, popular this season and top rated, each with a “See all” screen that pages in more titles as you scroll.',
+        'Airing schedule for the next 7 days, grouped by day, with a “next episode” countdown on each anime.',
+        'Debounced search with type filters, advanced filters (sort, status, season, year) and genre combinations.',
+        'Detail screens with Overview, Characters (Japanese voice actors, recommendations) and Related tabs, plus staff, studio, character and voice-actor pages, reviews, streaming links and an in-app trailer player.',
+        'Watchlist with Watching, Plan to Watch and Completed states, episode progress, your own score and a private note. It is stored on the device.',
+        'Profile stats: titles, episodes and estimated time watched, mean score and top genres.',
+        'Settings for title language (English, Romaji or Native) and clearing cached data.',
+      ]],
+      ['How it’s built', [
+        'React Native 0.88 in the bare (CLI) workflow with React 19 and TypeScript, using React Navigation with a native stack and bottom tabs.',
+        'Feature folders for anime, schedule, watchlist, search and settings, each with its own data hooks and components, and an @/ import alias.',
+        'MMKV stores the watchlist, settings and offline cache, react-native-svg draws the icons, and react-native-webview plays trailers.',
+      ]],
+      ['Engineering details', [
+        'Offline cache: Home, the schedule, detail pages and “See all” lists are saved on the device, shown instantly and still available without a connection, with an “Updated … ago” note.',
+        'Tablet layout: Schedule, Search and Library switch to a two-pane list and detail view, while phones keep single-pane screens.',
+        'Debounced search input, pull to refresh, and loading, error and empty states throughout.',
+        'Quality checks: ESLint with Prettier rules, a TypeScript check and Jest unit tests.',
+      ]],
+    ],
+    stack: ['React Native', 'TypeScript', 'GraphQL', 'React Navigation', 'MMKV', 'react-native-svg', 'WebView', 'Jest'],
+    links: [
+      ['View on GitHub', 'https://github.com/sougandhmp/AnimeNest'],
+    ],
+  },
+
+  'ssl-pinning': {
+    title: 'SSL Pinning & Key Rotation',
+    platforms: ['android'],
+    kicker: 'Sample project',
+    summary: 'A small Kotlin app plus a local HTTPS server for experimenting with public-key (SPKI) pinning and server key rotation. Flip the server between three keys and the app between several pin sets to see which combinations connect, which fail, and which layer rejected them.',
+    meta: [
+      ['Type', 'Personal experiment, open source'],
+      ['Platform', 'Android (API 24 and later)'],
+      ['Focus', 'Certificate pinning · key rotation'],
+      ['Layers compared', 'OkHttp CertificatePinner · Network Security Config'],
+    ],
+    screenshots: [
+      ['assets/images/projects/ssl-pinning/01-initial.png', 'The app on first launch, with a pin-set dropdown and two test buttons'],
+      ['assets/images/projects/ssl-pinning/02-pass-key-a.png', 'Experiment 1: server on key A with pins A and B, the connection passes'],
+      ['assets/images/projects/ssl-pinning/03-pass-rotated-key-b.png', 'Experiment 2: server rotated to key B with pins A and B, still passes because B was pinned ahead of time'],
+      ['assets/images/projects/ssl-pinning/04-fail-no-backup-pin.png', 'Experiment 3: server on key B with only A pinned, OkHttp rejects it and lists the server’s actual pin'],
+      ['assets/images/projects/ssl-pinning/05-fail-rogue-key-c.png', 'Experiment 5: server on rogue key C, Network Security Config rejects the CA-trusted but unpinned key'],
+    ],
+    sections: [
+      ['The problem it explores', [
+        'TLS trusts any certificate that chains to a CA in the device’s trust store. A user-installed CA, malware or a mis-issuing CA can let a man-in-the-middle present a certificate your app accepts.',
+        'Pinning adds a second check: the server’s public key must match one shipped in the app. Pinning the SPKI hash rather than the certificate survives routine certificate renewal.',
+        'The real risk is rotation. If the server moves to a key the app doesn’t know, every installed copy stops working until users update.',
+      ]],
+      ['How it’s set up', [
+        'A script generates a local test CA and three server keys, each with a valid, CA-signed certificate: A is the current key, B is the backup, and C is a rogue key that simulates a mis-issued or MITM certificate.',
+        'One generator run writes the keys and the matching pins and CA into the app, so the two sides can’t drift apart. A tiny Python HTTPS server serves whichever key you choose.',
+        'Two layers are pinned on purpose: OkHttp CertificatePinner, picked at runtime from a dropdown, and Network Security Config, fixed at build time with an expiration date. Because NSC sits underneath OkHttp, a request has to pass both.',
+      ]],
+      ['The experiments', [
+        'Normal operation: key A with pins A and B passes.',
+        'Rotation works: key B with pins A and B passes, because the backup pin shipped ahead of time.',
+        'No backup pin: key B with only A pinned fails with “Certificate pinning failure!”, so every install would be bricked.',
+        'Dropped the old pin too early: key A with only B pinned fails against servers still on A.',
+        'Rogue key: key C is blocked even though its certificate is CA-trusted, with or without OkHttp pins.',
+        'Layers stack: pinning C in OkHttp doesn’t help, because C was never in the NSC pin-set, so the stricter layer wins.',
+        'The log shows which layer rejected the connection: OkHttp, the NSC pin-set, or an untrusted chain.',
+      ]],
+      ['Rotation playbook it models', [
+        'Ship backup pins early: every release pins the current key and at least one backup, kept offline.',
+        'Rotate the server to the backup key, then ship a release that pins it plus a new backup.',
+        'Retire the old key once old app versions have aged out.',
+        'Set an NSC expiration so very old, unupdated installs fail open instead of being permanently bricked.',
+      ]],
+      ['Caveats', [
+        'The private keys in the repo are throwaway test keys, committed on purpose.',
+        'The test CA is trusted only for the test host through the NSC domain-config, and isn’t installed on the device.',
+        'In a real app, pick one pinning mechanism or keep both in sync, since a mismatch between them is a common source of rotation outages.',
+      ]],
+    ],
+    stack: ['Kotlin', 'OkHttp', 'Network Security Config', 'Certificate pinning', 'OpenSSL', 'Python test server'],
+    links: [
+      ['View on GitHub', 'https://github.com/sougandhmp/SslPinningExample'],
+    ],
+  },
+
+  'grpc-android': {
+    title: 'gRPC Android Sample',
+    platforms: ['android'],
+    kicker: 'Sample project',
+    summary: 'An end-to-end experiment in calling gRPC from an Android app written in Kotlin and Jetpack Compose. It has three parts sharing one contract: the Android client, a local Kotlin gRPC server and a .proto file that defines the API.',
+    meta: [
+      ['Type', 'Personal experiment, open source'],
+      ['Platform', 'Android (API 24 and later), plus a Kotlin/JVM server'],
+      ['Focus', 'gRPC · protobuf · server streaming'],
+      ['Call types', 'Unary and server streaming'],
+    ],
+    screenshots: [
+      ['assets/images/projects/grpc-android/screenshot.png', 'The gRPC Greeter screen after one Say hello call and one Stream x5 call, with the unary reply followed by five streamed replies about half a second apart'],
+    ],
+    sections: [
+      ['What it explores', [
+        'Sharing one API contract between an Android app and a JVM server, through a separate protos module that both consume.',
+        'Which transport and protobuf runtime suit Android: the OkHttp transport and the lite runtime.',
+        'How coroutines fit with gRPC: unary calls are suspend functions and server streams are Flow, using grpc-kotlin.',
+        'Showing a live stream in Compose without leaking work, with a StateFlow and a cancellable stream Job in the ViewModel.',
+        'Testing the server without a client, using server reflection and grpcurl.',
+      ]],
+      ['How it’s built', [
+        'The server extends the generated coroutine base class, so handlers are suspend functions and Flows. Blank names are rejected with Status.INVALID_ARGUMENT, and the stream count is clamped to 1 to 20 with a 500 ms delay between replies.',
+        'The repository owns the ManagedChannel (OkHttp channel with keep-alive) and the generated coroutine stub, sets a deadline on every call (5 s unary, 30 s streaming) and moves work to the IO dispatcher.',
+        'The ViewModel holds UI state in a StateFlow, turns StatusException into a readable message, keeps the stream Job so it can be cancelled, and closes the channel in onCleared().',
+        'The Compose screen is stateless, reads state with collectAsStateWithLifecycle() and disables buttons while loading.',
+        'The protobuf Gradle plugin generates the code: the lite runtime and grpc-okhttp on Android, and the full runtime, Netty and reflection on the server.',
+      ]],
+      ['Design decisions', [
+        'Cold Flow for streams, so the call starts on collection and is cancelled automatically with the collector.',
+        'Deadlines on every call, because gRPC has no timeout by default and a hung server would hang the UI.',
+        'Cleartext allowed only for local addresses (10.0.2.2, localhost and 127.0.0.1) in the network security config.',
+        'Versions pinned together in a Gradle version catalog.',
+      ]],
+      ['Taking it to production', [
+        'Turn on TLS and remove the cleartext entries from the network security config.',
+        'Add auth with a ClientInterceptor or CallCredentials.',
+        'Share one channel per backend for the app’s lifetime, for example through dependency injection, instead of one per ViewModel.',
+        'Handle more than StatusException, add retry and backoff for UNAVAILABLE, and review R8 rules before enabling minification.',
+      ]],
+    ],
+    stack: ['Kotlin', 'Jetpack Compose', 'gRPC', 'Protocol Buffers', 'Coroutines & Flow', 'OkHttp', 'Netty', 'grpcurl'],
+    links: [
+      ['View on GitHub', 'https://github.com/sougandhmp/GrpcAndroidSample'],
+    ],
+  },
 };
