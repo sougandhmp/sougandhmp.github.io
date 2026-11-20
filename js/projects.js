@@ -157,7 +157,7 @@ const PROJECTS = {
     ],
     impact: [
       ['80%', 'unit-test coverage'],
-      ['45%', 'fewer production bugs'],
+      ['20%', 'fewer production bugs'],
       ['25%', 'faster loading'],
     ],
     sections: [
@@ -168,7 +168,7 @@ const PROJECTS = {
         'Set up GitLab and Fastlane CI/CD pipelines, speeding up releases and cutting manual deployment work.',
         'Implemented automated data sync using GraphQL.',
         'Upgraded the app to Flutter 3.0 and cut loading time by 25% through image-size optimisation.',
-        'Raised unit-test coverage to 80%, reducing production bugs by 45%, and added UI tests.',
+        'Raised unit-test coverage to 80%, reducing production bugs by 20%, and added UI tests.',
         'Monitored the app in production, diagnosed issues and shipped stability fixes.',
       ]],
       ['The app', [
