@@ -150,14 +150,14 @@ const PROJECTS = {
     meta: [
       ['Role', 'IT Analyst (Android & Flutter), team lead'],
       ['Company', 'Tata Consultancy Services'],
-      ['When', 'Aug 2019 – Jan 2023'],
+      ['When', 'Oct 2018 – Jan 2023'],
       ['Where', 'Cologne, Germany · Kochi, India'],
       ['Team', 'Led 3–5 engineers'],
       ['Architecture', 'Clean Architecture · Riverpod'],
     ],
     impact: [
       ['80%', 'unit-test coverage'],
-      ['20%', 'fewer production bugs'],
+      ['45%', 'fewer production bugs'],
       ['25%', 'faster loading'],
     ],
     sections: [
@@ -168,7 +168,7 @@ const PROJECTS = {
         'Set up GitLab and Fastlane CI/CD pipelines, speeding up releases and cutting manual deployment work.',
         'Implemented automated data sync using GraphQL.',
         'Upgraded the app to Flutter 3.0 and cut loading time by 25% through image-size optimisation.',
-        'Raised unit-test coverage to 80%, reducing production bugs by 20%, and added UI tests.',
+        'Raised unit-test coverage to 80%, reducing production bugs by 45%, and added UI tests.',
         'Monitored the app in production, diagnosed issues and shipped stability fixes.',
       ]],
       ['The app', [
@@ -192,9 +192,9 @@ const PROJECTS = {
     kicker: 'Professional work · Tata Consultancy Services',
     summary: 'A suite of Android apps for a UK postal-service client, covering customer parcel tracking, couriers on their rounds, depot and warehouse operations, and internal staff tools.',
     meta: [
-      ['Role', 'Systems Engineer'],
+      ['Role', 'System Engineer'],
       ['Company', 'Tata Consultancy Services'],
-      ['When', '2016 – 2018'],
+      ['When', 'Oct 2016 – Sep 2018'],
       ['Where', 'Kochi, India'],
       ['Architecture', 'MVP'],
     ],
@@ -223,9 +223,9 @@ const PROJECTS = {
     kicker: 'Professional work · Tata Consultancy Services',
     summary: 'An Android telematics app for a leading US insurer. It collected GPS data from the phone and a connected in-car device to understand how each customer drives, feeding their insurance data.',
     meta: [
-      ['Role', 'Systems Engineer'],
+      ['Role', 'Assistant System Engineer'],
       ['Company', 'Tata Consultancy Services'],
-      ['When', '2014 – 2016'],
+      ['When', 'Oct 2014 – Sep 2016'],
       ['Where', 'Kochi, India'],
       ['Architecture', 'MVP'],
     ],
